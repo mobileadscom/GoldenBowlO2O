@@ -1,0 +1,22 @@
+.eraser {
+	width: 250px;
+	height: 236px;
+	margin: 15px auto;
+	position: relative;
+}
+
+.eraser canvas {
+	position: absolute;
+	z-index: 2;
+	top: 0px;
+	left: 0px;
+}
+
+.eraser img {
+	width: 100%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: -1;
+}

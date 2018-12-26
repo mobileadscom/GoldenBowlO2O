@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+  <title>O2O Coupon Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+</head>
+<body>    
+   <header>
+	  	<!-- <div class="banner" id="banner"> -->
+  		<div class="banner">
+			<img src="images/header-main-3.png" />
+	  	</div>
+	</header>
+	<div class="content">
+	  	<!-- <div class="main-banner">
+	  		<img src="images/banner.png"/>
+	  	</div> -->
+		<div id="page-wrapper" style="max-width: 1000px;width: 100%;">
+			<div id="instructionPage" class="page">
+				<div class="coupon-banner">
+					<img src="images/header-main-3.png" />
+				</div>
+				<div class="msg-wrapper">
+				    <div style="border-top: 1px solid #A0A0A0;
+					    border-bottom: 1px solid #A0A0A0;
+					    max-width: 400px;
+					    margin: 10px auto;
+					    padding: 10px;
+					    font-size: 18px;"
+					>
+						Description & Instruction
+					</div>
+				</div>
+				<div class="steps-wrapper">
+					<div class="step">
+						<div class="thumbnail">
+							<img src="images/step1.png">
+						</div>
+						<div class="text">
+							<div class="title">
+								Step 1
+							</div>
+							<div class="description">
+								Go to the nearest store
+							</div>
+						</div>
+					</div>
+					<div class="step">
+						<div class="thumbnail">
+							<img src="images/step2.png">
+						</div>
+						<div class="text">
+							<div class="title">
+								Step 2
+							</div>
+							<div class="description">
+								Open this coupon page
+							</div>
+						</div>
+					</div>
+					<div class="step">
+						<div class="thumbnail">
+							<img src="images/step3.png">
+						</div>
+						<div class="text">
+							<div class="title">
+								Step 3
+							</div>
+							<div class="description">
+								Tap on the redeem button below
+							</div>
+						</div>
+					</div>
+					<div class="step">
+						<div class="thumbnail">
+							<img src="images/step1.png">
+						</div>
+						<div class="text">
+							<div class="title">
+								Step 4
+							</div>
+							<div class="description">
+								Show your coupon code to the staff
+							</div>
+						</div>
+					</div>
+				</div>
+				<button id="redeemBtn" class="shadow-1 pageBtn" data-target="couponPage">
+					Tap to Redeem
+				</button>
+				<div class="redeem-notice">
+					Only tap to redeem when you are at store
+				</div>
+			</div>
+			<div id="couponPage" class="page">
+				<div class="coupon-section-wrapper">
+					<div class="coupon-section-banner">
+						<img src="images/banner.png"/>
+					</div>
+					<div class="coupon-section" id="couponSection">
+						<div class="section-page" id="barcodeSection" style="height: 360px;">
+							<div class="msg-wrapper">
+							    <div style="border-top: 1px solid #A0A0A0;
+								    border-bottom: 1px solid #A0A0A0;
+								    max-width: 400px;
+								    margin: 10px auto;
+								    padding: 10px;
+								    font-size: 18px;"
+								>
+									This is Your Coupon
+								</div>
+							</div>
+							<div class="msg-wrapper">
+								Show this to the staff to redeem
+							</div>
+							<div class="barcode-wrapper">
+								<img src="images/barcode.png">
+							</div>
+							<button id="doneRedeem" class="shadow-1 sectionBtn" data-target="thankyouSection" style="width: 110px;">
+								Done
+							</button>
+						</div>
+						<div id="thankyouSection" class="section-page" style="height: 360px;">
+							<div class="msg-wrapper">
+							    <div style="border-top: 1px solid #A0A0A0;
+								    border-bottom: 1px solid #A0A0A0;
+								    max-width: 400px;
+								    margin: 10px auto;
+								    padding: 10px;
+								    font-size: 18px;"
+								>
+									Redemption Complete
+								</div>
+							</div>
+							<div class="msg-wrapper">
+								Your redemption is now complete
+							</div>
+							<div class="msg-wrapper">
+							    <div style="
+								    max-width: 400px;
+								    margin: 10px auto;
+								    padding: 10px;
+								    font-size: 18px;"
+								>
+									Thank You
+									for Your Participation
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

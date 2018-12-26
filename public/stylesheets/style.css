@@ -1,0 +1,1481 @@
+@import url('https://fonts.googleapis.com/css?family=Merienda|Roboto');
+
+html {
+  height: 100%;
+}
+
+body {
+	margin: 0px;
+  text-align: center;
+  height: 100%;
+  overflow-x: hidden;
+  background-image: url('../images/bg.png');
+  font-family: 'Roboto', sans-serif;
+}
+
+div {
+  box-sizing: border-box;
+}
+
+@media( min-width: 1px) {
+  .main-banner {
+    display: none;
+  }
+
+  .banner img {
+    width: 280px
+  }
+
+  #mainBanner {
+    width: 220px;
+    margin-top: 20px;
+  }
+
+  .terms {
+    height: 250px;
+    font-size: 14px;
+  }
+
+  .terms.sm {
+    height: 200px;
+  }
+  
+  .terms .instruction {
+    font-size: 16px;
+  }
+
+  .terms .points-title:before {
+    height: 15px;
+    width: 15px;
+  }
+
+  .info {
+    font-size: 12px;
+  }
+
+  .info .points-title:before {
+    height: 12px;
+    width: 12px;
+  }
+  
+  #page-wrapper {
+    width: 100%;
+    /*height: calc(100% - 65px);*/
+  }
+
+  .intro-image {
+    width: 90%;
+    max-width: 450px;
+  }
+
+  #resultImage {
+    width: 220px;
+  }
+
+  #resultTitle {
+    font-size: 24px;
+    margin-top: 5px;
+  }
+
+
+  #resultDescription, #resultInstruction {
+    font-size: 16px;
+  }
+
+  .vid-wrapper {
+    width: 300px;
+    height: 250px;
+  }
+}
+
+@media( min-width: 480px) {
+  .vid-wrapper {
+    width: 100%;
+    height: 300px;
+    max-width: 400px;
+  }
+}
+
+@media( min-width: 768px) {
+  .banner img {
+    width: 450px
+  }
+
+  #mainBanner {
+    width: 450px;
+    margin-top: 50px;
+  }
+
+  .terms {
+    height: 400px;
+    font-size: 16px;
+  }
+
+  .terms.sm {
+    height: 250px;
+  }
+
+  .terms .instruction {
+    font-size: 20px;
+  }
+
+  .terms .points-title:before {
+    height: 18px;
+    width: 18px;
+  }
+
+  .info {
+    font-size: 14px;
+  }
+
+  .info .points-title:before {
+    height: 16px;
+    width: 16px;
+  }
+
+  .intro-image {
+    width: 90%;
+    max-width: 600px;
+  }
+
+  #resultImage {
+    width: 350px;
+  }
+
+  #resultTitle {
+    font-size: 30px;
+    margin-top: 30px;
+  }
+
+  #resultDescription, #resultInstruction {
+    font-size: 20px;
+  }
+}
+
+@media( min-width: 996px) {
+  .banner img, #resultImage {
+    display: none !important;
+  }
+  .main-banner {
+    display: block;
+    width: 50%;
+    max-width: 400px;
+  }
+  
+  #page-wrapper {
+    width: 50%;
+    max-width: 400px;
+    display: flex;
+    align-items: center;
+    /*height: calc(100% - 90px);*/
+  }
+
+/*  .page {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }*/
+
+  #mainBanner {
+    display: none;   
+  }
+
+  #resultTitle {
+    margin-top: 0px;
+  }
+}
+
+.shadow-1 {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.shadow-2 {
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.shadow-3 {
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.shadow-4 {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.shadow-5 {
+  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
+
+.red {
+  color: #E54C3C;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  max-width: 1200px;
+  margin: auto;
+  height: 100%;
+}
+
+.main-banner {
+  position: relative;
+}
+
+.main-banner img{
+  width: 400px;
+  position: absolute;
+  top: 50%;
+  right: 0px;
+  transform: translateY(-50%);
+}
+
+.banner {
+  width: 100%;
+  text-align: left;
+  margin-top: 10px;
+}
+
+.banner img {
+  display: block;
+  margin: auto;
+}
+
+#page-wrapper {
+  position: relative;
+  height: 100%;
+}
+
+.page {
+  text-align: center;
+}
+
+.loading-block {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 28px;
+  color: #4c4c4c;
+  font-weight: 600;
+  font-family: 'Merienda', cursive;
+}
+
+.msg-wrapper {
+  font-weight: 600;
+  font-family: 'Merienda', cursive;
+  color: #4c4c4c;
+  margin-top: 15px;
+  padding: 0px 20px;
+  font-size: 16px;
+}
+
+.msg-wrapper .big {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.tnc-wrapper {
+  width: 90%;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.terms {
+  overflow-y: auto;
+  overflow-x: hidden;
+  border: 1px solid #AAA;
+  padding: 12px;
+  text-align: left;
+  position: relative;
+  margin: 15px auto 0px;
+}
+
+.terms ul {
+  padding-left: 20px;
+}
+
+.terms::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+.terms::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+ 
+/* Handle */
+.terms::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 2px;
+}
+
+/* Handle on hover */
+.terms::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+.terms .instruction {
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: 600;
+}
+
+/*.terms .points {
+  position: absolute;
+  top: 100%;
+}*/
+
+.points-title:before {
+  content: "";
+  background-color: black;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.agree-box {
+  width: 120px;
+  margin-top: 20px;
+}
+
+.pageQuestion {
+  width: 90%;
+  max-width: 600px;
+  margin: auto;
+  font-size: 16px;
+}
+
+.page .pagination-wrapper {
+  margin-bottom: 15px;
+}
+
+.page .pagination-wrapper button, #toTerms, #startSurvey, #couponLink button {
+  border-radius: 5px;
+  font-size: 18px;
+  width: 120px;
+  padding: 3px 8px;
+  transition: all 0.3s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  font-family: 'Merienda', cursive;
+  margin: 0px 15px;
+  font-weight: 600;
+  outline: none;
+}
+
+#toTerms, #startSurvey, #couponLink button {
+  border: 1px solid #D22527;
+  background-color: #D22527; 
+  color: white;
+}
+
+#startSurvey {
+  margin-top: 20px;
+}
+
+#couponLink button {
+  width: 250px;
+  text-decoration: none;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.page .question-no {
+  display: inline-block;
+  margin: 0px 10px;
+  color: #E54C3C;
+  font-weight: 600;
+}
+
+button.back-btn {
+  /*text-align: center;*/
+  position: relative;
+  border: 1px solid #D22527;
+  background-color: white;
+  color: #D22527;
+}
+
+button .left {
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  left: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+button .left:after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-right: 3px solid #D22527;
+  border-bottom: 3px solid #D22527;
+  transform: rotate(135deg);
+  box-sizing: border-box;
+  transition: all 0.3s;
+  pointer-events: none;
+  left: 12px;
+  border-radius: 2px;
+}
+
+#startSurvey, #toTerms {
+  text-align: center;
+  position: relative;
+}
+
+button.next-btn {
+  /*text-align: center;*/
+  position: relative;
+  border: 1px solid #D22527;
+  background-color: #D22527;
+  color: white;
+}
+
+button .right {
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  right: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+button .right:after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-right: 3px solid white;
+  border-bottom: 3px solid white;
+  transform: rotate(315deg);
+  box-sizing: border-box;
+  transition: all 0.3s;
+  pointer-events: none;
+  right: 12px;
+  border-radius: 2px;
+}
+
+.page .pagination-wrapper button:hover, #toTerms:hover, #startSurvey:hover, #couponLink button:hover {
+  /*color: white;
+  background-color: #E54C3C;*/
+  /*color: #ccc;*/
+  cursor: pointer;
+}
+
+.page .pagination-wrapper button[disabled], #startSurvey[disabled] {
+  opacity: 0.3;
+}
+
+#resultImage, .intro-image {
+  display: block;
+  margin: 10px auto 0px;
+}
+
+#resultTitle {
+  font-weight: 600;
+  font-family: 'Merienda', cursive;
+  padding: 0px 15px;
+  color: #4c4c4c;
+}
+
+#resultDescription, #resultInstruction {
+  font-family: 'Merienda', cursive;
+  margin-top: 10px;
+  padding: 0px 15px;
+  color: #4c4c4c;
+}
+
+#couponLink {
+  display: block;
+  text-decoration: none;
+  margin-top: 15px;
+}
+
+.loader {
+  border: 2px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 2px solid #536D79;
+  width: 20px;
+  height: 20px;
+  -webkit-animation: spin 1s linear infinite; /* Safari */
+  animation: spin 1s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loader.in-btn {
+  display: inline-block;
+  vertical-align: text-bottom;
+}
+
+#toTerms {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.info {
+  text-align: left;
+  margin: auto;
+  margin-top: 20px;
+}
+
+/*#toVideo {
+  padding: 10px 30px;
+  display: block;
+  font-family: 'Merienda', cursive;
+  color: white;
+  margin: 30px auto 120px;
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+  background-color: #C71610;
+}
+
+#toVideo:hover {
+  cursor: pointer;
+}*/
+
+.vid-wrapper {
+  margin: 15px auto;
+}
+
+#regPage, #followPage, #termsPage, #page1, #page2, #page3, #page4, #page5, #page6, #applyPage, #videoPage, #resultPage {
+  display: none;
+}
+
+
+/* coupon page */
+@media(min-width: 1px) {
+  .coupon-section-banner {
+    display: none;
+  }
+
+  .coupon-section {
+    width: 100%;
+  }
+
+  .steps-wrapper {
+    margin: auto;
+  }
+
+  .coupon-banner {
+    display: none;
+  }
+}
+@media(min-width: 992px) {
+  .coupon-section-banner {
+    display: block;
+    width: 50%;
+    max-width: 400px;
+  }
+  
+  .coupon-section {
+    width: 50%;
+    max-width: 400px;
+  }
+
+  .coupon-banner {
+    display: block;
+  }
+
+  .steps-wrapper {
+    margin: 0px auto 30px;
+  }
+
+  .steps-wrapper .step {
+    max-width: 350px;
+  }
+}
+
+.coupon-section-banner {
+  position: relative;
+}
+
+.coupon-section {
+  position: relative;
+}
+.coupon-section-banner img{
+  width: 400px;
+  position: absolute;
+  top: 50%;
+  right: 0px;
+  transform: translateY(-50%);
+}
+
+.coupon-banner {
+  max-width: 400px;
+  margin: auto;
+}
+
+.coupon-banner img {
+  width: 100%;
+}
+
+.steps-wrapper {
+  /*max-width: 400px;*/
+  padding: 0px 20px;
+  flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.steps-wrapper .step {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0px;
+  max-width: 360px;
+}
+
+.steps-wrapper .step .thumbnail {
+  width: 40%;
+}
+
+.steps-wrapper .step .thumbnail img {
+  width: 100%;
+}
+
+.steps-wrapper .step .text {
+  width: 60%;
+  text-align: left;
+  padding: 8px 10px;
+}
+
+.steps-wrapper .step .text .title {
+  color: #4c4c4c;
+  font-family: 'Merienda', cursive;
+  margin-bottom: 2px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+#redeemBtn, #doneRedeem {
+  padding: 8px 15px;
+  width: 250px;
+  display: block;
+  font-family: 'Merienda', cursive;
+  color: white;
+  margin: 5px auto 5px;
+  border: none;
+  border-radius: 5px;
+  font-size: 19px;
+  background-color: #C71610;
+}
+
+#redeemBtn:hover, #doneRedeem:hover {
+  cursor: pointer;
+}
+
+.redeem-notice {
+  font-size: 14px;
+  margin: 8px 0px;
+}
+
+.barcode-wrapper {
+  margin: 15px auto;
+  border-radius: 6px;
+  max-width: 200px;
+  background-color: white;
+}
+
+.barcode-wrapper img {
+  width: 90%;
+}
+
+.coupon-section-wrapper {
+  display: flex;
+  justify-content: center;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.progress-wrapper {
+  width: 100%;
+  height: 4px;
+  background-color: white;
+  border-radius: 2px;
+  margin: auto;
+}
+
+.progress-wrapper div {
+  height: 4px;
+  background-color: #755033;
+  border-radius: 2px;
+  width: 0px;
+  /*transition: all 0.3s;*/
+}
+
+@import url('https://fonts.googleapis.com/css?family=Merienda|Roboto');
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0px;
+  text-align: center;
+  height: 100%;
+  overflow-x: hidden;
+  background-image: url('../images/bg.png');
+  font-family: 'Roboto', sans-serif;
+}
+
+div {
+  box-sizing: border-box;
+}
+
+@media( min-width: 1px) {
+  .main-banner {
+    display: none;
+  }
+
+  .banner img {
+    width: 280px
+  }
+
+  #mainBanner {
+    width: 220px;
+    margin-top: 20px;
+  }
+
+  #regPage .msg-wrapper {
+    margin-top: -10px;
+  }
+
+  .terms {
+    height: 250px;
+    font-size: 14px;
+  }
+
+  .terms.sm {
+    height: 200px;
+  }
+  
+  .terms .instruction {
+    font-size: 16px;
+  }
+
+  .terms .points-title:before {
+    height: 15px;
+    width: 15px;
+  }
+
+  .info {
+    font-size: 12px;
+  }
+
+  .info .points-title:before {
+    height: 12px;
+    width: 12px;
+  }
+  
+  #page-wrapper {
+    width: 100%;
+    /*height: calc(100% - 65px);*/
+  }
+
+  .intro-image {
+    width: 90%;
+    max-width: 450px;
+  }
+
+  #resultImage {
+    width: 220px;
+  }
+
+  #resultTitle {
+    font-size: 24px;
+    margin-top: 5px;
+  }
+
+
+  #resultDescription, #resultInstruction {
+    font-size: 16px;
+  }
+
+  .vid-wrapper {
+    width: 300px;
+    height: 250px;
+  }
+}
+
+@media( min-width: 480px) {
+  .vid-wrapper {
+    width: 450px;
+    height: 300px;
+  }
+}
+
+@media( min-width: 768px) {
+  .banner img {
+    width: 450px
+  }
+
+  #mainBanner {
+    width: 450px;
+    margin-top: 50px;
+  }
+
+  .terms {
+    height: 400px;
+    font-size: 16px;
+  }
+
+  .terms.sm {
+    height: 250px;
+  }
+
+  .terms .instruction {
+    font-size: 20px;
+  }
+
+  .terms .points-title:before {
+    height: 18px;
+    width: 18px;
+  }
+
+  .info {
+    font-size: 14px;
+  }
+
+  .info .points-title:before {
+    height: 16px;
+    width: 16px;
+  }
+
+  .intro-image {
+    width: 90%;
+    max-width: 600px;
+  }
+
+  #resultImage {
+    width: 350px;
+  }
+
+  #resultTitle {
+    font-size: 30px;
+    margin-top: 30px;
+  }
+
+  #resultDescription, #resultInstruction {
+    font-size: 20px;
+  }
+}
+
+@media( min-width: 996px) {
+  .banner img, #resultImage {
+    display: none !important;
+  }
+  .main-banner {
+    display: block;
+    width: 50%;
+    max-width: 400px;
+  }
+
+  #regPage .msg-wrapper {
+    margin-top: 0px;
+  }
+
+  #page-wrapper {
+    width: 50%;
+    max-width: 400px;
+    display: flex;
+    align-items: center;
+    /*height: calc(100% - 90px);*/
+  }
+
+/*  .page {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }*/
+
+  #mainBanner {
+    display: none;   
+  }
+
+  #resultTitle {
+    margin-top: 0px;
+  }
+}
+
+.shadow-1 {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.shadow-2 {
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.shadow-3 {
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.shadow-4 {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.shadow-5 {
+  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
+
+.red {
+  color: #E54C3C;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  max-width: 1200px;
+  margin: auto;
+  height: 100%;
+}
+
+.main-banner {
+  position: relative;
+}
+
+.main-banner img{
+  width: 400px;
+  position: absolute;
+  top: 50%;
+  right: 0px;
+  width: 100%;
+  transform: translateY(-50%);
+}
+
+.banner {
+  width: 100%;
+  text-align: left;
+  margin-top: 10px;
+}
+
+.banner img {
+  display: block;
+  margin: auto;
+}
+
+#page-wrapper {
+  position: relative;
+  height: 100%;
+}
+
+.page {
+  text-align: center;
+}
+
+.loading-block {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 28px;
+  color: #4c4c4c;
+  font-weight: 600;
+  font-family: 'Merienda', cursive;
+}
+
+.msg-wrapper {
+  font-weight: 600;
+  font-family: 'Merienda', cursive;
+  color: #4c4c4c;
+  margin-top: 15px;
+  padding: 0px 20px;
+  font-size: 16px;
+}
+
+.msg-wrapper .big {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.tnc-wrapper {
+  width: 90%;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.terms {
+  overflow-y: auto;
+  overflow-x: hidden;
+  border: 1px solid #AAA;
+  padding: 12px;
+  text-align: left;
+  position: relative;
+  margin: 15px auto 0px;
+}
+
+.terms ul {
+  padding-left: 20px;
+}
+
+.terms::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+.terms::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+ 
+/* Handle */
+.terms::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 2px;
+}
+
+/* Handle on hover */
+.terms::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+.terms .instruction {
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: 600;
+}
+
+/*.terms .points {
+  position: absolute;
+  top: 100%;
+}*/
+
+.points-title:before {
+  content: "";
+  background-color: black;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.agree-box {
+  width: 120px;
+  margin-top: 20px;
+}
+
+.pageQuestion {
+  width: 90%;
+  max-width: 600px;
+  margin: auto;
+  font-size: 16px;
+}
+
+.page .pagination-wrapper {
+  margin-bottom: 15px;
+}
+
+.page .pagination-wrapper button, #toTerms, #startSurvey, #couponLink button {
+  border-radius: 5px;
+  font-size: 18px;
+  width: 120px;
+  padding: 3px 8px;
+  transition: all 0.3s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  font-family: 'Merienda', cursive;
+  margin: 0px 15px;
+  font-weight: 600;
+  outline: none;
+}
+
+#toTerms, #startSurvey, #couponLink button {
+  border: 1px solid #D22527;
+  background-color: #D22527; 
+  color: white;
+}
+
+#startSurvey {
+  margin-top: 20px;
+}
+
+#couponLink button {
+  width: 250px;
+  text-decoration: none;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.page .question-no {
+  display: inline-block;
+  margin: 0px 10px;
+  color: #E54C3C;
+  font-weight: 600;
+}
+
+button.back-btn {
+  /*text-align: center;*/
+  position: relative;
+  border: 1px solid #D22527;
+  background-color: white;
+  color: #D22527;
+}
+
+button .left {
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  left: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+button .left:after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-right: 3px solid #D22527;
+  border-bottom: 3px solid #D22527;
+  transform: rotate(135deg);
+  box-sizing: border-box;
+  transition: all 0.3s;
+  pointer-events: none;
+  left: 12px;
+  border-radius: 2px;
+}
+
+#startSurvey, #toTerms {
+  text-align: center;
+  position: relative;
+}
+
+button.next-btn {
+  /*text-align: center;*/
+  position: relative;
+  border: 1px solid #D22527;
+  background-color: #D22527;
+  color: white;
+}
+
+button .right {
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  right: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+button .right:after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-right: 3px solid white;
+  border-bottom: 3px solid white;
+  transform: rotate(315deg);
+  box-sizing: border-box;
+  transition: all 0.3s;
+  pointer-events: none;
+  right: 12px;
+  border-radius: 2px;
+}
+
+.page .pagination-wrapper button:hover, #toTerms:hover, #startSurvey:hover, #couponLink button:hover {
+  /*color: white;
+  background-color: #E54C3C;*/
+  /*color: #ccc;*/
+  cursor: pointer;
+}
+
+.page .pagination-wrapper button[disabled], #startSurvey[disabled] {
+  opacity: 0.3;
+}
+
+#resultImage, .intro-image {
+  display: block;
+  margin: 10px auto 0px;
+}
+
+#resultTitle {
+  font-weight: 600;
+  font-family: 'Merienda', cursive;
+  padding: 0px 15px;
+  color: #4c4c4c;
+}
+
+#resultDescription, #resultInstruction {
+  font-family: 'Merienda', cursive;
+  margin-top: 10px;
+  padding: 0px 15px;
+  color: #4c4c4c;
+}
+
+#couponLink {
+  display: block;
+  text-decoration: none;
+  margin-top: 15px;
+}
+
+.loader {
+  border: 2px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 2px solid #536D79;
+  width: 20px;
+  height: 20px;
+  -webkit-animation: spin 1s linear infinite; /* Safari */
+  animation: spin 1s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loader.in-btn {
+  display: inline-block;
+  vertical-align: text-bottom;
+}
+
+#toTerms {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.info {
+  text-align: left;
+  margin: auto;
+  margin-top: 20px;
+}
+
+#toVideo {
+  padding: 10px 30px;
+  display: block;
+  font-family: 'Merienda', cursive;
+  color: white;
+  margin: 30px auto 120px;
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+  background-color: #C71610;
+}
+
+#toVideo:hover {
+  cursor: pointer;
+}
+
+.vid-wrapper {
+  margin: 15px auto;
+}
+
+#regPage, #followPage, #termsPage, #page1, #page2, #page3, #page4, #page5, #page6, #applyPage, #videoPage, #resultPage {
+  display: none;
+}
+
+
+/* coupon page */
+@media(min-width: 1px) {
+  .coupon-section-banner {
+    display: none;
+  }
+
+  .coupon-section {
+    width: 100%;
+  }
+
+  .steps-wrapper {
+    margin: auto;
+  }
+
+  .coupon-banner {
+    display: none;
+  }
+}
+@media(min-width: 992px) {
+  .coupon-section-banner {
+    display: block;
+    width: 50%;
+    max-width: 400px;
+  }
+  
+  .coupon-section {
+    width: 50%;
+    max-width: 400px;
+  }
+
+  .coupon-banner {
+    display: block;
+  }
+
+  .steps-wrapper {
+    margin: 0px auto 30px;
+  }
+
+  .steps-wrapper .step {
+    max-width: 350px;
+  }
+}
+
+.coupon-section-banner {
+  position: relative;
+}
+
+.coupon-section {
+  position: relative;
+}
+.coupon-section-banner img{
+  width: 400px;
+  position: absolute;
+  top: 50%;
+  right: 0px;
+  transform: translateY(-50%);
+}
+
+.coupon-banner {
+  max-width: 400px;
+  margin: auto;
+}
+
+.coupon-banner img {
+  width: 100%;
+}
+
+.steps-wrapper {
+  /*max-width: 400px;*/
+  padding: 0px 20px;
+  flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.steps-wrapper .step {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0px;
+  max-width: 360px;
+}
+
+.steps-wrapper .step .thumbnail {
+  width: 40%;
+}
+
+.steps-wrapper .step .thumbnail img {
+  width: 100%;
+}
+
+.steps-wrapper .step .text {
+  width: 60%;
+  text-align: left;
+  padding: 8px 10px;
+}
+
+.steps-wrapper .step .text .title {
+  color: #4c4c4c;
+  font-family: 'Merienda', cursive;
+  margin-bottom: 2px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+#redeemBtn, #doneRedeem {
+  padding: 8px 15px;
+  width: 250px;
+  display: block;
+  font-family: 'Merienda', cursive;
+  color: white;
+  margin: 5px auto 5px;
+  border: none;
+  border-radius: 5px;
+  font-size: 19px;
+  background-color: #C71610;
+}
+
+#redeemBtn:hover, #doneRedeem:hover {
+  cursor: pointer;
+}
+
+.redeem-notice {
+  font-size: 14px;
+  margin: 8px 0px;
+}
+
+.barcode-wrapper {
+  margin: 15px auto;
+  border-radius: 6px;
+  max-width: 200px;
+  background-color: white;
+}
+
+.barcode-wrapper img {
+  width: 90%;
+}
+
+.coupon-section-wrapper {
+  display: flex;
+  justify-content: center;
+  max-width: 1200px;
+  margin: auto;
+}
+
+@media screen and (orientation:landscape) and ( max-width: 995px){
+  .banner img, #resultImage {
+    display: none !important;
+  }
+  
+  .main-banner {
+    display: block;
+    width: 50%;
+    max-width: 400px;
+  }
+  
+  #regPage .msg-wrapper {
+    margin-top: 0px;
+  }
+
+  #page-wrapper {
+    width: 50%;
+    max-width: 400px;
+    display: flex;
+    align-items: center;
+  }
+
+  .page {
+    /*height: 100%;*/
+    overflow: scroll;
+  }
+
+  #mainBanner {
+    display: none;   
+  }
+
+  .vid-wrapper {
+    width: 95%;
+    height: 50%;
+  }
+
+  #resultTitle {
+    margin-top: 0px;
+  }
+
+  .page .pagination-wrapper button {
+    margin: 0px 5px;
+  }
+
+  #toVideo {
+    padding: 10px 15px;
+    margin-bottom: 100px;
+  }
+}
