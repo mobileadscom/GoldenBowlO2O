@@ -4,6 +4,7 @@ import miniSelect from './miniSelect';
 import modal from './modal';
 import winningLogic from './winningLogic';
 import user from './userDemo';
+import '../stylesheets/pageLayout.css';
 import '../stylesheets/eraser.css';
 import '../stylesheets/miniSelect.css';
 import '../stylesheets/style.css';
@@ -107,7 +108,7 @@ var app = {
 		}	
 	},
 	continue: function() {
-		this.changeHeaderImage();
+		// this.changeHeaderImage();
 
 
 		
@@ -124,17 +125,7 @@ var app = {
 			this.pages.toPage('resultPage');
 		}
 		else {
-			// if (noQuestionAnswered > 0) {
-			// 	if (noQuestionAnswered < this.q.length - 1) {
-			// 		this.pages.toPage('page' + (noQuestionAnswered + 1).toString());
-			// 	}
-			// 	else {
-			// 		this.pages.toPage('page' + (this.q.length - 1).toString());
-			// 	}
-			// }
-			// else {
-				this.pages.toPage('page1');
-			// }
+			this.pages.toPage('gamePage');
 		}
 	},
 	events: function() {
@@ -265,7 +256,7 @@ var app = {
       }
       else {
 		     this.pages.toPage('followPage');
-		     this.changeHeaderImage();
+		     // this.changeHeaderImage();
       }
     // this.continue();
     }).catch((error) => {
@@ -448,13 +439,13 @@ var app = {
       });
     }
 	},
-	changeHeaderImage() {
+	/*changeHeaderImage() {
     	document.getElementById('mainBanner').style.display = 'none';
     	var x = window.matchMedia("(min-width: 992px)");
     	if (!x.matches) {
 			document.getElementById('banner').style.display = 'block';
     	}
-	}
+	}*/
 }
 
 document.addEventListener('DOMContentLoaded', function() {

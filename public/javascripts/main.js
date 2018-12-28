@@ -1,4 +1,5 @@
-import '../stylesheets/style.css';
+import '../stylesheets/pageLayout.css';
+import '../stylesheets/couponPage.css';
 import miniPages from './miniPages';
 
 var app = {

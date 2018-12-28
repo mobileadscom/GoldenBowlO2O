@@ -7,14 +7,17 @@
 </head>
 <body>    
   <header>
-  	<div class="banner" id="banner" style="display: none;">
-      <img src="images/header-main-3.png" />
+  	<div class="banner" id="banner">
+      <img src="images/logo.png" />
   	</div>
   </header>
 	<div class="content">
-  	<div class="main-banner">
-  		<img src="images/banner.png"/>
-  	</div>
+	<div class="main-banner">
+		<div class="banner-content">
+			<img src="images/logo.png" style="width: 285px;margin-bottom: 30px;" />
+			<img src="images/main_cp.png"/>	
+		</div>
+	</div>
  
 	  <div id="page-wrapper">
 	  	<div id="loadingPage" class="page" style="height: 500px;">
@@ -23,10 +26,9 @@
 		    </div>
 		  </div>
 		  <div id="regPage" class="page">
-	  		<img src="images/banner.png" id="mainBanner" />
+	  		<img src="images/main_cp.png" style="max-width: 350px;" id="regBanner"/>
 	  		<div id="regSub1" class="reg-sub-page">
 			    <div class="msg-wrapper">
-					<div class="big">PayDay Treat!<br>Buy 1 Get 1 Free</div>
 				    Please register using one of the methods below
 			    </div>
 			    <div id="regButtons">
@@ -49,9 +51,9 @@
 		            <div>Email:</div>
 		            <input type="email" id="emailInput" required />
 		            <div></div>
-		            <input type="submit" id="submitBtn" class="shadow-1" value="OK" />
+		            <input type="submit" id="submitBtn" class="primary shadow-1" value="Register" />
 		          </form>
-		          <button class="shadow-1" id="toRegSub1">Back</button>
+		          <button class="cancel" id="toRegSub1">Back</button>
 		          <div class="form-loader" id="formWorking" style="position: static;">
 		          </div>
 		        </div>
@@ -75,46 +77,12 @@
 		      success！
 		    </div>
 		  </div>
-		  <!-- <div id="introPage" class="page">
-				<img class="intro-image" src="images/banner.png" />
-				<div class="tnc-wrapper">	
-			    <div class="info">
-						<strong class="points-title">応募期間</strong>
-						<br>2018年 月 日から2018年 月 日まで
-						<br><br>
-						<strong class="points-title">概要</strong>
-						<br>アンケートを完了した方から抽選で500名さまに「カルビー じゃがりこ サラダ」が当たります。
-						<br><br>
-						<strong class="points-title">商品引き換え期間</strong>
-						<br>2018年6月23日(日）まで
-						<br><br>
-						<strong class="points-title">賞品</strong>
-						<br>カルビー じゃがりこ サラダ　1個
-						<br><br>
-						<strong class="points-title">受け取り場所</strong>
-						<br>セブン-イレブンでお受取りいただけます。
-						<br><a href="http://www.sej.co.jp/shop/index.html" target="_blank">詳細はコチラ</a>
-						<br><br>
-						<strong class="points-title">当選発表</strong>
-						<br>アンケート回答後、その場で当選が分かります。 また、当選した方にはTesTee・Powlのマイページにもお知らせします。
-						<br><br>
-						<strong class="points-title">引き換え方法</strong>
-						<br>当選画面・または上述のマイページにクーポンURLを記載しますので、 対象店舗にてお引き換えください。
-				  </div>
-				</div>
-			  <button id="toTerms" class="pageBtn next-btn" data-target="termsPage">NEXT <span class="right"></button>
-		  </div>  -->
 		  <div id="termsPage" class="page">
 		    <div class="msg-wrapper">
 			    Terms and Conditions
 		    </div>
 		    <div class="tnc-wrapper">	
 		    <div class="terms" id="tnc">
-		    	<!-- <div class="instruction">
-						スクロールで
-						<br>最後まで表示されると
-						<br>同意のチェックボックスを活性化
-		    	</div> -->
 		    	<strong>Overview</strong>
 		      <br>
 	From those who responded to the questionnaire, by lottery&nbsp;&nbsp;&nbsp;&nbsp;
@@ -210,50 +178,6 @@
 		      <br>
 	Business hours 9: 00 ~ 17: 00 (except Saturdays, Sundays, and public holidays)
 		      <br>Contact form here
-		    	<!-- <div class="points">
-			      <strong class="points-title">概要</strong>
-			      <br>アンケートを完了した方から抽選で500名さまに「カルビー じゃがりこ サラダ」が当たります。
-			      <br><br>
-			      <strong class="points-title">応募期間</strong>
-			      <br>2018年 月 日から2018年 月 日まで
-			      <br><br>
-			      <strong class="points-title">商品引き換え期間</strong>
-			      <br>2018年6月23日(日）まで
-			      <br><br>
-			      <strong class="points-title">賞品</strong>
-			      <br>カルビー じゃがりこ サラダ　1個
-			      <br><br>
-			      <strong class="points-title">受け取り場所</strong>
-			      <br>セブン-イレブンでお受取りいただけます。
-			      <br><br>
-			      <strong class="points-title">注意事項</strong>
-			      <ul>
-			        <li>お引き換えには、電子クーポン画面を表示できるスマートフォン・携帯電話が必要です。</li>
-			        <li>電子クーポン画面の表示にはインターネット接続が必要です。</li>
-			        <li>ご利用に関するパケット通信料はお客様のご負担となります。</li>
-			        <li>スマートフォンの一部の機種・ブラウザでは電子クーポン表示ができない場合がございます。</li>
-			        <li>パソコン、タブレット、インターネット機能がない端末(プリペイド携帯など)では電子クーポン表示ができません。</li>
-			        <li>電子クーポンを印刷したものを店頭にお持ちいただいても、引き換えできません。</li>
-			        <li>他の割引券・引換券などとは併用できません。</li>
-			        <li>期限が過ぎた電子クーポンは無効です。</li>
-			        <li>引換期間中、お一人様1回限りご利用が可能です。</li>
-			        <li>店舗により、商品のお取り扱いがない、品切れ、掲載商品とパッケージや容量が異なる場合がございますので、予めご了承ください。</li>
-			        <li>商品は発送されません。</li>
-			        <li>商品は予告なく終了や変更になる可能性がございます。</li>
-			        <li>店舗に在庫が無い／お近くに店舗が無い等の理由により、お引き換えができない場合でも代替品の送付はいたしません。</li>
-			        <li>キャンペーンの対象となる商品等の性質（利用に年齢制限があるもの等）によっては、ご応募をお断りする場合がございます。</li>
-			        <li>当選連絡の再送いたしかねますので、ご注意ください。</li>
-			        <li>詳しい引き換え手順は当選後のご確認ください。</li>
-			        <li>選考方法を問わず、応募結果等について、個別のお問い合わせにはお答えいたしかねます。</li>
-			        <li>商品の責任は商品提供企業にございます。商品に関するお問い合わせは、商品提供企業に直接お願いいたします。この場合でも商品の交換ができない場合もございますので、あらかじめご了承ください。</li>
-			        <li>商品のご利用に際してお客様に生じた損害に関して一切の責任を負いませんのでご了承ください。</li>
-			        <li>ご応募は、日本国内に在住の方に限らせていただきます。</li>
-			        <li>応募期間内であっても、応募後の内容修正などはできませんので、入力の際は間違いのないようにお願いいたします。</li>
-			        <li>当選権利の換金・他人への譲渡はできません。</li>
-			        <li>本キャンペーンはやむをえない理由により予告なく内容の変更や中止となることがあります。</li>
-			        <li>登録内容に誤りがあった場合や、不正なご登録と判断された場合は、特典当選の権利は無効となりますのでご了承ください。</li>
-			      </ul>
-			    </div> -->
 			  </div>
 			    <div class="agree-box miniCheckbox">
 			      <input type="checkbox" id="agreeCheck">
@@ -326,7 +250,7 @@
 				  <button id="toResult" class="pageBtn next-btn saveQuestion" data-target="resultPage">NEXT <span class="right"></span></button>
 			  </div> -->
 		  </div>
-		  <div id="page2" class="page">
+		  <div id="gamePage" class="page">
 		  	<div class="msg-wrapper" style="margin-top: 0px;">
 			    <div style="border-top: 1px solid #A0A0A0;
 				    border-bottom: 1px solid #A0A0A0;
