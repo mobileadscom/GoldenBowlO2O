@@ -5,6 +5,12 @@ body {
   color: #FFFFFF;
 }
 
+h2 {
+  font-size: 24px;
+  margin: 20px 15px;
+  font-weight: bold;
+}
+
 .shadow-1 {
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
@@ -26,12 +32,12 @@ body {
 }
 
 button, input[type="submit"] {
-  border-radius: 5px;
+  border-radius: 3px;
   padding: 8px 20px;
   transition: 0.3s all;
   -webkit-box-shadow: 0 2px 4px rgba(0,0,0,0.16), 0 2px 4px rgba(0,0,0,0.23);
   box-shadow: 0 2px 4px rgba(0,0,0,0.16), 0 2px 4px rgba(0,0,0,0.23);
-  margin: 8px 10px;
+  margin: 20px 10px;
   font-size: 16px;
   font-family: 'Montserrat', sans-serif;
   color: #000000;
@@ -85,7 +91,7 @@ button.cancel:hover {
 @media( min-width: 1px) {
   #regBanner {
     width: 220px;
-    margin-top: 20px;
+    margin: 20px 0px;
   }
 
   .terms {
@@ -122,16 +128,6 @@ button.cancel:hover {
 
   #resultImage {
     width: 220px;
-  }
-
-  #resultTitle {
-    font-size: 24px;
-    margin-top: 5px;
-  }
-
-
-  #resultDescription, #resultInstruction {
-    font-size: 16px;
   }
 
   .vid-wrapper {
@@ -189,15 +185,6 @@ button.cancel:hover {
   #resultImage {
     width: 350px;
   }
-
-  #resultTitle {
-    font-size: 30px;
-    margin-top: 30px;
-  }
-
-  #resultDescription, #resultInstruction {
-    font-size: 20px;
-  }
 }
 
 @media( min-width: 996px) {
@@ -207,10 +194,6 @@ button.cancel:hover {
 
   #regBanner {
     display: none;   
-  }
-
-  #resultTitle {
-    margin-top: 0px;
   }
 }
 
@@ -224,9 +207,9 @@ button.cancel:hover {
 }
 
 .msg-wrapper {
-  margin-top: 15px;
+  margin: 15px 0px;
   padding: 0px 20px;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .msg-wrapper .big {
@@ -301,34 +284,6 @@ button.cancel:hover {
   margin-top: 20px;
 }
 
-.page .pagination-wrapper button, #toTerms, #startSurvey, #couponLink button {
-  border-radius: 5px;
-  font-size: 18px;
-  width: 120px;
-  padding: 3px 8px;
-  transition: all 0.3s;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  margin: 0px 15px;
-  font-weight: 600;
-  outline: none;
-}
-
-#toTerms, #startSurvey, #couponLink button {
-  border: 1px solid #D22527;
-  background-color: #D22527; 
-  color: white;
-}
-
-#startSurvey {
-  margin-top: 20px;
-}
-
-#couponLink button {
-  width: 250px;
-  text-decoration: none;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-}
-
 button.back-btn {
   /*text-align: center;*/
   position: relative;
@@ -400,10 +355,6 @@ button .right:after {
   border-radius: 2px;
 }
 
-.page .pagination-wrapper button:hover, #toTerms:hover, #startSurvey:hover, #couponLink button:hover {
-  cursor: pointer;
-}
-
 .page .pagination-wrapper button[disabled], #startSurvey[disabled] {
   opacity: 0.3;
 }
@@ -413,24 +364,21 @@ button .right:after {
   margin: 10px auto 0px;
 }
 
-#resultTitle {
-  font-weight: 600;
-  /*font-family: 'Merienda', cursive;*/
+#resultDescription {
+  margin: 10px auto;
+  font-size: 22px;
   padding: 0px 15px;
-  color: #4c4c4c;
 }
 
-#resultDescription, #resultInstruction {
-  /*font-family: 'Merienda', cursive;*/
-  margin-top: 10px;
+#resultInstruction {
   padding: 0px 15px;
-  color: #4c4c4c;
+  font-size: 18px;
+  max-width: 290px;
+  margin: 20px auto;
 }
 
 #couponLink {
-  display: block;
   text-decoration: none;
-  margin-top: 15px;
 }
 
 .loader {
@@ -490,7 +438,7 @@ button .right:after {
   margin: 15px auto;
 }
 
-#regPage, #followPage, #termsPage, #page1, #page2, #page3, #page4, #page5, #page6, #applyPage, #videoPage, #resultPage {
+#regPage, #followPage, #termsPage, #page1, #page2, #page3, #page4, #page5, #page6, #applyPage, #gamePage, #videoPage, #resultPage {
   display: none;
 }
 

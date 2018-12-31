@@ -41,30 +41,30 @@ var app = {
 	},
 	initResult(state, couponLink) {
 		if (state == 'win') {
-			document.getElementById('resultTitle').innerHTML = "Congratulations!";
-			document.getElementById('resultDescription').innerHTML = "You are qualified for our offer.";
+			document.getElementById('resultTitle').innerHTML = "CONGRATULATIONS!";
+			document.getElementById('resultDescription').innerHTML = "You won a cash voucher";
 			if (user.isWanderer) {
 				document.getElementById('couponLink').style.display = 'none';
 				document.getElementById('resultInstruction').style.display = 'none;'
 			}
 			else {
-				document.getElementById('resultInstruction').innerHTML = "Please click the button below to get your coupon";
+				document.getElementById('resultInstruction').innerHTML = "Share this with your friends to access your cash voucher";
 			}
 
 			if (couponLink) {
 				document.getElementById('couponLoader').style.display = 'none';
 				document.getElementById('couponLink').href = couponLink;
 				document.getElementById('couponLink').setAttribute('target', '_blank');
-			    document.getElementById('getCoupon').innerText = 'Here is your coupon.';
-			    var x = window.matchMedia("(min-width: 992px)");
+			    document.getElementById('getCoupon').innerText = 'NEXT';
+			    /*var x = window.matchMedia("(min-width: 992px)");
 		    	if (x.matches) {
 					document.getElementById('resultImage').style.display = 'none';
-		    	}
+		    	}*/
 			}
 		}
 		else {
 			document.getElementById('resultTitle').innerHTML = "Unfortunately, you are not qualified. Thank you for your time. <br>You may exit by closing this page";
-			document.getElementById('resultImage').style.display = 'none';
+			// document.getElementById('resultImage').style.display = 'none';
 			document.getElementById('couponLink').style.display = 'none';
 		}
 	},
@@ -162,37 +162,38 @@ var app = {
 	  	}
 	  });*/
 
-		/* email registration */
-	  var form = document.getElementById('regForm');
-	  form.onsubmit = (event) => {
-	    var spinner = document.getElementById('formWorking');
-	    var donePage = document.getElementById('doneSec');
-	    var regPage = document.getElementById('regSec');
-		  form.style.display = 'none';
-	    spinner.style.display = 'block';
-      event.preventDefault();
-      var email = document.getElementById('emailInput').value;
-			user.register(email).then((response) => {
-				console.log(response);
-        spinner.style.display = 'none';
-        // if (response.data.status == true) {
-        	this.formSections.toPage('doneSec');
-        	var emailContent = '<head><meta charset="utf-8"></head>Thank you for registering. Please click the link below to complete your registration and join the campaign.<br><br><a href="https://demo.o2oplatform.com/scratch/?userId=' + email + '" target="_blank">https://demo.o2oplatform.com/scratch/?userId=' + email + '</a>';
-        	user.sendEmail(email, 'MobileAds O2O Demo Link', emailContent);
-        	// user.trackRegister();
-     //    }
-     //    else if (response.data.message == 'user exist.') {
-     //    	user.info = response.data.user;
-     //    	this.continue();
-					// modal.closeAll();
-     //    }
-
-			}).catch((error) => {
-				console.log(error);
-				form.style.display = 'block';
-        spinner.style.display = 'none';
-			});
-    };
+			/* email registration */
+			var form = document.getElementById('regForm');
+			form.onsubmit = (event) => {
+				var spinner = document.getElementById('formWorking');
+				var regBtn = document.getElementById('submitBtn');
+				var backBtn = document.getElementById('toRegSub1');
+				regBtn.style.display = 'none';
+				backBtn.style.display = 'none';
+				spinner.style.display = 'block';
+				event.preventDefault();
+				var email = document.getElementById('emailInput').value;
+				user.register(email).then((response) => {
+					console.log(response);
+					spinner.style.display = 'none';
+				// if (response.data.status == true) {
+						this.formSections.toPage('doneSec');
+						var emailContent = '<head><meta charset="utf-8"></head>Thank you for registering. Please click the link below to complete your registration and join the campaign.<br><br><a href="https://demo.o2oplatform.com/scratch/?userId=' + email + '" target="_blank">https://demo.o2oplatform.com/scratch/?userId=' + email + '</a>';
+						user.sendEmail(email, 'MobileAds O2O Demo Link', emailContent);
+						// user.trackRegister();
+				//  }
+				//   else if (response.data.message == 'user exist.') {
+					//   user.info = response.data.user;
+				//    	 this.continue();
+						// modal.closeAll();
+				//  }
+				}).catch((error) => {
+					console.log(error);
+					regBtn.style.display = 'block';
+					backBtn.style.display = 'block';
+					spinner.style.display = 'none';
+				});
+			};
 
     /* twitter registration / login */
     var twitReg = document.getElementById('regTwitter');

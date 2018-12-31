@@ -44,23 +44,21 @@
 			    <div class="form-loader" id="regWorking"></div>
 			</div>
 			<div id="regSub2" class="reg-sub-page">
-				<h2>Register</h2>
 				<div id="formSecWrapper">
-		        <div id="regSec" class="sec">
-		          <form id="regForm">
-		            <div>Email:</div>
-		            <input type="email" id="emailInput" required />
-		            <div></div>
-		            <input type="submit" id="submitBtn" class="primary shadow-1" value="Register" />
-		          </form>
-		          <button class="cancel" id="toRegSub1">Back</button>
-		          <div class="form-loader" id="formWorking" style="position: static;">
-		          </div>
-		        </div>
-		        <div id="doneSec" class="sec">
-					We have sent you a confirmation email.
-					<br>Please check your email and click on the link to complete your registration.
-		        </div>
+			        <div id="regSec" class="sec">
+			          <form id="regForm">
+			          	<h2>Register</h2>
+			            <input type="email" id="emailInput" placeholder="Email Address" required />
+			            <div></div>
+			            <input type="submit" id="submitBtn" class="primary shadow-1" value="Register" />
+			            <div class="form-loader" id="formWorking"></div>
+			          </form>
+			          <button class="cancel" id="toRegSub1">Back</button>
+			        </div>
+			        <div id="doneSec" class="sec">
+						We have sent you a confirmation email.
+						<br>Please check your email and click on the link to complete your registration.
+			        </div>
 		      </div>
 			</div>
 		  </div>
@@ -185,7 +183,7 @@
 	I Agree</label>
 			      <span class="checkmark"></span>
 			    </div>
-			</div>
+			</div>	
 		    <button id="startSurvey" class="pageBtn next-btn" data-target="page1" disabled>Agree </button>
 		  </div>
 		  <div id="page1" class="page">
@@ -251,19 +249,9 @@
 			  </div> -->
 		  </div>
 		  <div id="gamePage" class="page">
-		  	<div class="msg-wrapper" style="margin-top: 0px;">
-			    <div style="border-top: 1px solid #A0A0A0;
-				    border-bottom: 1px solid #A0A0A0;
-				    max-width: 400px;
-				    margin: 10px auto;
-				    padding: 10px;
-				    font-size: 24px;"
-				>
-					Scratch To Reveal
-				</div>
-			</div>
+		  	<h2>Instruction</h2>
 			<div class="msg-wrapper">
-				Scratch the area below to win.
+				Scratch the area below.
 			</div>
 		  	<div class="eraser">
 		  		<img src="images/cover-img.png" id="scratchCover">
@@ -274,23 +262,26 @@
 		  	  <!-- <button id="toQ1" class="pageBtn back-btn" data-target="page1">BACK <span class="left"></span></button> -->
 		  	  <!-- <button id="toVideo" disabled class="pageBtn next-btn" data-target="videoPage">NEXT <span class="right"></span></button> -->
 		      <!-- <button id="toApply" disabled class="pageBtn next-btn saveQuestion" data-question="1" data-target="applyPage">NEXT <span class="right"></span></button> -->
-		      <div class="pagination-wrapper">
-				  <button id="toResult" disabled class="pageBtn next-btn saveQuestion" data-target="resultPage">NEXT <span class="right"></span></button>
-			  </div>
+				<button id="toResult" disabled class="pageBtn primary" data-target="resultPage" style="margin-top: 5px;">NEXT </button>
 		  	</div>
 		  </div>
 		  <div id="resultPage" class="page">
-			  <div id="resultTitle">
+			  <h2 id="resultTitle" style="margin-bottom: 10px;">
 			  	Result Title
-			  </div>
+			  </h2>
 			  <div id="resultDescription">
 			  </div>
-			  <img id="resultImage" src="images/banner.png" />
+			  <!-- <img id="resultImage" src="images/banner.png" /> -->
 			  <div id="resultInstruction">
 			  </div>
-			  <a id="couponLink"><button><div id="couponLoader" class="loader in-btn"></div><span id="getCoupon"><!-- クーポンを受け取る --></span></button></a>
+			  <a id="couponLink"><button class="primary"><div id="couponLoader" class="loader in-btn"></div><span id="getCoupon"><!-- クーポンを受け取る --></span></button></a>
 		  </div>
 	  </div>
    </div>
+   <footer>
+	  	<div class="footer-banner" id="footer-banner">
+	      <img src="images/footer-banner.png" />
+	  	</div>
+	</footer>
 </body>
 </html>
