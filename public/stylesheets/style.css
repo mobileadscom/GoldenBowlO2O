@@ -35,8 +35,6 @@ button, input[type="submit"] {
   border-radius: 3px;
   padding: 8px 20px;
   transition: 0.3s all;
-  -webkit-box-shadow: 0 2px 4px rgba(0,0,0,0.16), 0 2px 4px rgba(0,0,0,0.23);
-  box-shadow: 0 2px 4px rgba(0,0,0,0.16), 0 2px 4px rgba(0,0,0,0.23);
   margin: 20px 10px;
   font-size: 16px;
   font-family: 'Montserrat', sans-serif;
@@ -49,6 +47,8 @@ button:hover, input[type="submit"]:hover {
 }
 
 button.primary, input[type="submit"].primary {
+  -webkit-box-shadow: 0 2px 4px rgba(0,0,0,0.16), 0 2px 4px rgba(0,0,0,0.23);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.16), 0 2px 4px rgba(0,0,0,0.23);
   font-weight: 600;
   width: 120px;
   border: 1px solid #430000;
@@ -75,6 +75,21 @@ button.primary:hover, input[type="submit"].primary:hover {
   background-color: #f63032;
 }*/
 
+.link-button {
+  border: none;
+  background-color: transparent;
+  font-size: 14px;
+  text-decoration: underline;
+  color: white;
+  padding: 2px;
+  margin: 5px;
+  display: inline-block;
+}
+
+.link-button:hover {
+  cursor: pointer;
+}
+
 button.cancel {
   font-weight: 600;
   width: 120px;
@@ -95,7 +110,7 @@ button.cancel:hover {
   }
 
   .terms {
-    height: 250px;
+    /*height: 250px;*/
     font-size: 14px;
   }
 
@@ -150,9 +165,14 @@ button.cancel:hover {
     margin-top: 30px;
   }
 
+  .tnc-wrapper {
+    max-height: 550px;
+    overflow-y: auto;
+  }
+
   .terms {
-    height: 400px;
-    font-size: 16px;
+    /*height: 400px;*/
+    font-size: 15px;
   }
 
   .terms.sm {
@@ -218,141 +238,47 @@ button.cancel:hover {
 }
 
 .tnc-wrapper {
-  width: 90%;
-  max-width: 1000px;
-  margin: auto;
+  padding: 20px 15px;
+  color: #444;
+  background-color: #FFFFFF;
 }
 
 .terms {
-  overflow-y: auto;
+  /*overflow-y: auto;*/
   overflow-x: hidden;
-  border: 1px solid #AAA;
-  padding: 12px;
+  /*border: 1px solid #AAA;*/
+  /*padding: 12px;*/
   text-align: left;
   position: relative;
   margin: 15px auto 0px;
 }
 
-.terms ul {
-  padding-left: 20px;
+.terms ul, .terms ol {
+  padding-left: 30px;
 }
 
-.terms::-webkit-scrollbar {
+.terms li {
+  margin: 10px 0px;
+}
+
+.tnc-wrapper::-webkit-scrollbar {
   width: 8px;
 }
 
 /* Track */
-.terms::-webkit-scrollbar-track {
+.tnc-wrapper::-webkit-scrollbar-track {
   background: #f1f1f1;
 }
  
 /* Handle */
-.terms::-webkit-scrollbar-thumb {
+.tnc-wrapper::-webkit-scrollbar-thumb {
   background: #888;
   border-radius: 2px;
 }
 
 /* Handle on hover */
-.terms::-webkit-scrollbar-thumb:hover {
+.tnc-wrapper::-webkit-scrollbar-thumb:hover {
   background: #555; 
-}
-
-.terms .instruction {
-  position: absolute;
-  text-align: center;
-  width: 100%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-weight: 600;
-}
-
-/*.terms .points {
-  position: absolute;
-  top: 100%;
-}*/
-
-.points-title:before {
-  content: "";
-  background-color: black;
-  display: inline-block;
-  margin-right: 5px;
-}
-
-.agree-box {
-  width: 120px;
-  margin-top: 20px;
-}
-
-button.back-btn {
-  /*text-align: center;*/
-  position: relative;
-  border: 1px solid #D22527;
-  background-color: white;
-  color: #D22527;
-}
-
-button .left {
-  width: 10px;
-  height: 10px;
-  position: absolute;
-  left: 0px;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
-}
-
-button .left:after {
-  content: "";
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  border-right: 3px solid #D22527;
-  border-bottom: 3px solid #D22527;
-  transform: rotate(135deg);
-  box-sizing: border-box;
-  transition: all 0.3s;
-  pointer-events: none;
-  left: 12px;
-  border-radius: 2px;
-}
-
-#startSurvey, #toTerms {
-  text-align: center;
-  position: relative;
-}
-
-button.next-btn {
-  /*text-align: center;*/
-  position: relative;
-  border: 1px solid #D22527;
-  background-color: #D22527;
-  color: white;
-}
-
-button .right {
-  width: 10px;
-  height: 10px;
-  position: absolute;
-  right: 0px;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
-}
-
-button .right:after {
-  content: "";
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  border-right: 3px solid white;
-  border-bottom: 3px solid white;
-  transform: rotate(315deg);
-  box-sizing: border-box;
-  transition: all 0.3s;
-  pointer-events: none;
-  right: 12px;
-  border-radius: 2px;
 }
 
 .page .pagination-wrapper button[disabled], #startSurvey[disabled] {
@@ -407,53 +333,6 @@ button .right:after {
   vertical-align: text-bottom;
 }
 
-#toTerms {
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
-.info {
-  text-align: left;
-  margin: auto;
-  margin-top: 20px;
-}
-
-/*#toVideo {
-  padding: 10px 30px;
-  display: block;
-  font-family: 'Merienda', cursive;
-  color: white;
-  margin: 30px auto 120px;
-  border: none;
-  border-radius: 5px;
-  font-size: 20px;
-  background-color: #C71610;
-}
-
-#toVideo:hover {
-  cursor: pointer;
-}*/
-
-.vid-wrapper {
-  margin: 15px auto;
-}
-
-#regPage, #followPage, #termsPage, #page1, #page2, #page3, #page4, #page5, #page6, #applyPage, #gamePage, #videoPage, #resultPage {
+#regPage, #gamePage, #resultPage {
   display: none;
-}
-
-.progress-wrapper {
-  width: 100%;
-  height: 4px;
-  background-color: white;
-  border-radius: 2px;
-  margin: auto;
-}
-
-.progress-wrapper div {
-  height: 4px;
-  background-color: #755033;
-  border-radius: 2px;
-  width: 0px;
-  /*transition: all 0.3s;*/
 }

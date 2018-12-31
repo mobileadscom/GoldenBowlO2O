@@ -1,281 +1,135 @@
 <!DOCTYPE html>
 <html lang="jp">
 <head>
-  <title>O2O Scratch Demo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta charset="utf-8">
+	<title>Golden Bowl</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
 </head>
 <body>    
-  <header>
-  	<div class="banner" id="banner">
-      <img src="images/logo.png" />
-  	</div>
-  </header>
-	<div class="content">
-	<div class="main-banner">
-		<div class="banner-content">
-			<img src="images/logo.png" style="width: 285px;margin-bottom: 30px;" />
-			<img src="images/main_cp.png"/>	
+	<header>
+	  	<div class="banner" id="banner">
+			<img src="images/logo.png" />
+	  	</div>
+	</header>
+	<div id="tncModal" class="modal">
+		<div class="modal-content">
+			<span class="modalCloser" data-target="tncModal">&times;</span>
+			<div class="tnc-wrapper">
+				<h2 style="font-size: 20px;">Terms and Conditions</h2>
+				<div class="terms">
+					<ol>
+						<li>The promoter is: [COMPANY NAME] whose registered office is at [LOCATION].</li>
+						<li>The promotion is open to all business owner in Malaysia.</li>
+						<li>There is no entry fee and no purchase necessary to enter this promotion.</li>
+						<li>By entering this promotion, an entrant is indicating his/her agreement to be bound by these terms and conditions.</li>
+						<li>The route to entry for the promotion and details of how to enter are via <a href="https://goldenbowl.o2oplatform.com" target="_blank">https://goldenbowl.o2oplatform.com</a></li>
+						<li>Only one entry will be accepted per person. Multiple entries from the same person will be disqualified.</li>
+						<li>Closing date for entry will be <strong style="color: red;">[CLOSING DATE]</strong>. After this date, no further entries will be permitted.</li>
+						<li>No responsibility can be accepted for entries not received for whatever reason.</li>
+					</ol>
+					<p style="margin: 25px 10px 10px;">The rules of the competition and how to enter are as follows: -</p>
+					<ul>
+						<li>The promoter reserves the right to cancel or amend the promotion and these terms and conditions without notice in the event of a catastrophe, war, civil or military disturbance, act of God or any actual or anticipated breach of any applicable law or regulation or any other event outside of the promoter’s control.</li>
+					    <li>Any changes to the promotion will be notified to entrants as soon as possible by the promoter.</li>
+					    <li>The promoter is not responsible for inaccurate prize details supplied to any entrant by any third party connected with this promotion.</li>
+					    <li>
+					    	The prizes are as follows:
+							<ul>
+								<li>100 x RM 5 Cash Voucher</li>
+							    <li>100 x RM 10 Cash Voucher</li>
+							    <li>100 x RM 15 Cash Voucher</li>
+							    <li>100 x 5% OFF Voucher</li>
+							    <li>100 x 10% OFF Voucher</li>
+							</ul>
+					    </li>
+					    <li>The prizes are as stated above and no cash or other alternatives will be offered.</li>
+				        <li>The prizes are not transferable.</li>
+				        <li>Prizes are subject to availability and we reserve the right to substitute any prize with another of equivalent value without giving notice.</li>
+					    <li>The promoter’s decision in respect of all matters to do with the promotion will be final and no correspondence will be entered into.</li>
+					    <li>The promotion and these terms and conditions will be governed by Malaysian law and any disputes will be subject to the exclusive jurisdiction of the courts of Malaysia.</li>
+					    <li>The entrant agrees to the use of his/her name and image in any publicity material, as well as their entry. Any personal data relating to the entrant or any other entrants will be used solely in accordance with current Malaysia data protection legislation and will not be disclosed to a third party without the entrant’s prior consent.</li>
+					    <li>This promotion is in no way sponsored, endorsed or administered by, or associated with, Facebook, Twitter or any other Social Network. You are providing your information to [COMPANY NAME] and not to any other party.</li>
+					</ul>
+				</div>
+			</div>
 		</div>
 	</div>
+	<div class="content">
+		<div class="main-banner">
+			<div class="banner-content">
+				<img src="images/logo.png" style="width: 285px;margin-bottom: 30px;" />
+				<img src="images/main_cp.png"/>	
+			</div>
+		</div>
  
-	  <div id="page-wrapper">
-	  	<div id="loadingPage" class="page" style="height: 500px;">
-		    <div class="loading-block">
-		      <br>LOADING
-		    </div>
-		  </div>
-		  <div id="regPage" class="page">
-	  		<img src="images/main_cp.png" style="max-width: 350px;" id="regBanner"/>
-	  		<div id="regSub1" class="reg-sub-page">
-			    <div class="msg-wrapper">
-				    Please register using one of the methods below
+		<div id="page-wrapper">
+		  	<div id="loadingPage" class="page" style="height: 500px;">
+			    <div class="loading-block">
+			      <br>LOADING
 			    </div>
-			    <div id="regButtons">
-			      <button class="shadow-1 email-btn" id="regEmail" data-target="regSub2">
-				    <img src="images/envelope.png" />Email
-				  </button>
-			      <div></div>
-			      <button class="shadow-1" id="regTwitter">
+			</div>
+			<div id="regPage" class="page">
+		  		<img src="images/main_cp.png" style="max-width: 350px;" id="regBanner"/>
+		  		<div id="regSub1" class="reg-sub-page">
+				    <div class="msg-wrapper">
+					    Please register using one of the methods below
+				    </div>
+				    <div id="regButtons">
+						<button class="shadow-1 email-btn" id="regEmail" data-target="regSub2">
+						    <img src="images/envelope.png" />Email
+						</button>
+			      <!-- <button class="shadow-1" id="regTwitter">
 				      <img src="images/twitter.png" />Twitter
 				  </button>
-				  <a href="https://line-scratch-demo.herokuapp.com/auth" style="text-decoration: none;color: white;"><button id="regLine"><img src="images/line.png" />LINE</button></a>
-			    </div>
-			    <div class="form-loader" id="regWorking"></div>
-			</div>
-			<div id="regSub2" class="reg-sub-page">
-				<div id="formSecWrapper">
-			        <div id="regSec" class="sec">
-			          <form id="regForm">
-			          	<h2>Register</h2>
-			            <input type="email" id="emailInput" placeholder="Email Address" required />
-			            <div></div>
-			            <input type="submit" id="submitBtn" class="primary shadow-1" value="Register" />
-			            <div class="form-loader" id="formWorking"></div>
-			          </form>
-			          <button class="cancel" id="toRegSub1">Back</button>
-			        </div>
-			        <div id="doneSec" class="sec">
-						We have sent you a confirmation email.
-						<br>Please check your email and click on the link to complete your registration.
-			        </div>
-		      </div>
-			</div>
-		  </div>
-		  <div id="followPage" class="page">
-		    <div class="msg-wrapper">
-		      Follow our company Twitter to participate in the campaign.
-		    </div>
-		    <br>
-		    <!-- <img src="images/follow.png" style="width: 150px;" id="followBtn"/> -->
-		    <button class="shadow-1" id="followBtn">
-			      <img src="images/twitter.png" />Follow
-			  </button>
-		    <div id="successFollow">
-		      success！
-		    </div>
-		  </div>
-		  <div id="termsPage" class="page">
-		    <div class="msg-wrapper">
-			    Terms and Conditions
-		    </div>
-		    <div class="tnc-wrapper">	
-		    <div class="terms" id="tnc">
-		    	<strong>Overview</strong>
-		      <br>
-	From those who responded to the questionnaire, by lottery&nbsp;&nbsp;&nbsp;&nbsp;
-	We will give you a coupon for redemption that can be used by MobileAds in your name.
-		      <br><br>
-		      <strong>
-	Campaign period</strong>
-		      <br>2018 * Month * Day 0:00 ~ 2018 * Month * Day (Sunday) 23:59
-		      <br><br>
-		      <strong>Prize</strong>
-		      <br>＜Redemption deadline＞
-		      <br>2018 * Month * Day 0:00 ~ 2018 * Month * Day (Sunday) 23:59
-		      <br><br>
-		      <strong>
-	Application method</strong>
-		      <br>
-		      <div class="steps">
-		        <p><strong>STEP 1</strong>
-		        <br>
-	Log in with your email address or Twitter account</p>
-		        <p><strong>STEP 2</strong>
-		        <br>
-	Answer to the questionnaire</p>
-		        <p><strong>STEP 3</strong>
-		        <br>Application</p>
-		        ※
-	Application is limited to one per person
-		        <br>※
-	Please note that it may take some time for reply due to access concentration and environment etc.
-		      </div>
-		      <br><br>
-		      <strong>Lottery / winning announcement</strong>
-		      <br>The lottery result can be confirmed on the spot after entry. We can not answer inquiries concerning the result. For those who are elected, the URL of the coupon page will be displayed on the winning screen, so please tap and get the coupon.
-		      <br><br><br>
-		      <strong>About redemption of coupon in shop</strong>
-		      <ul>
-					  <p>＜Redeeming Procedure＞</p>
-					  <li>
-	Please confirm that the corresponding item is in the shop.</li>
-				    <li>
-	Please bring the coupon ticket to the cash to register together with the corresponding item.</li>
-				    <li>Coupons are only valid for 30 minutes from ticketing.</li>
-				    <li>
-	Although it becomes invalid after 30 minutes pass, it is possible to re-issue ticket.</li>
-				    <li>Ticketed coupons are only valid at issuing stores.</li>
-		      </ul>
-		      <br>
-		      <strong>Precautions</strong>
-		      <ul>
-		        <li>
-	If you are under 13 years old (12 years old or younger) and would like to participate in this campaign, should be accompany by parents.</li>
-		        <li>
-	In the event that we decide to interfere / misbehave such as lacking equality, such as consecutive application with the same person by multiple accounts, the winning may be invalid without prior notice.</li>
-		        <li>Tweet content (text and images) for entry to this campaign triggers third party's rights, induces pornography, obscene, idolatry, blasphemy, hate, prejudice, racial discrimination, imitation, unjust violence, Promotion or expressions are limited to those not included at all. In case of any damage to a third party, participants respond by their own responsibility and participants compensate for it. Also, if disputes arise with third parties due to the contents of tweets and posting, participants will resolve the dispute by the participants' responsibilities and costs.</li>
-		        <li>
-	The contents of the tweet (including account name) and images posted are sold by our company, our company affiliated company and this campaign secretariat for the purposes related to advertisement and sales activities, including the website, including TV, PC, mobile, Please acknowledge that it will be posted on and submit it. In that case, please be aware that some of the posted content may be revised / modified.</li>
-		        <li>＊＊＊＊Company employees and stakeholders can not participate.</li>
-		        <li>
-	Internet communication charges and connection fee will be borne by the customer.</li>
-		        <li>Participation and winning rights of this campaign are limited to those living in Japan.</li>
-		        <li>
-	Please note that we can not answer inquiries about the application status of the campaign and lottery result.</li>
-		        <li>The winner 's right will be the person' s own personal belongings, and you can not transfer, resell, or cash to your family / friends etc.</li>
-		        <li>The dispatch of winning prizes to the same address will be limited to 1 point.</li>
-		        <li>
-	If there is no registration of shipping address information or if the information you entered is incomplete, the election rights will be invalid. Please note.</li>
-		        <li>
-	Dispatch of prizes is limited to Japan.</li>
-		        <li>
-	Delivery area, weather, traffic situation, when you are not present, delays may result.</li>
-		        <li>If you can not deliver the prize due to reasons such as the address and the destination you are unknown, the entrance / election rights may be invalid.</li>
-		        <li>Resale of prizes in net auction etc. is prohibited.</li>
-		        <li>
-	Prizes are subject to change without notice, so please be forewarned.</li>
-		        <li>
-	Please note that this campaign may be canceled without notice or the contents may be changed.</li>
-		        <li>We are not responsible for connection trouble during communication, so please understand.</li>
-		      </ul>
-		      <br>
-		      <strong>Handling of personal information</strong>
-		      <ul>
-		        <li>The customer's personal information you filled in will be managed by **** Corporation.</li>
-		        <li>
-	We will use it for marketing purposes such as lottery for this campaign, prize shipment, statistics not specifying individuals etc.</li>
-		        <li>
-	We will not disclose / present your personal information to any third party outside the subcontractor without your consent. (Except when disclosure is requested by law etc.)</li>
-		        <li>We have encrypted communication using SSL / TLS for the security of your personal information that you filled in.</li>
-		        <li>For other handling of customer's personal information, please refer to the privacy policy.</li>
-		      </ul>
-		      <br>
-		      <strong>Contact Us</strong>
-		      <br>＊＊＊＊Customer Center
-		      <br>
-	Business hours 9: 00 ~ 17: 00 (except Saturdays, Sundays, and public holidays)
-		      <br>Contact form here
-			  </div>
-			    <div class="agree-box miniCheckbox">
-			      <input type="checkbox" id="agreeCheck">
-			      <label for="agreeCheck">
-	I Agree</label>
-			      <span class="checkmark"></span>
-			    </div>
-			</div>	
-		    <button id="startSurvey" class="pageBtn next-btn" data-target="page1" disabled>Agree </button>
-		  </div>
-		  <div id="page1" class="page">
-		  	<div class="msg-wrapper">
-			    <div style="border-top: 1px solid #A0A0A0;
-				    border-bottom: 1px solid #A0A0A0;
-				    max-width: 400px;
-				    margin: 10px auto;
-				    padding: 10px;
-				    font-size: 28px;"
-				>
-					Instructions
+				  <a href="https://line-scratch-demo.herokuapp.com/auth" style="text-decoration: none;color: white;"><button id="regLine"><img src="images/line.png" />LINE</button></a> -->
+						<div style="text-align: left;width: 250px;margin: auto;">
+						  	<button class="modalOpener link-button" data-target="tncModal">Terms & Condition</button>
+						</div>
+				    </div>
+					<div class="form-loader" id="regWorking"></div>
+				</div>
+				<div id="regSub2" class="reg-sub-page">
+					<div id="formSecWrapper">
+				        <div id="regSec" class="sec">
+							<form id="regForm">
+					          	<h2>Register</h2>
+					            <input type="email" id="emailInput" placeholder="Email Address" required />
+					            <div></div>
+					            <input type="submit" id="submitBtn" class="primary" value="Register" />
+					            <div class="form-loader" id="formWorking"></div>
+							</form>
+							<button class="cancel" id="toRegSub1">Back</button>
+				        </div>
+				        <div id="doneSec" class="sec">
+							We have sent you a confirmation email.
+							<br>Please check your email and click on the link to complete your registration.
+				        </div>
+					</div>
 				</div>
 			</div>
-			<div class="msg-wrapper" style="text-align: left;margin-bottom: 25px;">
-				STEP 1
-				<div style="font-family: 'Roboto', sans-serif;font-weight: 500;">
-					Watch the video.
+			<div id="gamePage" class="page">
+			  	<h2>Instruction</h2>
+				<div class="msg-wrapper">
+					Scratch the area below.
 				</div>
-				<br>
-				STEP 2
-				<div style="font-family: 'Roboto', sans-serif;font-weight: 500;">
-					Scratch the coupon to reveal result.
-				</div>
+			  	<div class="eraser">
+			  		<img src="images/cover-img.jpg" id="scratchCover">
+			  		<img src="images/lose.png" id="scratchLose" class="eraser-bg">
+			  		<img src="images/win.png" id="scratchWin" class="eraser-bg">
+			  	</div>
+			  	<div class="pagination-wrapper">
+					<button id="toResult" disabled class="pageBtn primary" data-target="resultPage" style="margin-top: 5px;">NEXT </button>
+			  	</div>
 			</div>
-		  	<div class="pagination-wrapper">
-		      <!-- <button id="toQ2" class="pageBtn next-btn saveQuestion" data-question="1" data-target="page2">NEXT <span class="right"></span></button> -->
-		      <button id="toVideo" class="pageBtn next-btn" data-target="videoPage">NEXT <span class="right"></span></button>
-		  	</div>
-		  </div>
-		  
-		  <!-- <div id="applyPage" class="page">
-		  	<div class="msg-wrapper">
-			    <div style="border-top: 1px solid #A0A0A0;
-				    border-bottom: 1px solid #A0A0A0;
-				    max-width: 400px;
-				    margin: 10px auto;
-				    padding: 10px;
-				    font-size: 32px;"
-				>
-					Thank You
+			<div id="resultPage" class="page">
+				<h2 id="resultTitle" style="margin-bottom: 10px;">Result Title</h2>
+				<div id="resultDescription">
 				</div>
-			  </div>
-			  <button id="toVideo" class="pageBtn shadow-2" data-target="videoPage">Submit your response</button>
-			  <div class="pagination-wrapper">
-					<button id="toP1" class="pageBtn back-btn" data-target="page1">BACK <span class="left"></span></button>
-			  </div>
-		  </div> -->
-		  <div id="videoPage" class="page">
-			 <!--  <div class="msg-wrapper">
-					Your result will be displayed after watching the video below.
-			  </div> -->
-			  <div class="vid-wrapper" id="vid">
-		    </div>
-		    <div style="padding: 0px 20px;margin-top: -13px;">
-		    	<div class="progress-wrapper">
-			    	<div id="vidProgress"></div>
-			    </div>
-		    </div>
-		   
-	<!-- 	    <div class="pagination-wrapper">
-				  <button id="toResult" class="pageBtn next-btn saveQuestion" data-target="resultPage">NEXT <span class="right"></span></button>
-			  </div> -->
-		  </div>
-		  <div id="gamePage" class="page">
-		  	<h2>Instruction</h2>
-			<div class="msg-wrapper">
-				Scratch the area below.
+				<!-- <img id="resultImage" src="images/banner.png" /> -->
+				<div id="resultInstruction">
+				</div>
+				<a id="couponLink"><button class="primary"><div id="couponLoader" class="loader in-btn"></div><span id="getCoupon"><!-- クーポンを受け取る --></span></button></a>
 			</div>
-		  	<div class="eraser">
-		  		<img src="images/cover-img.png" id="scratchCover">
-		  		<img src="images/lose.png" id="scratchLose" class="eraser-bg">
-		  		<img src="images/win.png" id="scratchWin" class="eraser-bg">
-		  	</div>
-		  	<div class="pagination-wrapper">
-		  	  <!-- <button id="toQ1" class="pageBtn back-btn" data-target="page1">BACK <span class="left"></span></button> -->
-		  	  <!-- <button id="toVideo" disabled class="pageBtn next-btn" data-target="videoPage">NEXT <span class="right"></span></button> -->
-		      <!-- <button id="toApply" disabled class="pageBtn next-btn saveQuestion" data-question="1" data-target="applyPage">NEXT <span class="right"></span></button> -->
-				<button id="toResult" disabled class="pageBtn primary" data-target="resultPage" style="margin-top: 5px;">NEXT </button>
-		  	</div>
-		  </div>
-		  <div id="resultPage" class="page">
-			  <h2 id="resultTitle" style="margin-bottom: 10px;">
-			  	Result Title
-			  </h2>
-			  <div id="resultDescription">
-			  </div>
-			  <!-- <img id="resultImage" src="images/banner.png" /> -->
-			  <div id="resultInstruction">
-			  </div>
-			  <a id="couponLink"><button class="primary"><div id="couponLoader" class="loader in-btn"></div><span id="getCoupon"><!-- クーポンを受け取る --></span></button></a>
-		  </div>
 	  </div>
    </div>
    <footer>
