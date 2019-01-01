@@ -1,6 +1,19 @@
-import '../stylesheets/pageLayout.css';
-import '../stylesheets/couponPage.css';
 import miniPages from './miniPages';
+import axios from 'axios';
+
+import '../stylesheets/pageLayout.css';
+import '../stylesheets/theme.css';
+import '../stylesheets/couponPage.css';
+
+var user = {
+	get: function(userId) {
+	    return axios.get(domain + '/api/coupon/softbank/user_info', {
+	      params: {
+	        id: userId
+	      }
+	    });
+	},
+}
 
 var app = {
 	pages: null, // array of pages
@@ -9,15 +22,16 @@ var app = {
 		this.pages = new miniPages({
 		  	pageWrapperClass: document.getElementById('page-wrapper'),
 		  	pageClass: 'page',
-		  	initialPage: document.getElementById('instructionPage'),
+		  	initialPage: document.getElementById('loadingPage'),
 		  	pageButtonClass: 'pageBtn'
 		});
-		this.sections = new miniPages({
-		  	pageWrapperClass: document.getElementById('couponSection'),
-		  	pageClass: 'section-page',
-		  	initialPage: document.getElementById('barcodeSection'),
-		  	pageButtonClass: 'sectionBtn'
-		});
+
+		//get data
+		//user.get....
+		setTimeout(() => {
+			this.pages.toPage('instructionPage')
+		}, 1000)
+
 	}
 }
 

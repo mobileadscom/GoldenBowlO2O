@@ -1,14 +1,13 @@
 import miniPages from './miniPages';
 import Eraser from './eraser.js';
-import miniSelect from './miniSelect';
 import modal from './modal';
 import winningLogic from './winningLogic';
 import user from './userDemo';
+
 import '../stylesheets/pageLayout.css';
+import '../stylesheets/theme.css';
+import '../stylesheets/campaignPage.css';
 import '../stylesheets/eraser.css';
-import '../stylesheets/miniSelect.css';
-import '../stylesheets/style.css';
-import '../stylesheets/miniCheckbox.css';
 import '../stylesheets/modal.css';
 import '../stylesheets/regForm.css';
 
@@ -253,8 +252,6 @@ var app = {
 	  });
     this.initEraser();
     this.events();
-    /* apply mini select to <select> */
-	  miniSelect.init('miniSelect');
 
 	  /* User Info */
 	  if (!this.params.userId || !this.params.source) {

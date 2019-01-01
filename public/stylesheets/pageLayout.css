@@ -10,7 +10,6 @@ body {
 	background-image: url('../images/bg.png');
 	font-family: 'Roboto', sans-serif;
 	background-repeat: no-repeat;
-	background-size: cover;
 	/*position: relative;*/
 }
 
@@ -19,9 +18,9 @@ body {
 }
 
 @media( min-width: 1px) {
-	/*body {
+	body {
 		background-size: auto;
-	}*/
+	}
 
 	#page-wrapper {
 		width: 100%;
@@ -32,7 +31,7 @@ body {
 		display: none;
 	}
 
-	.banner img {
+	.header-banner img {
 		width: 280px
 	}
 }
@@ -43,8 +42,12 @@ body {
 	}*/
 }
 @media( min-width: 996px) {
-	body {
-		background-size: cover;
+	/*body {
+		background-size: auto;
+		height: 100%;
+	}*/
+
+	.content {
 		height: 100%;
 	}
 
@@ -56,7 +59,7 @@ body {
 		/*height: calc(100% - 90px);*/
 	}
 
-	.banner img {
+	.header-banner img {
 		display: none !important;
 	}
 
@@ -66,8 +69,25 @@ body {
 		max-width: 400px;
 	}
 
+	.footer-banner {
+		display: none;
+	}
+
+
 	.footer-banner img {
 		display: none !important;
+	}
+}
+
+@media( min-width: 1200px) {
+	body {
+		background-size: cover;
+	}
+}
+
+@media (min-height: 900px) {
+	body {
+		background-size: cover;
 	}
 }
 
@@ -76,7 +96,6 @@ body {
 	justify-content: center;
 	max-width: 1200px;
 	margin: auto;
-	height: 100%;
 }
 
 
@@ -108,30 +127,33 @@ body {
 	max-width: 350px;
 }
 
-.banner {
+.header-banner {
 	width: 100%;
 	text-align: left;
-	margin-top: 10px;
+	padding-top: 10px;
 }
 
-.banner img {
+.header-banner img {
 	display: block;
 	margin: auto;
 }
 
 .footer-banner img {
-	position: absolute;
-    bottom: 1px;
-    max-width: 400px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-    z-index: -1;
+	max-width: 400px;
+	max-height: 100px;
+    /*width: 90%;*/
+    z-index: -2;
+    display: block;
+    margin: auto;
 }
 
 @media screen and (orientation:landscape) and ( max-width: 995px){
 	body {
 		background-size: auto;
+		height: 100%;
+	}
+
+	.content {
 		height: 100%;
 	}
 
@@ -143,7 +165,7 @@ body {
 		/*height: calc(100% - 90px);*/
 	}
 
-	.banner img {
+	.header-banner img {
 		display: none !important;
 	}
 
@@ -157,6 +179,10 @@ body {
 		max-width: 90%;
 	}
 
+	.footer-banner {
+		display: none;
+	}
+
 	.footer-banner img {
 		display: none !important;
 	}
@@ -166,4 +192,25 @@ body {
 			align-items: flex-start;
 		}
 	}
+}
+
+/* for sticky footer */
+body {
+	height: 100%;
+}
+/*body {
+	margin-bottom: -20px;
+}*/
+
+.content {
+	min-height: calc(100% - 168px);
+}
+
+.footer-banner {
+	z-index: -2;
+	width: 100%;
+	margin-top: 30px;
+/*	position: fixed;*/
+	height: 100px;
+	bottom: 0px;
 }

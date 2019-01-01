@@ -7,147 +7,52 @@
 </head>
 <body>    
    <header>
-  		<div class="banner">
-			<img src="images/header-main-3.png" />
+  		<div class="header-banner">
+			<img src="images/logo.png" />
 	  	</div>
 	</header>
 	<div class="content">
-		<div id="page-wrapper" style="max-width: 1000px;width: 100%;">
-			<div id="instructionPage" class="page">
-				<div class="coupon-banner">
-					<img src="images/header-main-3.png" />
-				</div>
-				<div class="msg-wrapper">
-				    <div style="border-top: 1px solid #A0A0A0;
-					    border-bottom: 1px solid #A0A0A0;
-					    max-width: 400px;
-					    margin: 10px auto;
-					    padding: 10px;
-					    font-size: 18px;"
-					>
-						Description & Instruction
-					</div>
-				</div>
-				<div class="steps-wrapper">
-					<div class="step">
-						<div class="thumbnail">
-							<img src="images/step1.png">
-						</div>
-						<div class="text">
-							<div class="title">
-								Step 1
-							</div>
-							<div class="description">
-								Go to the nearest store
-							</div>
-						</div>
-					</div>
-					<div class="step">
-						<div class="thumbnail">
-							<img src="images/step2.png">
-						</div>
-						<div class="text">
-							<div class="title">
-								Step 2
-							</div>
-							<div class="description">
-								Open this coupon page
-							</div>
-						</div>
-					</div>
-					<div class="step">
-						<div class="thumbnail">
-							<img src="images/step3.png">
-						</div>
-						<div class="text">
-							<div class="title">
-								Step 3
-							</div>
-							<div class="description">
-								Tap on the redeem button below
-							</div>
-						</div>
-					</div>
-					<div class="step">
-						<div class="thumbnail">
-							<img src="images/step1.png">
-						</div>
-						<div class="text">
-							<div class="title">
-								Step 4
-							</div>
-							<div class="description">
-								Show your coupon code to the staff
-							</div>
-						</div>
-					</div>
-				</div>
-				<button id="redeemBtn" class="shadow-1 pageBtn" data-target="couponPage">
-					Tap to Redeem
-				</button>
-				<div class="redeem-notice">
-					Only tap to redeem when you are at store
-				</div>
+		<div class="main-banner">
+			<div class="banner-content">
+				<img src="images/logo.png" style="width: 285px;margin-bottom: 30px;" />
+				<img src="images/main_cp.png"/>	
 			</div>
-			<div id="couponPage" class="page">
-				<div class="coupon-section-wrapper">
-					<div class="coupon-section-banner">
-						<img src="images/banner.png"/>
-					</div>
-					<div class="coupon-section" id="couponSection">
-						<div class="section-page" id="barcodeSection" style="height: 360px;">
-							<div class="msg-wrapper">
-							    <div style="border-top: 1px solid #A0A0A0;
-								    border-bottom: 1px solid #A0A0A0;
-								    max-width: 400px;
-								    margin: 10px auto;
-								    padding: 10px;
-								    font-size: 18px;"
-								>
-									This is Your Coupon
-								</div>
-							</div>
-							<div class="msg-wrapper">
-								Show this to the staff to redeem
-							</div>
-							<div class="barcode-wrapper">
-								<img src="images/barcode.png">
-							</div>
-							<button id="doneRedeem" class="shadow-1 sectionBtn" data-target="thankyouSection" style="width: 110px;">
-								Done
-							</button>
-						</div>
-						<div id="thankyouSection" class="section-page" style="height: 360px;">
-							<div class="msg-wrapper">
-							    <div style="border-top: 1px solid #A0A0A0;
-								    border-bottom: 1px solid #A0A0A0;
-								    max-width: 400px;
-								    margin: 10px auto;
-								    padding: 10px;
-								    font-size: 18px;"
-								>
-									Redemption Complete
-								</div>
-							</div>
-							<div class="msg-wrapper">
-								Your redemption is now complete
-							</div>
-							<div class="msg-wrapper">
-							    <div style="
-								    max-width: 400px;
-								    margin: 10px auto;
-								    padding: 10px;
-								    font-size: 18px;"
-								>
-									Thank You
-									for Your Participation
-								</div>
-							</div>
-						</div>
-					</div>
+		</div>
+		<div id="page-wrapper">
+			<div id="loadingPage" class="page" style="height: 500px;">
+			    <div class="loading-block">
+			      <br>LOADING
+			    </div>
+			</div>
+			<div id="instructionPage" class="page">
+				<h2>HOW TO REDEEM YOUR CASH VOUCER</h2>
+				<div class="msg-wrapper" style="padding-top: 5px;font-size: 16px;">
+					<h2 style="margin: 5px 15px;">Step 1</h2>
+					Go to the nearest store
 				</div>
+				<div class="msg-wrapper" style="padding-top: 5px;font-size: 16px;">
+					<h2 style="margin: 5px 15px;">Step 2</h2>
+					Open this coupon page
+				</div>
+				<div class="msg-wrapper" style="padding-top: 5px;font-size: 16px;">
+					<h2 style="margin: 5px 15px;">Step 3</h2>
+					Tap on the "Redeem" button below
+				</div>
+				<div class="msg-wrapper" style="padding-top: 5px;font-size: 16px;">
+					<h2 style="margin: 5px 15px;">Step 4</h2>
+					Show your coupon code to the staff
+				</div>
+				<button class="primary pageBtn" data-target="redeemPage" style="width: 180px;">Tap To Redeem</button>
+			</div>
+			<div id="redeemPage" class="page">
+				<h2>SHOW THIS TO THE CASHIER</h2>
 			</div>
 		</div>
 	</div>
+	<footer>
+	  	<div class="footer-banner" id="footer-banner">
+	      <img src="images/footer-banner.png" />
+	  	</div>
+	</footer>
 </body>
 </html>
