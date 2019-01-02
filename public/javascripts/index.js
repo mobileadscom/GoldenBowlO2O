@@ -10,6 +10,7 @@ import '../stylesheets/campaignPage.css';
 import '../stylesheets/eraser.css';
 import '../stylesheets/modal.css';
 import '../stylesheets/regForm.css';
+import '../stylesheets/sharer.css';
 
 var app = {
 	storage: 'o2odemo_en',
@@ -153,7 +154,26 @@ var app = {
 				spinner.style.display = 'none';
 			});
 		};
+
+		/* Fb Login */
+		document.getElementById('regFb').addEventListener('click', () => {
+			user.registerFb()
+		})
 		/* ==== Event Listeners End ==== */
+	},
+	checkRedirection() {
+		user.getRedirectResult().then((result) => {
+			console.log(result);
+			/*if (result.credential) {
+			 	
+			}
+			else {
+				
+			}*/
+		}).catch((error) => {
+			console.error(error);
+			// this.start();
+		})
 	},
 	initUser: function(userId, autoRegister, isTwitter) {
 		/* check if user is registered, if no, then register user, if yes, continue on where the user left off */
@@ -204,7 +224,7 @@ var app = {
 		}
 		this.eraser = new Eraser({
 			ele: document.getElementById('scratchCover'),
-			completeRatio: 0.8,
+			completeRatio: 0.6,
 			width: 250,
 			height: 236,
 			completeFunction: function() {
@@ -233,26 +253,26 @@ var app = {
 		});
 
 		/* init registration pagination */
-	  this.regSections = new miniPages({
-	  	pageWrapperClass: document.getElementById('regPage'),
-	  	pageClass: 'reg-sub-page',
-	  	initialPage: document.getElementById('regSub1'),
-	  	pageButtonClass: 'email-btn'
-	  });
+		this.regSections = new miniPages({
+			pageWrapperClass: document.getElementById('regPage'),
+			pageClass: 'reg-sub-page',
+			initialPage: document.getElementById('regSub1'),
+			pageButtonClass: 'email-btn'
+		});
 
-	  document.getElementById('toRegSub1').addEventListener('click', () => {
-		this.regSections.toPage('regSub1');
-	  });
+		document.getElementById('toRegSub1').addEventListener('click', () => {
+			this.regSections.toPage('regSub1');
+		});
 
-	  /* init registration form sections */
-	  this.formSections = new miniPages({
-	  	pageWrapperClass: document.getElementById('formSecWrapper'),
-	  	pageClass: 'sec',
-	  	initialPage: document.getElementById('regSec')
-	  });
-    this.initEraser();
-    this.events();
-
+		/* init registration form sections */
+		this.formSections = new miniPages({
+			pageWrapperClass: document.getElementById('formSecWrapper'),
+			pageClass: 'sec',
+			initialPage: document.getElementById('regSec')
+		});
+		this.initEraser();
+		this.events();
+		this.checkRedirection();
 	  /* User Info */
 	  if (!this.params.userId || !this.params.source) {
 		  user.isWanderer = true;

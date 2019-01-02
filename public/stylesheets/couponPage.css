@@ -1,144 +1,48 @@
-/* coupon page */
-@media(min-width: 1px) {
-  .coupon-section-banner {
-    display: none;
-  }
-
-  .coupon-section {
-    width: 100%;
-  }
-
-  .steps-wrapper {
-    margin: auto;
-  }
-
-  .coupon-banner {
-    display: none;
-  }
-}
-@media(min-width: 992px) {
-  .coupon-section-banner {
-    display: block;
-    width: 50%;
-    max-width: 400px;
-  }
-  
-  .coupon-section {
-    width: 50%;
-    max-width: 400px;
-  }
-
-  .coupon-banner {
-    display: block;
-  }
-
-  .steps-wrapper {
-    margin: 0px auto 30px;
-  }
-
-  .steps-wrapper .step {
-    max-width: 350px;
-  }
+.store-selector-section {
+  margin: 25px 0px;
 }
 
-.coupon-section-banner {
-  position: relative;
-}
-
-.coupon-section {
-  position: relative;
-}
-.coupon-section-banner img{
-  width: 400px;
-  position: absolute;
-  top: 50%;
-  right: 0px;
-  transform: translateY(-50%);
-}
-
-.coupon-banner {
-  max-width: 400px;
-  margin: auto;
-}
-
-.coupon-banner img {
+.location-wrapper {
   width: 100%;
-}
-
-.steps-wrapper {
-  /*max-width: 400px;*/
-  padding: 0px 20px;
-  flex-wrap: wrap;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: row;
   justify-content: center;
 }
 
-.steps-wrapper .step {
-  display: flex;
-  justify-content: center;
-  margin: 10px 0px;
-  max-width: 360px;
+.location-wrapper .location {
+  background-color: #1E1F24;
+  border: 1px solid #010603;
+  border-radius: 3px;
+  width: 140px;
+  height: 80px;
+  margin: 5px;
+  padding: 5px;
+  color: #FFFFFF;
+  font-size: 14px;
+  transition: all 0.3s;
 }
 
-.steps-wrapper .step .thumbnail {
-  width: 40%;
-}
-
-.steps-wrapper .step .thumbnail img {
-  width: 100%;
-}
-
-.steps-wrapper .step .text {
-  width: 60%;
-  text-align: left;
-  padding: 8px 10px;
-}
-
-.steps-wrapper .step .text .title {
-  color: #4c4c4c;
-  font-family: 'Merienda', cursive;
-  margin-bottom: 2px;
-  font-size: 18px;
-  font-weight: 600;
-}
-
-#redeemBtn, #doneRedeem {
-  padding: 8px 15px;
-  width: 250px;
-  display: block;
-  font-family: 'Merienda', cursive;
-  color: white;
-  margin: 5px auto 5px;
-  border: none;
-  border-radius: 5px;
-  font-size: 19px;
-  background-color: #C71610;
-}
-
-#redeemBtn:hover, #doneRedeem:hover {
+.location-wrapper .location:hover {
   cursor: pointer;
 }
 
-.redeem-notice {
-  font-size: 14px;
-  margin: 8px 0px;
+.location.selected {
+  background-color: #F3BD16;
+  color: black;
+  font-weight: bold;
 }
 
-.barcode-wrapper {
-  margin: 15px auto;
-  border-radius: 6px;
-  max-width: 200px;
-  background-color: white;
-}
-
-.barcode-wrapper img {
+.coupon-code {
   width: 90%;
-}
-
-.coupon-section-wrapper {
+  margin: auto;
+  border: 1px solid #FFFFFF;
+  padding: 10px;
+  font-size: 24px;
+  border-radius: 3px;
+  font-weight: bold;
+  max-width: 300px;
   display: flex;
   justify-content: center;
-  max-width: 1200px;
-  margin: auto;
+  align-items: center;
+  color: #F3BD16;
 }

@@ -1,0 +1,38 @@
+.sharer-wrapper {
+	display: flex;
+	justify-content: center;
+	flex-direction: row;
+	flex-wrap: wrap;
+	width: 90%;
+	margin: 20px auto;
+}
+
+.sharer-wrapper .sharer {
+	margin: 5px;
+	width: 70px;
+	height: 70px;
+	border-radius: 3px;
+	background-size: 45px;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.sharer.fb {
+	background-color: #3B5998;
+	background-image: url('../images/sharer/facebook.svg');
+}
+
+.sharer.wa {
+	background-color: #26D367;
+	background-image: url('../images/sharer/whatsapp.svg');
+}
+
+.sharer.fb-messenger {
+	background-color: #2196F3;
+	background-image: url('../images/sharer/fb-messenger.svg');
+}
+
+.sharer.twitter {
+	background-color: #26A6D1;
+	background-image: url('../images/sharer/twitter.svg');
+}

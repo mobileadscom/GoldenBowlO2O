@@ -82,6 +82,21 @@
   font-size: 19px;
 }
 */
+#regFb {
+  -webkit-box-shadow: 0 2px 4px rgba(0,0,0,0.16), 0 2px 4px rgba(0,0,0,0.23);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.16), 0 2px 4px rgba(0,0,0,0.23);
+  font-weight: 600;
+  color: white;
+  border: 1px solid #30416B;
+  background-color: #3B5999; 
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#3B5999), to(#1A3877));
+  background-image: -webkit-linear-gradient(top, #3B5999, #1A3877);
+  background-image: -moz-linear-gradient(top, #3B5999, #1A3877);
+  background-image: -ms-linear-gradient(top, #3B5999, #1A3877);
+  background-image: -o-linear-gradient(top, #3B5999, #1A3877);
+  background-image: linear-gradient(to bottom, #3B5999, #1A3877);
+}
+
 #submitBtn:hover {
   cursor: pointer;
 }
@@ -90,12 +105,12 @@
   margin-top: 20px;
 }
 
-#regEmail, #regTwitter, #followBtn, #regLine {
+#regTwitter, #followBtn, #regLine {
   padding: 8px 15px;
   width: 250px;
   display: block;
   font-family: 'Roboto', sans-serif;
-  color: white;
+  /*color: white;*/
   margin: 0px auto 15px;
   border: none;
   border-radius: 5px;

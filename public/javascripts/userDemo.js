@@ -246,6 +246,20 @@ var user = {
       console.log(error);
     });
 	},
+	registerFb: function() {
+		var provider = new firebase.auth.FacebookAuthProvider()
+		firebase.auth().signInWithRedirect(provider);
+	},
+	getRedirectResult: function() {
+		return new Promise(function(resolve, reject) {
+			console.log('redirect result');
+			firebase.auth().getRedirectResult().then(function(result) {
+			  resolve(result);
+			}).catch(function(error) {
+			  reject(error);
+			});	
+		});
+	},
 	registerTwitter: function() {
 		console.log('registerTwitter');
 		var provider = new firebase.auth.TwitterAuthProvider();

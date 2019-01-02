@@ -43,7 +43,11 @@ button, input[type="submit"] {
 }
 
 button:hover, input[type="submit"]:hover {
-   cursor: pointer;
+  cursor: pointer;
+}
+
+button[disabled], input[disabled] {
+  opacity: 0.5;
 }
 
 button.primary, input[type="submit"].primary {
@@ -103,10 +107,40 @@ button.cancel:hover {
   background-color: #FFFFFF;
 }
 
+.loader {
+  border: 3px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 3px solid #536D79;
+  width: 40px;
+  height: 40px;
+  -webkit-animation: spin 1s linear infinite; /* Safari */
+  animation: spin 1s linear infinite;
+  margin: auto;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loader.in-btn {
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #536D79;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  vertical-align: text-bottom;
+}
 .msg-wrapper {
   margin: 15px 0px;
   padding: 0px 20px;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .msg-wrapper .big {
@@ -122,4 +156,13 @@ button.cancel:hover {
   transform: translate(-50%, -50%);
   font-size: 28px;
   font-weight: 600;
+}
+
+.section {
+  margin: 25px 0px;
+}
+
+.section-title {
+  font-size: 22px;
+  margin: 10px auto;
 }

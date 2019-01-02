@@ -140,11 +140,22 @@ body {
 
 .footer-banner img {
 	max-width: 400px;
-	max-height: 100px;
-    /*width: 90%;*/
+	width: 90%;
+	bottom: 0px;
+    position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
     z-index: -2;
     display: block;
     margin: auto;
+}
+
+.footer-banner .overlay {
+	position: absolute;
+    height: 75px;
+    background-color: rgba(0,0,0,0.5);
+    width: 100%;
+    bottom: 0px;
 }
 
 @media screen and (orientation:landscape) and ( max-width: 995px){
@@ -203,14 +214,14 @@ body {
 }*/
 
 .content {
-	min-height: calc(100% - 168px);
+	min-height: calc(100% - 167px);
 }
 
 .footer-banner {
 	z-index: -2;
 	width: 100%;
 	margin-top: 30px;
-/*	position: fixed;*/
+	position: relative;
 	height: 100px;
 	bottom: 0px;
 }

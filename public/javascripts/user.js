@@ -61,6 +61,10 @@ var user = {
       console.log(error);
     });
 	},
+	registerFb: function() {
+		var provider = new firebase.auth.FacebookAuthProvider()
+		firebase.auth().signInWithRedirect(provider);
+	},
 	registerTwitter: function() {
 		console.log('registerTwitter');
 		var provider = new firebase.auth.TwitterAuthProvider();
