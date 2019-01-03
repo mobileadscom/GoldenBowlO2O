@@ -2,7 +2,8 @@ import miniPages from './miniPages';
 import Eraser from './eraser.js';
 import modal from './modal';
 import winningLogic from './winningLogic';
-import user from './userDemo';
+// import user from './userDemo';
+import user from './userCore';
 
 import '../stylesheets/pageLayout.css';
 import '../stylesheets/theme.css';
@@ -107,19 +108,6 @@ var app = {
 			this.initResult(this.scratchResult);
 		}	
 	},
-	continue: function() {
-		if (user.info.state == 'win') {
-			this.initResult('win', user.info.couponLink);
-			this.pages.toPage('resultPage');
-		}
-		else if (user.info.state == 'lose') {
-			this.initResult('lose');
-			this.pages.toPage('resultPage');
-		}
-		else {
-			this.pages.toPage('gamePage');
-		}
-	},
 	events: function() {
 		/* ==== Event Listeners ==== */
 		/* email registration */
@@ -133,26 +121,30 @@ var app = {
 			spinner.style.display = 'block';
 			event.preventDefault();
 			var email = document.getElementById('emailInput').value;
-			user.register(email).then((response) => {
-				console.log(response);
-				spinner.style.display = 'none';
-			// if (response.data.status == true) {
-					this.formSections.toPage('doneSec');
-					var emailContent = '<head><meta charset="utf-8"></head>Thank you for registering. Please click the link below to complete your registration and join the campaign.<br><br><a href="https://demo.o2oplatform.com/scratch/?userId=' + email + '" target="_blank">https://demo.o2oplatform.com/scratch/?userId=' + email + '</a>';
-					user.sendEmail(email, 'MobileAds O2O Demo Link', emailContent);
-					// user.trackRegister();
-			//  }
-			//   else if (response.data.message == 'user exist.') {
-				//   user.info = response.data.user;
-			//    	 this.continue();
-					// modal.closeAll();
-			//  }
+			 const options = {
+	        	userInfo: {
+	        		userId: email,
+	        		source: user.info.source,
+	        		type: 'email'
+	        	},
+	        	autoRegister: true
+	        }
+	        user.init(options).then((response) => {
+				// this.continue(response)
+				if (response.message == 'registration success.') {
+					this.formSections.toPage('doneSec')
+					user.sendLoginEmail(email)
+				}
+				else if (response.user) {
+					this.continue()
+				}
 			}).catch((error) => {
-				console.log(error);
+				console.log(error)
 				regBtn.style.display = 'block';
 				backBtn.style.display = 'block';
 				spinner.style.display = 'none';
-			});
+				alert('registration error')
+			})
 		};
 
 		/* Fb Login */
@@ -160,58 +152,6 @@ var app = {
 			user.registerFb()
 		})
 		/* ==== Event Listeners End ==== */
-	},
-	checkRedirection() {
-		user.getRedirectResult().then((result) => {
-			console.log(result);
-			/*if (result.credential) {
-			 	
-			}
-			else {
-				
-			}*/
-		}).catch((error) => {
-			console.error(error);
-			// this.start();
-		})
-	},
-	initUser: function(userId, autoRegister, isTwitter) {
-		/* check if user is registered, if no, then register user, if yes, continue on where the user left off */
-		user.get(userId).then((response) => {
-			console.log(response);
-    	if (response.data.status == false) { // user is not registered
-	    	if (autoRegister) {
-	    		user.register(userId).then((res) => { // auto register user
-						console.log(res);
-						user.isWanderer = false;
-						user.info.id = userId;
-						user.source = this.params.source;
-						this.continue();
-					  // user.trackRegister();
-	    		}).catch((err) => {
-	    			user.isWanderer = true;
-	    			console.log(err);
-	    			// this.pages.toPage('page1')
-	    			this.pages.toPage('regPage');
-	    		});
-	    	}
-	    	else {
-	    		this.pages.toPage('regPage');
-	    		// this.pages.toPage('page1')
-	    	}
-    	}
-    	else { // user is registered
-    		user.isWanderer = false;
-				user.info = response.data.user;
-				user.source = this.params.source;
-				this.continue();
-    	}
-    }).catch((error) => {
-    	user.isWanderer = true;
-			console.log(error);
-			this.pages.toPage('regPage');
-			// this.pages.toPage('page1')
-    });
 	},
 	initEraser: function() {
 		var result = winningLogic.process(true);
@@ -238,13 +178,68 @@ var app = {
 			}
 		})
 	},
+	continue() {
+		if (user.info.id) {
+			if (user.info.state == 'win') {
+				this.initResult('win', user.info.couponCode);
+				this.pages.toPage('resultPage')
+			}
+			else if (user.info.state == 'lose') {
+				this.initResult('lose')
+				this.pages.toPage('resultPage')
+			}
+			else {
+				this.pages.toPage('gamePage')
+			}
+		}
+		else {
+			this.pages.toPage('regPage')
+		}
+	},
+	initUser(options) {
+		if (options) {
+			user.init(options).then((response) => {
+				this.continue(response)
+			}).catch((error) => {
+				console.log(error)
+				this.continue()
+			})
+		}
+		else {
+			if (this.params.userId) {
+				let options = {
+					userInfo: {
+						userId: this.params.userId,
+						source: user.info.source,
+					}
+				}
+
+				if (this.params.displayName) { // line login
+					options.userInfo.type = 'line'
+					options.autoRegister = true
+				}
+				else {
+					options.autoRegister = false
+				}
+
+				user.init(options).then((response) => {
+					this.continue(response)
+				}).catch((error) => {
+					console.log(error)
+					this.continue()
+				})
+			}
+			else {
+				user.getLocalUser(user.info.source) // load localStorage user data
+				console.log(user.info)
+				this.continue()
+			}
+		}
+	},
 	init: function() {
 		/* init pagination */
 		this.params = this.getParams();
-		if (this.params.displayName) {
-			this.params.signInMethod = 'line';
-		}
-		this.params.source = 'source1'; // dummy source
+
 		this.pages = new miniPages({
 		  	pageWrapperClass: document.getElementById('page-wrapper'),
 		  	pageClass: 'page',
@@ -272,24 +267,48 @@ var app = {
 		});
 		this.initEraser();
 		this.events();
-		this.checkRedirection();
-	  /* User Info */
-	  if (!this.params.userId || !this.params.source) {
-		  user.isWanderer = true;
-	    setTimeout(() => {
-		    this.pages.toPage('regPage');
-		    // this.pages.toPage('page1')
-		  }, 1000);
-	  }
-	  else {
-	  	if (this.params.signInMethod == 'line') {
-			this.initUser(this.params.userId, true);
-	  	}
-	  	else {
-	  		this.initUser(this.params.userId, false);
-	  	}
-	}
-	  
+
+		if (this.params.source) {
+			user.changeSource(source)
+		}
+
+		if (this.params.reset) {
+		  	user.clearAllData();
+		}
+
+		user.getRedirectResult().then((res) => {
+			console.log(res)
+			if (res.credential) {
+				user.oauth.token = res.credential.accessToken || ''
+		        user.oauth.secret = res.credential.secret || ''
+			    let id = ''
+			    const type = res.credential.providerId.replace('.com', '')
+		        if (type == 'twitter') {
+					id = res.additionalUserInfo.profile.id_str
+		        }
+		        else {
+					id = res.additionalUserInfo.profile.id
+		        }
+
+		        const options = {
+		        	userInfo: {
+		        		userId: id,
+		        		source: user.info.source,
+		        		type: type
+		        	},
+		        	autoRegister: true
+		        }
+		        this.initUser(options)
+		      
+			}
+			else {
+				this.initUser()
+			}
+		}).catch((err) => {
+			console.error(err)
+			this.initUser()
+		})
+
 	  var processed = false; // check if result has been processed to avoid double result processsing
 	},
 }
@@ -298,6 +317,7 @@ document.addEventListener('DOMContentLoaded', function() {
   app.init();
   modal.init();
   window.params = app.params;
+  window.user = user
 });
 
 export {
