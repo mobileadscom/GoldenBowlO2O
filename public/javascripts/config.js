@@ -1,16 +1,16 @@
 let config = {
-	isDemo: true,
+	isDemo: false,
 	userAPIURL: 'https://api.mobileads.com', // demo api
 	source: 'dumSource',
-	campaignLink: 'https://demo.o2oplatform.com/survey/',
-	couponLink: 'https://demo.o2oplatform.com/survey/coupon.html',
+	campaignLink: 'https://demo.o2oplatform.com/goldenBowl/',
+	couponLink: 'https://demo.o2oplatform.com/goldenBowl/coupon.html',
 	emailSender: 'contact@o2otracking.com',
 	loginEmail: {
 		subject: 'GoldenBowl O2O Login Link',
 		content: `
 			<head><meta charset="utf-8"></head>
 			Thank you for registering. Please click the link below to complete your registration and win a coupon
-			<br><br><a href="https://demo.o2oplatform.com/survey/?userId={{userId}}" target="_blank">
+			<br><br><a href="https://demo.o2oplatform.com/goldenBowl/?userId={{userId}}" target="_blank">
 			{{campaignLink}}?userId={{userId}}</a>
 		`
 	},

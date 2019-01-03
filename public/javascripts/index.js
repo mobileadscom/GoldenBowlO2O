@@ -2,8 +2,8 @@ import miniPages from './miniPages';
 import Eraser from './eraser.js';
 import modal from './modal';
 import winningLogic from './winningLogic';
-// import user from './userDemo';
 import user from './userCore';
+import axios from 'axios'
 
 import '../stylesheets/pageLayout.css';
 import '../stylesheets/theme.css';
@@ -16,6 +16,7 @@ import '../stylesheets/sharer.css';
 var app = {
 	storage: 'o2odemo_en',
 	eraser: null,
+	couponId: '',
 	pages: null, // array of pages
 	params: {}, // params in query string
 	player: null, //youtube player
@@ -69,7 +70,32 @@ var app = {
 			document.getElementById('couponLink').style.display = 'none';
 		}
 	},
+
 	processResult() {
+		const couponLink = user.generateCouponLink()
+		if (user.info.id.indexOf('@') > -1) { // login via email
+			user.sendCouponEmail(user.info.id, couponLink)
+		}
+		this.initResult('win', couponLink)
+
+	/*	user.mark(this.couponId).then((response) => {
+			console.log(response)
+			this.initResult('win', response.data.couponLink);
+						var message = '綾鷹クーポンが当たりました！ ' + response.data.couponLink;
+						
+
+						if (user.info.id.indexOf('@') > -1) { // login via email
+		        	var emailContent = '<head><meta charset="utf-8"></head><div style="text-align:center;font-weight:600;color:#FF4244;font-size:28px;">Congratulations. You are qualified for our offer.</div><br><br><div style="text-align:center;font-weight:600;">Please click the button below to get your coupon.</div><a href="' + response.data.couponLink + '" target="_blank" style="text-decoration:none;"><button style="display:block;margin:20px auto;margin-bottom:40px;border-radius:5px;background-color:#E54C3C;border:none;color:white;width:200px;height:50px;font-weight:600;">Coupon</button></a>';
+	        	  user.sendEmail(user.info.id, 'MobileAds Coupon Link', emailContent);
+						}
+						else {
+							// user.messageTwitter(message);
+						}
+		}).catch((error) => {
+			console.error(error)
+		})*/
+	},
+	/*processResult() {
 		if (!user.isWanderer) {
 			if (this.scratchResult == 'win') {
   			user.win(user.info.id, 'A', user.source).then((response) => {
@@ -107,7 +133,7 @@ var app = {
 		else {
 			this.initResult(this.scratchResult);
 		}	
-	},
+	},*/
 	events: function() {
 		/* ==== Event Listeners ==== */
 		/* email registration */
@@ -154,29 +180,29 @@ var app = {
 		/* ==== Event Listeners End ==== */
 	},
 	initEraser: function() {
-		var result = winningLogic.process(true);
-		this.scratchResult = result.actualResult;
-		if (this.scratchResult == 'win') {
-			document.getElementById('scratchLose').style.display = 'none'
-		}
-		else {
-			document.getElementById('scratchWin').style.display = 'none'
-		}
-		this.eraser = new Eraser({
-			ele: document.getElementById('scratchCover'),
-			completeRatio: 0.6,
-			width: 250,
-			height: 236,
-			completeFunction: function() {
-				this.reveal();
-				if (!app.processed) {
-	            	app.processed = true;
-	            	app.processResult();
+		axios.get(`https://api.mobileads.com/coupons/goldenBowl/coupon_draw?id=${user.info.id}`).then((response) => {
+			console.log(response)
+			this.couponId = response.data._id
+			document.getElementById('scratchWin').src = `https://rmarepo.richmediaads.com/goldenBowl/coupons/${response.data.couponCode}.jpg`
+			 
+			this.eraser = new Eraser({
+				ele: document.getElementById('scratchCover'),
+				completeRatio: 0.8,
+				width: 250,
+				height: 236,
+				completeFunction: function() {
+					this.reveal();
+					if (!app.processed) {
+		            	app.processed = true;
+		            	app.processResult();
+					}
+					document.getElementById('eraser').style.pointerEvents = 'none';
+					document.getElementById('toResult').disabled = false;
 				}
-				document.getElementById('eraser').style.pointerEvents = 'none';
-				document.getElementById('toResult').disabled = false;
-			}
-		})
+			})
+		}).catch((error) => {
+			console.error(error)
+		})	
 	},
 	continue() {
 		if (user.info.id) {
@@ -189,6 +215,7 @@ var app = {
 				this.pages.toPage('resultPage')
 			}
 			else {
+				this.initEraser();
 				this.pages.toPage('gamePage')
 			}
 		}
@@ -265,7 +292,7 @@ var app = {
 			pageClass: 'sec',
 			initialPage: document.getElementById('regSec')
 		});
-		this.initEraser();
+		
 		this.events();
 
 		if (this.params.source) {
@@ -316,6 +343,7 @@ var app = {
 document.addEventListener('DOMContentLoaded', function() {
   app.init();
   modal.init();
+  window.app = app
   window.params = app.params;
   window.user = user
 });

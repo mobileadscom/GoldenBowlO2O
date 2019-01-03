@@ -84,12 +84,33 @@ let user = {
 			console.error('userInfo error')
 		}
 	},
+	generateCouponLink() {
+		return config.couponLink + `?userId=${user.info.id}`
+	},
+	mark(couponId) {
+		if (!config.isDemo) {
+			return axios.post(`${config.userAPIURL}/coupons/goldenBowl/mark_user?id=${this.info.id}&source=${this.info.source}&couponId=${couponId}`)
+		}
+	},
 	sendLoginEmail(email) {
 		let formData = new FormData()
 	    formData.append('sender', config.emailSender)
 	    formData.append('subject', config.loginEmail.subject)
 	    formData.append('recipient', email)
 	    let content = config.loginEmail.content.replace(/{{userId}}/g, email).replace(/{{campaignLink}}/g, config.campaignLink)
+	    formData.append('content', content)
+	    axios.post('https://www.mobileads.com/mail/send', formData, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).then((resp) => {
+	      console.log(resp);
+	    }).catch((error) => {
+	      console.log(error);
+	    });
+	},
+	sendCouponEmail(email, couponLink) {
+		let formData = new FormData()
+	    formData.append('sender', config.emailSender)
+	    formData.append('subject', config.couponEmail.subject)
+	    formData.append('recipient', email)
+	    let content = config.couponEmail.content.replace(/{{couponLink}}/g, couponLink)
 	    formData.append('content', content)
 	    axios.post('https://www.mobileads.com/mail/send', formData, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).then((resp) => {
 	      console.log(resp);

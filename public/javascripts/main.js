@@ -13,17 +13,33 @@ var user = {
 		state: '-'
 	},
 	get: function(userId) {
-	    return axios.get(domain + '/api/coupon/softbank/user_info', {
-	      params: {
-	        id: userId
-	      }
-	    });
+	    return axios.get(`https://api.mobileads.com/coupons/goldenBowl/user_info?id=${userId}`);
 	},
 }
 
 var app = {
-	pages: null, // array of pages
-	sections: null,
+	params: {},
+	pages: null,
+	getParams: function() {
+		  var query_string = {};
+		  var query = window.location.search.substring(1);
+		  var vars = query.split("&");
+		  for (var i=0;i<vars.length;i++) {
+		      var pair = vars[i].split("=");
+		      // If first entry with this name
+		      if (typeof query_string[pair[0]] === "undefined") {
+		          query_string[pair[0]] = pair[1];
+		      // If second entry with this name
+		      } else if (typeof query_string[pair[0]] === "string") {
+		          var arr = [ query_string[pair[0]], pair[1] ];
+		          query_string[pair[0]] = arr;
+		      // If third or later entry with this name
+		      } else {
+		          query_string[pair[0]].push(pair[1]);
+		      }
+		  } 
+		  return query_string;
+	},
 	redeemCoupon: function() {
 		if (location.selected && user.info.id) {
 			document.getElementById('redeemLoader').style.display = 'block'
@@ -50,6 +66,7 @@ var app = {
 		})
 	},
 	init: function() {
+		this.params = this.getParams()
 		this.pages = new miniPages({
 		  	pageWrapperClass: document.getElementById('page-wrapper'),
 		  	pageClass: 'page',
@@ -59,6 +76,17 @@ var app = {
 
 		//get data
 		//user.get....
+		if (this.params.userId) {
+			user.get(this.params.userId).then((response) => {
+				console.log(response)
+				if (response.data.coupon) {
+					document.getElementById('couponCode').innerHTML = response.data.coupon.couponCode
+				}
+			}).catch((error) => {
+				console.error(error)
+			})
+		}
+		
 		setTimeout(() => {
 			this.pages.toPage('instructionPage')
 			location.init();
