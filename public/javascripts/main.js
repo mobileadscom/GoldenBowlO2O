@@ -10,11 +10,11 @@ import '../stylesheets/sharer.css'
 
 var user = {
 	info: {
-		id: '11',
+		id: '',
 		state: '-'
 	},
 	get(userId) {
-	    return axios.get(`https://api.mobileads.com/coupons/goldenBowl/user_info?id=${userId}`);
+	    return axios.get(`${config.userAPIDomain}/coupons/goldenBowl/user_info?id=${userId}`);
 	},
 }
 
@@ -24,7 +24,7 @@ var coupon = {
 	claimed: false,
 	claiming: false,
 	claim(location) {
-		return axios.post(`https://api.mobileads.com/coupons/goldenBowl/coupon_claim?id=${user.info.id}&couponId=${this.id}&claimAt=${location}`)
+		return axios.post(`${config.userAPIDomain}/coupons/goldenBowl/coupon_claim?id=${user.info.id}&couponId=${this.id}&claimAt=${location}`)
 	}
 }
 
@@ -71,15 +71,9 @@ var app = {
 				console.error(error)
 				alert('Fail to claim coupon. Please refresh the page and try again.')
 			})
-			
-			/*setTimeout(() => {
-				document.getElementById('redeemLoader').style.display = 'none'
-				// document.getElementById('confirmRedeem').style.display = 'inline-block'
-				this.pages.toPage('donePage')
-			}, 1000)*/
 		}
 		else {
-			alert('error')
+			alert('Fail to claim coupon. Please refresh the page and try again.')
 		}
 	},
 	events: function() {
@@ -88,7 +82,7 @@ var app = {
 				this.redeemCoupon();
 			}
 			else {
-				alert('Please select store location')
+				alert('Please select store location.')
 			}
 		})
 	},

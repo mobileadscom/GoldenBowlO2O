@@ -70,7 +70,7 @@ let user = {
 	},
 	register(userInfo) {
 		if (userInfo.userId && userInfo.source && userInfo.type) {
-			return axios.post(`${config.userAPIURL}/coupons/goldenBowl/user_register?id=${userInfo.userId}&source=${userInfo.source}&type=${userInfo.type}`)
+			return axios.post(`${config.userAPIDomain}/coupons/goldenBowl/user_register?id=${userInfo.userId}&source=${userInfo.source}&type=${userInfo.type}`)
 		}
 		else {
 			console.error('userInfo error')
@@ -78,7 +78,7 @@ let user = {
 	},
 	get(userInfo) {
 		if (userInfo.userId && userInfo.source) {
-			return axios.get(`${config.userAPIURL}/coupons/goldenBowl/user_info?id=${userInfo.userId}&source=${userInfo.source}`)
+			return axios.get(`${config.userAPIDomain}/coupons/goldenBowl/user_info?id=${userInfo.userId}&source=${userInfo.source}`)
 		}
 		else {
 			console.error('userInfo error')
@@ -89,7 +89,7 @@ let user = {
 	},
 	mark(couponId) {
 		if (!config.isDemo) {
-			return axios.post(`${config.userAPIURL}/coupons/goldenBowl/mark_user?id=${this.info.id}&source=${this.info.source}&couponId=${couponId}`)
+			return axios.post(`${config.userAPIDomain}/coupons/goldenBowl/mark_user?id=${this.info.id}&source=${this.info.source}&couponId=${couponId}`)
 		}
 		else {
 			return new Promise((resolve, reject) => {
