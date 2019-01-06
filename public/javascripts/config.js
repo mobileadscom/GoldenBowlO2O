@@ -1,5 +1,5 @@
 let config = {
-	isDemo: true,
+	isDemo: false,
 	userAPIURL: 'https://api.mobileads.com', // demo api
 	source: 'dumSource',
 	campaignLink: 'https://demo.o2oplatform.com/goldenBowl/',

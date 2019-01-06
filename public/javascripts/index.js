@@ -1,7 +1,7 @@
 import miniPages from './miniPages';
 import Eraser from './eraser.js';
 import modal from './modal';
-import winningLogic from './winningLogic';
+// import winningLogic from './winningLogic';
 import user from './userCore';
 import axios from 'axios'
 
@@ -70,70 +70,24 @@ var app = {
 			document.getElementById('couponLink').style.display = 'none';
 		}
 	},
-
 	processResult() {
-		const couponLink = user.generateCouponLink()
-		if (user.info.id.indexOf('@') > -1) { // login via email
-			user.sendCouponEmail(user.info.id, couponLink)
-		}
-		this.initResult('win', couponLink)
-
-	/*	user.mark(this.couponId).then((response) => {
-			console.log(response)
-			this.initResult('win', response.data.couponLink);
-						var message = '綾鷹クーポンが当たりました！ ' + response.data.couponLink;
-						
-
-						if (user.info.id.indexOf('@') > -1) { // login via email
-		        	var emailContent = '<head><meta charset="utf-8"></head><div style="text-align:center;font-weight:600;color:#FF4244;font-size:28px;">Congratulations. You are qualified for our offer.</div><br><br><div style="text-align:center;font-weight:600;">Please click the button below to get your coupon.</div><a href="' + response.data.couponLink + '" target="_blank" style="text-decoration:none;"><button style="display:block;margin:20px auto;margin-bottom:40px;border-radius:5px;background-color:#E54C3C;border:none;color:white;width:200px;height:50px;font-weight:600;">Coupon</button></a>';
-	        	  user.sendEmail(user.info.id, 'MobileAds Coupon Link', emailContent);
-						}
-						else {
-							// user.messageTwitter(message);
-						}
+		user.mark(this.couponId).then((response) => {
+			if (response.data.couponCode) {
+				user.setUserInfo({
+					state: 'win',
+					couponCode: response.data.couponCode
+				})
+				const couponLink = user.generateCouponLink()
+				if (user.info.id.indexOf('@') > -1) { // login via email
+					user.sendCouponEmail(user.info.id, couponLink)
+				}
+				this.initResult('win', couponLink)
+			}
 		}).catch((error) => {
 			console.error(error)
-		})*/
+			alert('An error has occured. Please refresh the page and try again.')
+		})
 	},
-	/*processResult() {
-		if (!user.isWanderer) {
-			if (this.scratchResult == 'win') {
-  			user.win(user.info.id, 'A', user.source).then((response) => {
-					console.log(response);
-					if (response.data.couponLink) {
-						this.initResult('win', response.data.couponLink);
-						var message = '綾鷹クーポンが当たりました！ ' + response.data.couponLink;
-						
-
-						if (user.info.id.indexOf('@') > -1) { // login via email
-		        	var emailContent = '<head><meta charset="utf-8"></head><div style="text-align:center;font-weight:600;color:#FF4244;font-size:28px;">Congratulations. You are qualified for our offer.</div><br><br><div style="text-align:center;font-weight:600;">Please click the button below to get your coupon.</div><a href="' + response.data.couponLink + '" target="_blank" style="text-decoration:none;"><button style="display:block;margin:20px auto;margin-bottom:40px;border-radius:5px;background-color:#E54C3C;border:none;color:white;width:200px;height:50px;font-weight:600;">Coupon</button></a>';
-	        	  user.sendEmail(user.info.id, 'MobileAds Coupon Link', emailContent);
-						}
-						else {
-							// user.messageTwitter(message);
-						}
-					}
-					else {
-						this.initResult('lose');
-					}
-  			}).catch((error) => {
-  				console.log(error);
-	  			this.initResult('win');
-  			});
-  		}
-  		else {
-  			user.lose(user.info.id, user.source).then((response) => {
-  				console.log(response);
-  			}).catch((error) => {
-  				console.log(error);
-  			});
-  			this.initResult('lose');
-  		}
-		}
-		else {
-			this.initResult(this.scratchResult);
-		}	
-	},*/
 	events: function() {
 		/* ==== Event Listeners ==== */
 		/* email registration */
@@ -169,7 +123,7 @@ var app = {
 				regBtn.style.display = 'block';
 				backBtn.style.display = 'block';
 				spinner.style.display = 'none';
-				alert('registration error')
+				alert('Registration error. Please refresh the page and try again.')
 			})
 		};
 
@@ -180,43 +134,51 @@ var app = {
 		/* ==== Event Listeners End ==== */
 	},
 	initEraser: function() {
-		axios.get(`https://api.mobileads.com/coupons/goldenBowl/coupon_draw?id=${user.info.id}`).then((response) => {
-			console.log(response)
-			this.couponId = response.data._id
-			document.getElementById('scratchWin').src = `https://rmarepo.richmediaads.com/goldenBowl/coupons/${response.data.couponCode}.jpg`
-			 
-			this.eraser = new Eraser({
-				ele: document.getElementById('scratchCover'),
-				completeRatio: 0.8,
-				width: 250,
-				height: 236,
-				completeFunction: function() {
-					this.reveal();
-					if (!app.processed) {
-		            	app.processed = true;
-		            	app.processResult();
+		return new Promise((resolve, reject) => {
+			axios.get(`https://api.mobileads.com/coupons/goldenBowl/coupon_draw?id=${user.info.id}`).then((response) => {
+				console.log(response)
+				this.couponId = response.data._id
+				document.getElementById('scratchWin').src = `https://rmarepo.richmediaads.com/goldenBowl/coupons/${response.data.couponCode}.jpg`
+				 
+				this.eraser = new Eraser({
+					ele: document.getElementById('scratchCover'),
+					completeRatio: 0.8,
+					width: 250,
+					height: 236,
+					completeFunction: function() {
+						this.reveal();
+						if (!app.processed) {
+			            	app.processed = true;
+			            	app.processResult();
+						}
+						document.getElementById('eraser').style.pointerEvents = 'none';
+						document.getElementById('toResult').disabled = false;
 					}
-					document.getElementById('eraser').style.pointerEvents = 'none';
-					document.getElementById('toResult').disabled = false;
-				}
+				})
+				resolve(response)
+			}).catch((error) => {
+				console.error(error)
+				reject(error)
 			})
-		}).catch((error) => {
-			console.error(error)
-		})	
+		})
 	},
 	continue() {
 		if (user.info.id) {
 			if (user.info.state == 'win') {
-				this.initResult('win', user.info.couponCode);
+				this.initResult('win', user.generateCouponLink());
 				this.pages.toPage('resultPage')
 			}
-			else if (user.info.state == 'lose') {
+			/*else if (user.info.state == 'lose') {
 				this.initResult('lose')
 				this.pages.toPage('resultPage')
-			}
+			}*/
 			else {
-				this.initEraser();
-				this.pages.toPage('gamePage')
+				this.initEraser().then((r) => {
+					this.pages.toPage('gamePage')
+				}).catch((e) => {
+					this.pages.toPage('regPage')
+				})
+				
 			}
 		}
 		else {

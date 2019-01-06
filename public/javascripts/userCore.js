@@ -91,6 +91,17 @@ let user = {
 		if (!config.isDemo) {
 			return axios.post(`${config.userAPIURL}/coupons/goldenBowl/mark_user?id=${this.info.id}&source=${this.info.source}&couponId=${couponId}`)
 		}
+		else {
+			return new Promise((resolve, reject) => {
+				resolve({
+					data: {
+						message: 'marked.',
+						state: 'win',
+						status: true
+					}
+				})
+			})
+		}
 	},
 	sendLoginEmail(email) {
 		let formData = new FormData()
