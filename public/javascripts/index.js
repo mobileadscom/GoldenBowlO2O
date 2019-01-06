@@ -69,6 +69,15 @@ var app = {
 			// document.getElementById('resultImage').style.display = 'none';
 			document.getElementById('couponLink').style.display = 'none';
 		}
+
+		var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+		if (!isMobile) {
+			const mobileSharers = document.getElementsByClassName('mobile-sharer')
+			for (let m = 0; m < mobileSharers.length; m++) {
+				mobileSharers[m].style.display = 'none'
+			}
+		  /* your code here */
+		}
 	},
 	processResult() {
 		user.mark(this.couponId).then((response) => {
