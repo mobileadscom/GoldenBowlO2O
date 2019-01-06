@@ -76,7 +76,6 @@ var app = {
 			for (let m = 0; m < mobileSharers.length; m++) {
 				mobileSharers[m].style.display = 'none'
 			}
-		  /* your code here */
 		}
 	},
 	processResult() {
@@ -212,7 +211,7 @@ var app = {
 					}
 				}
 
-				if (this.params.displayName) { // line login
+				if (this.params.displayName) { // temporary line login detection
 					options.userInfo.type = 'line'
 					options.autoRegister = true
 				}
@@ -230,6 +229,7 @@ var app = {
 			else {
 				user.getLocalUser(user.info.source) // load localStorage user data
 				if (user.info.id) {
+					// check if db has cleared the user, if cleared, clear local storage also 
 					user.get({
 						userId: user.info.id,
 						source: user.info.source

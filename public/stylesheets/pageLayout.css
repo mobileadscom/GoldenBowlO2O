@@ -158,7 +158,7 @@ body {
     bottom: 0px;
 }
 
-@media screen and (orientation:landscape) and ( max-width: 995px){
+/*@media screen and (orientation:landscape) and ( max-width: 995px){
 	body {
 		background-size: auto;
 		height: 100%;
@@ -203,7 +203,7 @@ body {
 			align-items: flex-start;
 		}
 	}
-}
+}*/
 
 /* for sticky footer */
 body {
