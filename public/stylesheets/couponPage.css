@@ -46,3 +46,7 @@
   align-items: center;
   color: #F3BD16;
 }
+
+#joinPage, #instructionPage, #redeemPage, #donePage {
+  display: none;
+}

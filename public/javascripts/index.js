@@ -229,8 +229,24 @@ var app = {
 			}
 			else {
 				user.getLocalUser(user.info.source) // load localStorage user data
-				console.log(user.info)
-				this.continue()
+				if (user.info.id) {
+					user.get({
+						userId: user.info.id,
+						source: user.info.source
+					}).then((res) => {
+						console.log(res)
+						if (res.data.status == false && res.data.message == 'not registered.') {
+							user.clearUserInfo()
+						}
+						this.continue()
+					}).catch((err) => {
+						user.clearUserInfo()
+						this.continue()
+					})
+				}
+				else {
+					this.continue()
+				}
 			}
 		}
 	},
@@ -271,7 +287,7 @@ var app = {
 		}
 
 		if (this.params.reset) {
-		  	user.clearAllData();
+		  	user.clearLocalSourceData()
 		}
 
 		user.getRedirectResult().then((res) => {

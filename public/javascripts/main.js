@@ -99,16 +99,23 @@ var app = {
 		if (this.params.userId) {
 			user.get(this.params.userId).then((response) => {
 				console.log(response)
-				user.info.id = response.data.user.id
-				user.info.state = response.data.user.state
-				coupon.id = response.data.coupon._id
-				coupon.couponCode = response.data.coupon.couponCode
-				coupon.claimed = response.data.coupon.claimed
-				if (coupon.couponCode && user.info.state == 'win') {
-					document.getElementById('couponCode').innerHTML = response.data.coupon.couponCode
-				}
-				if (coupon.claimed) {
-					this.pages.toPage('donePage')
+				if (response.data.status) {
+					user.info.id = response.data.user.id
+					user.info.state = response.data.user.state
+					coupon.id = response.data.coupon._id
+					coupon.couponCode = response.data.coupon.couponCode
+					coupon.claimed = response.data.coupon.claimed
+					if (coupon.couponCode && user.info.state == 'win') {
+						document.getElementById('couponCode').innerHTML = response.data.coupon.couponCode
+					}
+					if (coupon.claimed) {
+						this.pages.toPage('donePage')
+					}
+					else {
+						this.pages.toPage('instructionPage')
+						location.init();
+						this.events();
+					}
 				}
 				else {
 					this.pages.toPage('instructionPage')

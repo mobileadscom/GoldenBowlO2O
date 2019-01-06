@@ -37,6 +37,15 @@ let user = {
 			console.error('user info must be an object.')
 		}
 	},
+	clearUserInfo() {
+		this.setUserInfo({
+			couponCode: '',
+			id: '',
+			state: '-',
+			source: this.info.source,
+			gameData: {},
+		})
+	},
 	getLocalUser(source) {
 		if (!config.isDemo) {
 			const localUser = storage.getUserData(source)
@@ -58,10 +67,10 @@ let user = {
 			return {}
 		}
 	},
-	clearSourceData() {
+	clearLocalSourceData() {
 		storage.clearSourceData(this.info.source)
 	},
-	clearAllData() {
+	clearAllLocalData() {
 		storage.clearAllData()
 	},
 	registerFb: function() {
