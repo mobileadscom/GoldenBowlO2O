@@ -173,7 +173,7 @@ body {
 		max-width: 400px;
 		display: flex;
 		align-items: center;
-		/*height: calc(100% - 90px);*/
+		/*height: calc(100% - 90px);
 	}
 
 	.header-banner img {
@@ -209,9 +209,6 @@ body {
 body {
 	height: 100%;
 }
-/*body {
-	margin-bottom: -20px;
-}*/
 
 .content {
 	min-height: calc(100% - 167px);
