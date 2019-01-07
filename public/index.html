@@ -4,6 +4,13 @@
 	<title>Golden Bowl O2O</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
+	<script type="text/javascript">
+		function getRndInteger(min, max) {
+		    return Math.floor(Math.random() * (max - min) ) + min;
+		}
+
+		window.pgId = Date.now().toString() + getRndInteger(10, 99).toString();
+	</script>
 </head>
 <body>
 	<header>

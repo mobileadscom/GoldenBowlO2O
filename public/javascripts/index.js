@@ -1,17 +1,17 @@
-import miniPages from './miniPages';
-import Eraser from './eraser.js';
-import modal from './modal';
+import miniPages from './miniPages'
+import Eraser from './eraser.js'
+import modal from './modal'
 // import winningLogic from './winningLogic';
-import user from './userCore';
+import user from './userCore'
 import axios from 'axios'
 
-import '../stylesheets/pageLayout.css';
-import '../stylesheets/theme.css';
-import '../stylesheets/campaignPage.css';
-import '../stylesheets/eraser.css';
-import '../stylesheets/modal.css';
-import '../stylesheets/regForm.css';
-import '../stylesheets/sharer.css';
+import '../stylesheets/pageLayout.css'
+import '../stylesheets/theme.css'
+import '../stylesheets/campaignPage.css'
+import '../stylesheets/eraser.css'
+import '../stylesheets/modal.css'
+import '../stylesheets/regForm.css'
+import '../stylesheets/sharer.css'
 
 var app = {
 	storage: 'o2odemo_en',
@@ -331,7 +331,7 @@ document.addEventListener('DOMContentLoaded', function() {
   app.init();
   modal.init();
   window.app = app
-  window.params = app.params;
+  window.params = app.params
   window.user = user
 });
 
