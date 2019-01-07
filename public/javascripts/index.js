@@ -54,9 +54,17 @@ var app = {
 			}
 
 			if (couponLink) {
+				let sharers = document.getElementsByClassName('sharer')
+				for (let s = 0; s < sharers.length; s++) {
+					sharers[s].addEventListener('click', () => {
+						setTimeout(() => {
+							document.getElementById('couponLinkBtn').disabled = false
+						}, 3000)
+						document.getElementById('couponLink').href = couponLink;
+						document.getElementById('couponLink').setAttribute('target', '_blank');
+					})
+				}
 				document.getElementById('couponLoader').style.display = 'none';
-				document.getElementById('couponLink').href = couponLink;
-				document.getElementById('couponLink').setAttribute('target', '_blank');
 			    document.getElementById('getCoupon').innerText = 'NEXT';
 			    /*var x = window.matchMedia("(min-width: 992px)");
 		    	if (x.matches) {

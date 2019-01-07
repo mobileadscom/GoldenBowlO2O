@@ -11,6 +11,9 @@ let location = {
 			e.target.classList.add('selected')
 			if (this.selected) {
 				document.getElementById('confirmRedeem').disabled = false
+				if (document.getElementById('couponSection').style.display == 'none') {
+					document.getElementById('couponSection').style.display = 'block'
+				}
 			}
 		}
 	},

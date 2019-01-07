@@ -50,6 +50,9 @@
 					Show your coupon code to the staff
 				</div>
 				<button class="primary pageBtn" data-target="redeemPage" style="width: 180px;">Tap To Redeem</button>
+				<div class="dk-footer" style="width: 90%;font-size: 14px;margin: auto;">
+					Only tap this button when you are making payments at the cashier
+				</div>
 			</div>
 			<div id="redeemPage" class="page">
 				<h2>SHOW THIS TO THE CASHIER</h2>
@@ -60,14 +63,19 @@
 						<button class="location" data-id="Promenade">Promenade</button>
 					</div>
 				</div>
-				<div class="section">
-					<div class="section-title">Voucher Code</div>
-					<div class="coupon-code">
-						<div id="couponCode">GBP-5P</div>
+				<div id="couponSection" style="display: none;">
+					<div class="section">
+						<div class="section-title">Voucher Code</div>
+						<div class="coupon-code">
+							<div id="couponCode">GBP-5P</div>
+						</div>
+					</div>
+					<button class="primary" style="width: 230px;" disabled id="confirmRedeem">Done Redemption</button>
+					<div id="redeemLoader" class="loader" style="display: none;"></div>
+					<div class="dk-footer" style="width: 90%;font-size: 14px;margin: auto;">
+						Only tap this button when you are making payments at the cashier
 					</div>
 				</div>
-				<button class="primary" style="width: 230px;" disabled id="confirmRedeem">Done Redemption</button>
-				<div id="redeemLoader" class="loader" style="display: none;"></div>
 			</div>
 			<div id="donePage" class="page">
 				<h2>YOU HAVE SUCCESSFULLY REDEEMED YOUR CASH VOUCHER</h2>
@@ -84,8 +92,8 @@
 		</div>
 	</div>
 	<footer>
-	  	<div class="footer-banner" id="footer-banner">
-	  		<div class="overlay" id="footerOverlay">
+	  	<div class="footer-banner">
+	  		<div class="overlay">
 				<div style="position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);width: 90%;font-size: 16px;">
 					Only tap this button when you are making payments at the cashier
 				</div>

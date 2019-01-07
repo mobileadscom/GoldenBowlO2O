@@ -95,6 +95,14 @@ var app = {
 		  	pageButtonClass: 'pageBtn'
 		});
 
+		var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+		if (!isMobile) {
+			const mobileSharers = document.getElementsByClassName('mobile-sharer')
+			for (let m = 0; m < mobileSharers.length; m++) {
+				mobileSharers[m].style.display = 'none'
+			}
+		}
+
 		//get data
 		if (this.params.userId) {
 			user.get(this.params.userId).then((response) => {
