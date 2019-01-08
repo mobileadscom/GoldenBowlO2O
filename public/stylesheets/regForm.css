@@ -95,6 +95,17 @@
   background-image: -ms-linear-gradient(top, #3B5999, #1A3877);
   background-image: -o-linear-gradient(top, #3B5999, #1A3877);
   background-image: linear-gradient(to bottom, #3B5999, #1A3877);
+  transition: all 0.3s;
+}
+
+#regFb:hover {
+  background-color: #496FBC; 
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#4468AF), to(#224A9B));
+  background-image: -webkit-linear-gradient(top, #4468AF, #224A9B);
+  background-image: -moz-linear-gradient(top, #4468AF, #224A9B);
+  background-image: -ms-linear-gradient(top, #4468AF, #224A9B);
+  background-image: -o-linear-gradient(top, #4468AF, #224A9B);
+  background-image: linear-gradient(to bottom, #4468AF, #224A9B);
 }
 
 #submitBtn:hover {

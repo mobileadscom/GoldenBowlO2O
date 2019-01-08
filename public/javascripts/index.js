@@ -16,6 +16,7 @@ import '../stylesheets/sharer.css'
 var app = {
 	storage: 'o2odemo_en',
 	eraser: null,
+	campaignEnded: false,
 	couponId: '',
 	pages: null, // array of pages
 	params: {}, // params in query string
@@ -153,24 +154,29 @@ var app = {
 		return new Promise((resolve, reject) => {
 			axios.get(`https://api.mobileads.com/coupons/goldenBowl/coupon_draw?id=${user.info.id}`).then((response) => {
 				console.log(response)
-				this.couponId = response.data._id
-				document.getElementById('scratchWin').src = `https://rmarepo.richmediaads.com/goldenBowl/coupons/${response.data.couponCode}.jpg`
-				 
-				this.eraser = new Eraser({
-					ele: document.getElementById('scratchCover'),
-					completeRatio: 0.8,
-					width: 250,
-					height: 236,
-					completeFunction: function() {
-						this.reveal();
-						if (!app.processed) {
-			            	app.processed = true;
-			            	app.processResult();
+				if (response.data._id) {
+					this.couponId = response.data._id
+					document.getElementById('scratchWin').src = `https://rmarepo.richmediaads.com/goldenBowl/coupons/${response.data.couponCode}.jpg`
+					 
+					this.eraser = new Eraser({
+						ele: document.getElementById('scratchCover'),
+						completeRatio: 0.8,
+						width: 250,
+						height: 236,
+						completeFunction: function() {
+							this.reveal();
+							if (!app.processed) {
+				            	app.processed = true;
+				            	app.processResult();
+							}
+							document.getElementById('eraser').style.pointerEvents = 'none';
+							document.getElementById('toResult').disabled = false;
 						}
-						document.getElementById('eraser').style.pointerEvents = 'none';
-						document.getElementById('toResult').disabled = false;
-					}
-				})
+					})
+				}
+				else {
+					this.campaignEnded = true
+				}
 				resolve(response)
 			}).catch((error) => {
 				console.error(error)
@@ -190,7 +196,12 @@ var app = {
 			}*/
 			else {
 				this.initEraser().then((r) => {
-					this.pages.toPage('gamePage')
+					if (!this.campaignEnded) {
+						this.pages.toPage('gamePage')
+					}
+					else {
+						this.pages.toPage('closePage')
+					}
 				}).catch((e) => {
 					this.pages.toPage('regPage')
 				})

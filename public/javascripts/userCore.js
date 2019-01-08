@@ -13,6 +13,7 @@ let user = {
 		state: '-',
 		source: '',
 		gameData: {},
+		trackedPages: []
 	},
 	oauth: {
 		token: '',
@@ -44,6 +45,7 @@ let user = {
 			state: '-',
 			source: this.info.source,
 			gameData: {},
+			trackedPages: []
 		})
 	},
 	getLocalUser(source) {
@@ -74,6 +76,7 @@ let user = {
 		storage.clearAllData()
 	},
 	registerFb: function() {
+		window.redirectState.set()
 		var provider = new firebase.auth.FacebookAuthProvider()
 		firebase.auth().signInWithRedirect(provider);
 	},

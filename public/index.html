@@ -16,11 +16,116 @@
     <meta property="og:image" content="https://demo.o2oplatform.com/goldenBowl/card.png" />
     <meta property="og:url" content="https://demo.o2oplatform.com/goldenBowl" />
 	<script type="text/javascript">
+		function queryParams() {
+			  var query_string = {};
+			  var query = window.location.search.substring(1);
+			  var vars = query.split("&");
+			  for (var i=0;i<vars.length;i++) {
+			      var pair = vars[i].split("=");
+			      // If first entry with this name
+			      if (typeof query_string[pair[0]] === "undefined") {
+			          query_string[pair[0]] = pair[1];
+			      // If second entry with this name
+			      } else if (typeof query_string[pair[0]] === "string") {
+			          var arr = [ query_string[pair[0]], pair[1] ];
+			          query_string[pair[0]] = arr;
+			      // If third or later entry with this name
+			      } else {
+			          query_string[pair[0]].push(pair[1]);
+			      }
+			  } 
+			  return query_string;
+		}
+
 		function getRndInteger(min, max) {
 		    return Math.floor(Math.random() * (max - min) ) + min;
 		}
 
+		function getLocalUser() {
+			// refer storage.js 
+			var storageName = 'o2o_rma';
+			var storageKey = 'goldenBowl';
+
+			// refer config.js
+			var source = qparams.source || 'dumSource';
+
+			if (window.localStorage.getItem(storageName)) {
+				try {
+					let dataObj = JSON.parse(window.localStorage.getItem(storageName))
+					if (dataObj[storageKey] && dataObj[storageKey][source]) {
+						return dataObj[storageKey][source]
+					}
+					else {
+						return {}
+					}			
+				}
+				catch(err) {
+					return {}
+				}
+			}
+			else {
+				return {}
+			}
+		}
+
+		function hasLocalUser() {
+			var localUserData = getLocalUser();
+			if (localUserData.id) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+
+		function trackImp() {
+			var campaignId = '95953d6d8279e4a0be1ee8ba34d3cbe7';
+			var adUserId = '4831';
+			var rmaId = '4';
+			var generalUrl = 'https://track.richmediaads.com/a/analytic.htm?rmaId={{rmaId}}&domainId=0&pageLoadId={{cb}}&userId={{adUserId}}&pubUserId=0&campaignId={{campaignId}}&callback=trackSuccess&type={{type}}&value={{value}}&uniqueId={{userId}}&userType={{userType}}&source={{source}}';
+			var trackingUrl = generalUrl.replace('{{rmaId}}', rmaId).replace('{{campaignId}}', campaignId).replace('{{adUserId}}', adUserId).replace('{{cb}}', pgId);
+		    var pixel = document.createElement('img');
+		    var type = 'imp_main';
+		    var src = trackingUrl.replace('{{type}}', type).replace('{{value}}', '').replace('{{userId}}','').replace('{{source}}', qparams.utm_source || '{{source}}');
+		    var isRedirecting = redirectState.get();
+		    if (window.location.hostname.indexOf('localhost') > -1) {
+			    if (!isRedirecting && !qparams.userId && !hasLocalUser()) {
+			    	console.log(src);
+			    }
+			}
+			else {
+				if (!isRedirecting && !qparams.userId && !hasLocalUser()) {
+					pixel.src = src;
+					document.head.appendChild(pixel);
+				}
+			}
+			if (isRedirecting) {
+				redirectState.clear();
+			}
+		}
+
+		/* check if page is redirected from login */
+		var redirectState = {
+			stateName: 'goldenBowlRedirecting',
+			get: function() {
+				var states = localStorage.getItem(this.stateName);
+				if (states == '1') {
+					return true;
+				}
+				else {
+					return false;
+				}
+			},
+			set: function() {
+				localStorage.setItem(this.stateName, '1');
+			},
+			clear: function() {
+				localStorage.removeItem(this.stateName);
+			}
+		}
+		var qparams = queryParams();
 		window.pgId = Date.now().toString() + getRndInteger(10, 99).toString();
+		trackImp();
 	</script>
 </head>
 <body>
@@ -158,8 +263,13 @@
 				</div>
 				<a id="couponLink"><button class="primary" id="couponLinkBtn" disabled><div id="couponLoader" class="loader in-btn"></div><span id="getCoupon"></span></button></a>
 			</div>
-		</div>
-
+			<div id="closePage" class="page" style="height: 500px;">
+			    <div class="loading-block" style="width: 90%;">
+				    Campaign Has Ended
+				    <br><br>Thank you for your time
+			    </div>
+			</div>
+		</div>	
 	</div>
 	<footer class="footer-banner" id="footer-banner">
 		<img src="images/footer-banner.png" />
