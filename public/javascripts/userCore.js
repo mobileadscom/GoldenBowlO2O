@@ -1,5 +1,4 @@
 import storage from './storage'
-import config from './config'
 import axios from 'axios';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
@@ -19,9 +18,10 @@ let user = {
 		token: '',
 		secret: ''
 	},
+	config: {}, // put in config from index.js
 	changeSource(source) {
 		this.info.source = source
-		config.source = source
+		this.config.source = source
 	},
 	setUserInfo(userInfo) {
 		if (typeof userInfo == 'object') {
@@ -30,7 +30,7 @@ let user = {
 					this.info[i] = userInfo[i]
 				}
 			}
-			if (!config.isDemo) {
+			if (!this.config.isDemo) {
 				storage.saveUserData(this.info)
 			}
 		}
@@ -49,7 +49,7 @@ let user = {
 		})
 	},
 	getLocalUser(source) {
-		if (!config.isDemo) {
+		if (!this.config.isDemo) {
 			const localUser = storage.getUserData(source)
 			if (localUser.id) {
 				this.setUserInfo(localUser)
@@ -57,12 +57,12 @@ let user = {
 		}
 	},
 	saveGameData(obj) {
-		if (!config.isDemo) {
+		if (!this.config.isDemo) {
 			storage.saveGameData(obj, this.info.source)
 		}
 	},
 	getGameData() {
-		if (!config.isDemo) {
+		if (!this.config.isDemo) {
 			return storage.getGameData(this.info.source)
 		}
 		else {
@@ -82,7 +82,7 @@ let user = {
 	},
 	register(userInfo) {
 		if (userInfo.userId && userInfo.source && userInfo.type) {
-			return axios.post(`${config.userAPIDomain}/coupons/goldenBowl/user_register?id=${userInfo.userId}&source=${userInfo.source}&type=${userInfo.type}`)
+			return axios.post(`${this.config.userAPIDomain}/coupons/goldenBowl/user_register?id=${userInfo.userId}&source=${userInfo.source}&type=${userInfo.type}`)
 		}
 		else {
 			console.error('userInfo error')
@@ -90,18 +90,18 @@ let user = {
 	},
 	get(userInfo) {
 		if (userInfo.userId && userInfo.source) {
-			return axios.get(`${config.userAPIDomain}/coupons/goldenBowl/user_info?id=${userInfo.userId}&source=${userInfo.source}`)
+			return axios.get(`${this.config.userAPIDomain}/coupons/goldenBowl/user_info?id=${userInfo.userId}&source=${userInfo.source}`)
 		}
 		else {
 			console.error('userInfo error')
 		}
 	},
 	generateCouponLink() {
-		return config.couponLink + `?userId=${user.info.id}`
+		return this.config.couponLink + `?userId=${user.info.id}`
 	},
 	mark(couponId) {
-		if (!config.isDemo) {
-			return axios.post(`${config.userAPIDomain}/coupons/goldenBowl/mark_user?id=${this.info.id}&source=${this.info.source}&couponId=${couponId}`)
+		if (!this.config.isDemo) {
+			return axios.post(`${this.config.userAPIDomain}/coupons/goldenBowl/mark_user?id=${this.info.id}&source=${this.info.source}&couponId=${couponId}`)
 		}
 		else {
 			return new Promise((resolve, reject) => {
@@ -117,10 +117,10 @@ let user = {
 	},
 	sendLoginEmail(email) {
 		let formData = new FormData()
-	    formData.append('sender', config.emailSender)
-	    formData.append('subject', config.loginEmail.subject)
+	    formData.append('sender', this.config.emailSender)
+	    formData.append('subject', this.config.loginEmail.subject)
 	    formData.append('recipient', email)
-	    let content = config.loginEmail.content.replace(/{{userId}}/g, email).replace(/{{campaignLink}}/g, config.campaignLink)
+	    let content = this.config.loginEmail.content.replace(/{{userId}}/g, email).replace(/{{campaignLink}}/g, this.config.campaignLink)
 	    formData.append('content', content)
 	    axios.post('https://www.mobileads.com/mail/send', formData, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).then((resp) => {
 	      console.log(resp);
@@ -130,10 +130,10 @@ let user = {
 	},
 	sendCouponEmail(email, couponLink) {
 		let formData = new FormData()
-	    formData.append('sender', config.emailSender)
-	    formData.append('subject', config.couponEmail.subject)
+	    formData.append('sender', this.config.emailSender)
+	    formData.append('subject', this.config.couponEmail.subject)
 	    formData.append('recipient', email)
-	    let content = config.couponEmail.content.replace(/{{couponLink}}/g, couponLink)
+	    let content = this.config.couponEmail.content.replace(/{{couponLink}}/g, couponLink)
 	    formData.append('content', content)
 	    axios.post('https://www.mobileads.com/mail/send', formData, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).then((resp) => {
 	      console.log(resp);
@@ -143,7 +143,7 @@ let user = {
 	},
 	sendEmail(options) {
 		let formData = new FormData();
-	    formData.append('sender', config.emailSender);
+	    formData.append('sender', this.config.emailSender);
 	    formData.append('subject', options.subjectTitle);
 	    formData.append('recipient', options.email);
 	    formData.append('content', options.content);
@@ -185,10 +185,12 @@ let user = {
 					if (options.autoRegister == true) { // register user if autoRegister is set to true
 						this.register(options.userInfo).then((res) => {
 							if (res.data.status == true) { // successfully registered
-								this.setUserInfo({
-									id: options.userInfo.userId,
-									source: this.info.source,
-								})
+								if (options.userInfo.type != 'email') {
+									this.setUserInfo({
+										id: options.userInfo.userId,
+										source: this.info.source,
+									})
+								}
 								resolve({
 									status: true,
 									message: res.data.message
@@ -226,8 +228,12 @@ let user = {
 			})
 		})
 	},
+	setConfig(config) {
+		this.config = config
+		this.info.source = config.source
+	}
 }
 
-user.info.source = config.source
+// user.info.source = config.source
 
 export default user;

@@ -1,8 +1,9 @@
 import miniPages from './miniPages'
 import Eraser from './eraser.js'
 import modal from './modal'
-// import winningLogic from './winningLogic';
+import config from './config'
 import user from './userCore'
+import tracker from './tracker'
 import axios from 'axios'
 
 import '../stylesheets/pageLayout.css'
@@ -301,6 +302,11 @@ var app = {
 		
 		this.events();
 
+		if (this.params.utm_source) {
+			config.tracking.utm_source = this.params.utm_source
+		}
+		tracker.generateTrackingURL()
+
 		if (this.params.source) {
 			user.changeSource(source)
 		}
@@ -341,17 +347,22 @@ var app = {
 			console.error(err)
 			this.initUser()
 		})
-
-	  var processed = false; // check if result has been processed to avoid double result processsing
 	},
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  app.init();
-  modal.init();
-  window.app = app
-  window.params = app.params
-  window.user = user
+	/* important! must set config for user and tracker first! */
+	user.setConfig(config)
+	tracker.setConfig(config)
+
+	/* init after setting config */
+	modal.init();
+	app.init();
+
+	window.app = app
+	window.params = app.params
+	window.user = user
+	window.tracker = tracker
 });
 
 export {

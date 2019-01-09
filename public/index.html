@@ -78,15 +78,15 @@
 			}
 		}
 
+		// refer config.js
 		function trackImp() {
 			var campaignId = '95953d6d8279e4a0be1ee8ba34d3cbe7';
 			var adUserId = '4831';
 			var rmaId = '4';
 			var generalUrl = 'https://track.richmediaads.com/a/analytic.htm?rmaId={{rmaId}}&domainId=0&pageLoadId={{cb}}&userId={{adUserId}}&pubUserId=0&campaignId={{campaignId}}&callback=trackSuccess&type={{type}}&value={{value}}&uniqueId={{userId}}&userType={{userType}}&source={{source}}';
-			var trackingUrl = generalUrl.replace('{{rmaId}}', rmaId).replace('{{campaignId}}', campaignId).replace('{{adUserId}}', adUserId).replace('{{cb}}', pgId);
-		    var pixel = document.createElement('img');
+			var trackingUrl = generalUrl.replace('{{rmaId}}', rmaId).replace('{{campaignId}}', campaignId).replace('{{adUserId}}', adUserId).replace('{{cb}}', pgId).replace('{{source}}', qparams.utm_source || '{{source}}');
 		    var type = 'imp_main';
-		    var src = trackingUrl.replace('{{type}}', type).replace('{{value}}', '').replace('{{userId}}','').replace('{{source}}', qparams.utm_source || '{{source}}');
+		    var src = trackingUrl.replace('{{type}}', type);
 		    var isRedirecting = redirectState.get();
 		    if (window.location.hostname.indexOf('localhost') > -1) {
 			    if (!isRedirecting && !qparams.userId && !hasLocalUser()) {
@@ -95,6 +95,7 @@
 			}
 			else {
 				if (!isRedirecting && !qparams.userId && !hasLocalUser()) {
+					var pixel = document.createElement('img');
 					pixel.src = src;
 					document.head.appendChild(pixel);
 				}
