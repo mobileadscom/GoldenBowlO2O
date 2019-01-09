@@ -183,7 +183,6 @@ let user = {
 		return new Promise((resolve, reject) => {
 			this.get(options.userInfo).then((response) => {
 				if (response.data.status == true) { // user found
-					console.log(response.data.user.type)
 					this.setUserInfo({
 						id: response.data.user.id,
 						source: this.info.source,

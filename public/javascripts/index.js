@@ -47,6 +47,9 @@ var app = {
 			tracker.track(`imp_${page}`, '', user.info.id, user.info.type)
 		}
 	},
+	trackEvent(type, value) {
+		tracker.track(type, value, user.info.id, user.info.type)
+	},
 	initResult(state, couponLink) {
 		if (state == 'win') {
 			document.getElementById('resultTitle').innerHTML = "CONGRATULATIONS!";
@@ -154,9 +157,18 @@ var app = {
 			user.registerFb()
 		})
 
+		/* track result page*/
 		document.getElementById('toResult').addEventListener('click', () => {
 			this.trackPage('result')
 		})
+
+		/* track buttons click */
+		const tBtn = document.getElementsByClassName('track')
+		for (let t = 0; t < tBtn.length; t++) {
+			tBtn[t].addEventListener('click', (e) => {
+				this.trackEvent(e.target.dataset.tracker, e.target.dataset.trackvalue || '')
+			})
+		}
 		/* ==== Event Listeners End ==== */
 	},
 	initEraser: function() {

@@ -199,9 +199,20 @@
 					    Please register using one of the methods below
 				    </div>
 				    <div id="regButtons">
-				    	<button class="shadow-1" id="regFb" style="width: 250px;margin: 0px auto 10px;padding: 12px 20px;">Facebook Registration</button>
+				    	<button class="shadow-1 track"
+					    	id="regFb"
+					    	style="width: 250px;margin: 0px auto 10px;padding: 12px 20px;"
+					    	data-tracker="reg_fb">
+					    	Facebook Registration
+						</button>
 				    	<br>
-				    	<button class="primary email-btn" id="regEmail" data-target="regSub2" style="width: 250px;margin: 0px auto 10px;padding: 12px 20px;">Email Registration</button>
+				    	<button class="primary email-btn track"
+					    	id="regEmail"
+					    	data-target="regSub2"
+					    	style="width: 250px;margin: 0px auto 10px;padding: 12px 20px;"
+					    	data-tracker="reg_email">
+						    Email Registration
+						</button>
 
 						<!-- <button class="shadow-1 email-btn" id="regEmail" data-target="regSub2">
 						    <img src="images/envelope.png" />Email
@@ -257,10 +268,31 @@
 				<div id="resultInstruction">
 				</div>
 				<div class="sharer-wrapper">
-					<a href="https://www.facebook.com/sharer/sharer.php?u=https://demo.o2oplatform.com/goldenBowl/" target="_blank" class="sharer fb"></a>
-					<a href="whatsapp://send?text=https://demo.o2oplatform.com/goldenBowl/" data-action="share/whatsapp/share" target="_blank" class="sharer wa mobile-sharer"></a>
-					<a href="fb-messenger://share/?link=https://demo.o2oplatform.com/goldenBowl&app_id=1464196980377441" target="_blank" class="sharer fb-messenger mobile-sharer"></a>
-					<a href="https://twitter.com/home?status=https://demo.o2oplatform.com/goldenBowl/" target="_blank" class="sharer twitter"></a>
+					<a href="https://www.facebook.com/sharer/sharer.php?u=https://demo.o2oplatform.com/goldenBowl/"
+						target="_blank"
+						class="sharer fb track"
+						data-tracker="share"
+						data-trackvalue="facebook">
+					</a>
+					<a href="whatsapp://send?text=https://demo.o2oplatform.com/goldenBowl/"
+						data-action="share/whatsapp/share"
+						target="_blank"
+						class="sharer wa mobile-sharer track"
+						data-tracker="share"
+						data-trackvalue="whatsapp">
+					</a>
+					<a href="fb-messenger://share/?link=https://demo.o2oplatform.com/goldenBowl&app_id=1464196980377441"
+						target="_blank"
+						class="sharer fb-messenger mobile-sharer track"
+						data-tracker="share"
+						data-trackvalue="facebook_msg">
+					</a>
+					<a href="https://twitter.com/home?status=https://demo.o2oplatform.com/goldenBowl/"
+						target="_blank"
+						class="sharer twitter track"
+						data-tracker="share"
+						data-trackvalue="twitter">
+					</a>
 				</div>
 				<a id="couponLink"><button class="primary" id="couponLinkBtn" disabled><div id="couponLoader" class="loader in-btn"></div><span id="getCoupon"></span></button></a>
 			</div>
