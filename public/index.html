@@ -80,9 +80,9 @@
 
 		// refer config.js
 		function trackImp() {
-			var campaignId = '95953d6d8279e4a0be1ee8ba34d3cbe7';
-			var adUserId = '4831';
-			var rmaId = '4';
+			var campaignId = 'df9fa8c87d2ab84e1f1893d7484908a9';
+			var adUserId = '3354';
+			var rmaId = '239';
 			var generalUrl = 'https://track.richmediaads.com/a/analytic.htm?rmaId={{rmaId}}&domainId=0&pageLoadId={{cb}}&userId={{adUserId}}&pubUserId=0&campaignId={{campaignId}}&callback=trackSuccess&type={{type}}&value={{value}}&uniqueId={{userId}}&userType={{userType}}&source={{source}}';
 			var trackingUrl = generalUrl.replace('{{rmaId}}', rmaId).replace('{{campaignId}}', campaignId).replace('{{adUserId}}', adUserId).replace('{{cb}}', pgId).replace('{{source}}', qparams.utm_source || '{{source}}');
 		    var type = 'imp_main';

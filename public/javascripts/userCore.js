@@ -12,6 +12,7 @@ let user = {
 		state: '-',
 		source: '',
 		gameData: {},
+		type: '',
 		trackedPages: []
 	},
 	oauth: {
@@ -45,6 +46,7 @@ let user = {
 			state: '-',
 			source: this.info.source,
 			gameData: {},
+			type: '',
 			trackedPages: []
 		})
 	},
@@ -74,6 +76,19 @@ let user = {
 	},
 	clearAllLocalData() {
 		storage.clearAllData()
+	},
+	trackPage(page) {
+		let tp = this.info.trackedPages
+		if (tp.indexOf(page) > -1) {
+			return false
+		}
+		else {
+			tp.push(page)
+			this.setUserInfo({
+				trackedPages: tp
+			})
+			return true
+		}
 	},
 	registerFb: function() {
 		window.redirectState.set()
@@ -168,11 +183,13 @@ let user = {
 		return new Promise((resolve, reject) => {
 			this.get(options.userInfo).then((response) => {
 				if (response.data.status == true) { // user found
+					console.log(response.data.user.type)
 					this.setUserInfo({
 						id: response.data.user.id,
 						source: this.info.source,
 						state: response.data.user.state,
 						couponCode: response.data.user.couponCode,
+						type: response.data.user.type
 						// gameData: JSON.parse(response.data.user.game)
 					})
 					resolve({
@@ -189,6 +206,7 @@ let user = {
 									this.setUserInfo({
 										id: options.userInfo.userId,
 										source: this.info.source,
+										type: options.userInfo.type
 									})
 								}
 								resolve({
@@ -203,6 +221,7 @@ let user = {
 										source: this.info.source,
 										state: res.data.user.state,
 										couponCode: res.data.user.couponCode,
+										type: res.data.user.type
 										// gameData: JSON.parse(response.data.user.game)
 									})
 								}

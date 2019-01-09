@@ -30,9 +30,10 @@ let config = {
 		`
 	},
 	tracking: {
-		campaignId: '95953d6d8279e4a0be1ee8ba34d3cbe7',
-		adUserId: '4831',
-		rmaId: '4',
+		// make sure same as in index.html
+		campaignId: 'df9fa8c87d2ab84e1f1893d7484908a9',
+		adUserId: '3354',
+		rmaId: '239',
 		utm_source: '',
 		generalURL: 'https://track.richmediaads.com/a/analytic.htm?rmaId={{rmaId}}&domainId=0&pageLoadId={{cb}}&userId={{adUserId}}&pubUserId=0&campaignId={{campaignId}}&callback=trackSuccess&type={{type}}&value={{value}}&uniqueId={{userId}}&userType={{userType}}&source={{source}}'
 	}

@@ -15,7 +15,6 @@ import '../stylesheets/regForm.css'
 import '../stylesheets/sharer.css'
 
 var app = {
-	storage: 'o2odemo_en',
 	eraser: null,
 	campaignEnded: false,
 	couponId: '',
@@ -42,6 +41,11 @@ var app = {
 		      }
 		  } 
 		  return query_string;
+	},
+	trackPage(page) {
+		if (user.trackPage(page)) {
+			tracker.track(`imp_${page}`, '', user.info.id, user.info.type)
+		}
 	},
 	initResult(state, couponLink) {
 		if (state == 'win') {
@@ -96,10 +100,11 @@ var app = {
 					couponCode: response.data.couponCode
 				})
 				const couponLink = user.generateCouponLink()
-				if (user.info.id.indexOf('@') > -1) { // login via email
+				if (user.info.type == 'email') { // login via email
 					user.sendCouponEmail(user.info.id, couponLink)
 				}
 				this.initResult('win', couponLink)
+				document.getElementById('toResult').disabled = false;
 			}
 		}).catch((error) => {
 			console.error(error)
@@ -128,7 +133,6 @@ var app = {
 	        	autoRegister: true
 	        }
 	        user.init(options).then((response) => {
-				// this.continue(response)
 				if (response.message == 'registration success.') {
 					this.formSections.toPage('doneSec')
 					user.sendLoginEmail(email)
@@ -148,6 +152,10 @@ var app = {
 		/* Fb Login */
 		document.getElementById('regFb').addEventListener('click', () => {
 			user.registerFb()
+		})
+
+		document.getElementById('toResult').addEventListener('click', () => {
+			this.trackPage('result')
 		})
 		/* ==== Event Listeners End ==== */
 	},
@@ -171,7 +179,7 @@ var app = {
 				            	app.processResult();
 							}
 							document.getElementById('eraser').style.pointerEvents = 'none';
-							document.getElementById('toResult').disabled = false;
+							
 						}
 					})
 				}
@@ -190,6 +198,7 @@ var app = {
 			if (user.info.state == 'win') {
 				this.initResult('win', user.generateCouponLink());
 				this.pages.toPage('resultPage')
+				this.trackPage('result')
 			}
 			/*else if (user.info.state == 'lose') {
 				this.initResult('lose')
@@ -199,11 +208,14 @@ var app = {
 				this.initEraser().then((r) => {
 					if (!this.campaignEnded) {
 						this.pages.toPage('gamePage')
+						this.trackPage('game')
 					}
 					else {
 						this.pages.toPage('closePage')
+						this.trackPage('close')
 					}
 				}).catch((e) => {
+					console.log(e)
 					this.pages.toPage('regPage')
 				})
 				
@@ -216,7 +228,7 @@ var app = {
 	initUser(options) {
 		if (options) {
 			user.init(options).then((response) => {
-				this.continue(response)
+				this.continue()
 			}).catch((error) => {
 				console.log(error)
 				this.continue()
@@ -240,7 +252,7 @@ var app = {
 				}
 
 				user.init(options).then((response) => {
-					this.continue(response)
+					this.continue()
 				}).catch((error) => {
 					console.log(error)
 					this.continue()
@@ -250,12 +262,14 @@ var app = {
 				user.getLocalUser(user.info.source) // load localStorage user data
 				if (user.info.id) {
 					// check if db has cleared the user, if cleared, clear local storage also 
-					user.get({
-						userId: user.info.id,
-						source: user.info.source
+					user.init({
+						userInfo: {
+							userId: user.info.id,
+							source: user.info.source
+						},
+						autoRegister: false
 					}).then((res) => {
-						console.log(res)
-						if (res.data.status == false && res.data.message == 'not registered.') {
+						if (res.status == false && res.message == 'not registered.') {
 							user.clearUserInfo()
 						}
 						this.continue()

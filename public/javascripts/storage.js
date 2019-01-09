@@ -1,4 +1,5 @@
 let storage = {
+	// make sure same as in index.html
 	storageName: 'o2o_rma',
 	storageKey: 'goldenBowl',
 	saveUserData(obj) {
