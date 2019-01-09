@@ -83,7 +83,7 @@
 			var campaignId = 'df9fa8c87d2ab84e1f1893d7484908a9';
 			var adUserId = '3354';
 			var rmaId = '239';
-			var generalUrl = 'https://track.richmediaads.com/a/analytic.htm?rmaId={{rmaId}}&domainId=0&pageLoadId={{cb}}&userId={{adUserId}}&pubUserId=0&campaignId={{campaignId}}&callback=trackSuccess&type={{type}}&value={{value}}&uniqueId={{userId}}&userType={{userType}}&source={{source}}';
+			var generalUrl = 'https://track.richmediaads.com/a/analytic.htm?rmaId={{rmaId}}&domainId=0&pageLoadId={{cb}}&userId={{adUserId}}&pubUserId=0&campaignId={{campaignId}}&callback=trackSuccess&type={{type}}&value={{value}}&uniqueId={{userId}}&userType={{userType}}&source={{source}}&tc=o2o';
 			var trackingUrl = generalUrl.replace('{{rmaId}}', rmaId).replace('{{campaignId}}', campaignId).replace('{{adUserId}}', adUserId).replace('{{cb}}', pgId).replace('{{source}}', qparams.utm_source || '{{source}}');
 		    var type = 'imp_main';
 		    var src = trackingUrl.replace('{{type}}', type);
@@ -202,7 +202,7 @@
 				    	<button class="shadow-1 track"
 					    	id="regFb"
 					    	style="width: 250px;margin: 0px auto 10px;padding: 12px 20px;"
-					    	data-tracker="reg_fb">
+					    	data-tracker="click_reg_fb">
 					    	Facebook Registration
 						</button>
 				    	<br>
@@ -210,20 +210,15 @@
 					    	id="regEmail"
 					    	data-target="regSub2"
 					    	style="width: 250px;margin: 0px auto 10px;padding: 12px 20px;"
-					    	data-tracker="reg_email">
+					    	data-tracker="click_reg_email">
 						    Email Registration
 						</button>
-
-						<!-- <button class="shadow-1 email-btn" id="regEmail" data-target="regSub2">
-						    <img src="images/envelope.png" />Email
-						</button> -->
-						
-			      <!-- <button class="shadow-1" id="regTwitter">
-				      <img src="images/twitter.png" />Twitter
-				  </button>
-				  <a href="https://line-scratch-demo.herokuapp.com/auth" style="text-decoration: none;color: white;"><button id="regLine"><img src="images/line.png" />LINE</button></a> -->
 						<div style="text-align: left;width: 250px;margin: auto;">
-						  	<button class="modalOpener link-button" data-target="tncModal">Terms & Condition</button>
+						  	<button class="modalOpener link-button track" 
+							  	data-target="tncModal"
+							  	data-tracker="click_tnc">
+								Terms & Condition
+							</button>
 						</div>
 				    </div>
 					<div class="form-loader" id="regWorking"></div>

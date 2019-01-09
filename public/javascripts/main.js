@@ -1,6 +1,7 @@
 import miniPages from './miniPages'
 import config from './config'
-import location from './location'
+import tracker from './tracker'
+import store from './store'
 import axios from 'axios'
 
 import '../stylesheets/pageLayout.css'
@@ -11,7 +12,8 @@ import '../stylesheets/sharer.css'
 var user = {
 	info: {
 		id: '',
-		state: '-'
+		state: '-',
+		type: ''
 	},
 	get(userId) {
 	    return axios.get(`${config.userAPIDomain}/coupons/goldenBowl/user_info?id=${userId}`);
@@ -23,8 +25,8 @@ var coupon = {
 	couponCode: '',
 	claimed: false,
 	claiming: false,
-	claim(location) {
-		return axios.post(`${config.userAPIDomain}/coupons/goldenBowl/coupon_claim?id=${user.info.id}&couponId=${this.id}&claimAt=${location}`)
+	claim(store) {
+		return axios.post(`${config.userAPIDomain}/coupons/goldenBowl/coupon_claim?id=${user.info.id}&couponId=${this.id}&claimAt=${store}`)
 	}
 }
 
@@ -51,18 +53,31 @@ var app = {
 		  } 
 		  return query_string;
 	},
+	trackPage(page) {
+		tracker.track(`imp_${page}`, '', user.info.id, user.info.type)
+	},
+	trackEvent(type, value, userInfo) {
+		if (userInfo) {
+			tracker.track(type, value, userInfo.id, userInfo.type)
+		}
+		else {
+			tracker.track(type, value, user.info.id, user.info.type)
+		}
+	},
 	redeemCoupon: function() {
-		if (location.selected && user.info.id && !coupon.claiming) {
+		if (store.selected && user.info.id && !coupon.claiming) {
 			coupon.claiming = true
-			location.disabled = true
+			store.disabled = true
 			document.getElementById('redeemLoader').style.display = 'block'
 			document.getElementById('confirmRedeem').style.display = 'none'
 			//redeem coupon api...
-			coupon.claim(location.selected).then((response) => {
+			coupon.claim(store.selected).then((response) => {
 				console.log(response)
 				if (response.data.message == 'claimed.') {
 					document.getElementById('redeemLoader').style.display = 'none'
+					this.trackEvent('redeem', store.selected)
 					this.pages.toPage('donePage')
+					this.trackPage('coupon_redeemed')
 				}
 				else {
 					alert('Fail to claim coupon. Please refresh the page and try again.')
@@ -76,15 +91,33 @@ var app = {
 			alert('Fail to claim coupon. Please refresh the page and try again.')
 		}
 	},
+	storeCallback() {
+		document.getElementById('confirmRedeem').disabled = false
+		if (document.getElementById('couponSection').style.display == 'none') {
+			document.getElementById('couponSection').style.display = 'block'
+		}
+	},
 	events: function() {
 		document.getElementById('confirmRedeem').addEventListener('click', (e) => {
-			if (!e.target.disabled && location.selected) {
+			if (!e.target.disabled && store.selected) {
 				this.redeemCoupon();
 			}
 			else {
 				alert('Please select store location.')
 			}
 		})
+
+		document.getElementById('toRedeemPage').addEventListener('click', () => {
+			this.trackPage('coupon_redemption')
+		})
+
+		/* track buttons click */
+		const tBtn = document.getElementsByClassName('track')
+		for (let t = 0; t < tBtn.length; t++) {
+			tBtn[t].addEventListener('click', (e) => {
+				this.trackEvent(e.target.dataset.tracker, e.target.dataset.trackvalue || '')
+			})
+		}
 	},
 	init: function() {
 		this.params = this.getParams()
@@ -103,13 +136,19 @@ var app = {
 			}
 		}
 
+		if (this.params.utm_source) {
+			config.tracking.utm_source = this.params.utm_source
+		}
+		tracker.generateTrackingURL()
+
 		//get data
 		if (this.params.userId) {
 			user.get(this.params.userId).then((response) => {
 				console.log(response)
-				if (response.data.status) {
+				if (response.data.status && response.data.coupon._id) {
 					user.info.id = response.data.user.id
 					user.info.state = response.data.user.state
+					user.info.type = response.data.user.type
 					coupon.id = response.data.coupon._id
 					coupon.couponCode = response.data.coupon.couponCode
 					coupon.claimed = response.data.coupon.claimed
@@ -118,16 +157,19 @@ var app = {
 					}
 					if (coupon.claimed) {
 						this.pages.toPage('donePage')
+						this.trackPage('coupon_redeemed')
 					}
 					else {
 						this.pages.toPage('instructionPage')
-						location.init();
+						store.init(() => {
+							app.storeCallback()
+						});
 						this.events();
 					}
 				}
 				else {
-					this.pages.toPage('instructionPage')
-					location.init();
+					this.pages.toPage('joinPage')
+					document.getElementById('footer-banner').style.display = 'none'
 					this.events();
 				}
 			}).catch((error) => {
@@ -142,8 +184,10 @@ var app = {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  app.init();
-  window.app = app;
-  window.coupon = coupon
-  window.user = user
+	tracker.setConfig(config)
+	app.init();
+	window.app = app;
+	window.coupon = coupon
+	window.user = user
+	window.tracker = tracker
 });

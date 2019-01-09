@@ -74,6 +74,6 @@
 }
 
 #couponSection {
-  -webkit-animation: fadeIn 0.3s linear;
-  animation: fadeIn 0.3s linear;
+  -webkit-animation: fadeIn 0.3s ease;
+  animation: fadeIn 0.3s ease;
 }

@@ -1,7 +1,8 @@
-let location = {
+let store = {
 	selected: null,
 	locs: [],
 	disabled: false,
+	callback: null,
 	selectLoc: function(e) {
 		if (!this.disabled) {
 			this.selected = e.target.dataset.id
@@ -10,14 +11,13 @@ let location = {
 			}
 			e.target.classList.add('selected')
 			if (this.selected) {
-				document.getElementById('confirmRedeem').disabled = false
-				if (document.getElementById('couponSection').style.display == 'none') {
-					document.getElementById('couponSection').style.display = 'block'
+				if (this.callback) {
+					this.callback()
 				}
 			}
 		}
 	},
-	init: function() {
+	init: function(callback) {
 		// console.log(this)
 		this.locs  = document.getElementsByClassName('location')
 		for (let l = 0; l < this.locs.length; l++) {
@@ -25,7 +25,10 @@ let location = {
 				this.selectLoc(e)
 			})
 		}
+		if (callback) {
+			this.callback = callback
+		}
 	}
 }
 
-export default location
+export default store

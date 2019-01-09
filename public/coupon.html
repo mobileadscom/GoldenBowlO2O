@@ -15,6 +15,55 @@
     <meta property="og:description" content="Golden Bowl Voucher" />
     <meta property="og:image" content="https://demo.o2oplatform.com/goldenBowl/card.png" />
     <meta property="og:url" content="https://demo.o2oplatform.com/goldenBowl/coupon.html" />
+    <script type="text/javascript">
+		function queryParams() {
+			  var query_string = {};
+			  var query = window.location.search.substring(1);
+			  var vars = query.split("&");
+			  for (var i=0;i<vars.length;i++) {
+			      var pair = vars[i].split("=");
+			      // If first entry with this name
+			      if (typeof query_string[pair[0]] === "undefined") {
+			          query_string[pair[0]] = pair[1];
+			      // If second entry with this name
+			      } else if (typeof query_string[pair[0]] === "string") {
+			          var arr = [ query_string[pair[0]], pair[1] ];
+			          query_string[pair[0]] = arr;
+			      // If third or later entry with this name
+			      } else {
+			          query_string[pair[0]].push(pair[1]);
+			      }
+			  } 
+			  return query_string;
+		}
+
+    	function getRndInteger(min, max) {
+		    return Math.floor(Math.random() * (max - min) ) + min;
+		}
+
+    	// refer config.js
+		function trackImp() {
+			var campaignId = 'df9fa8c87d2ab84e1f1893d7484908a9';
+			var adUserId = '3354';
+			var rmaId = '239';
+			var generalUrl = 'https://track.richmediaads.com/a/analytic.htm?rmaId={{rmaId}}&domainId=0&pageLoadId={{cb}}&userId={{adUserId}}&pubUserId=0&campaignId={{campaignId}}&callback=trackSuccess&type={{type}}&value={{value}}&uniqueId={{userId}}&userType={{userType}}&source={{source}}&tc=o2o';
+			var trackingUrl = generalUrl.replace('{{rmaId}}', rmaId).replace('{{campaignId}}', campaignId).replace('{{adUserId}}', adUserId).replace('{{cb}}', pgId).replace('{{source}}', qparams.utm_source || '{{source}}');
+		    var type = 'imp_coupon';
+		    var src = trackingUrl.replace('{{type}}', type);
+		    if (window.location.hostname.indexOf('localhost') > -1) {
+			    console.log(src);
+			}
+			else {
+				var pixel = document.createElement('img');
+				pixel.src = src;
+				document.head.appendChild(pixel);
+			}
+		}
+
+		var qparams = queryParams();
+		window.pgId = Date.now().toString() + getRndInteger(10, 99).toString();
+		trackImp()
+    </script>
 </head>
 <body>    
    <header>
@@ -60,7 +109,7 @@
 					<h2 style="margin: 5px 15px;">Step 4</h2>
 					Show your coupon code to the staff
 				</div>
-				<button class="primary pageBtn" data-target="redeemPage" style="width: 180px;">Tap To Redeem</button>
+				<button class="primary pageBtn" data-target="redeemPage" style="width: 180px;" id="toRedeemPage">Tap To Redeem</button>
 				<div class="dk-footer" style="width: 90%;font-size: 14px;margin: auto;">
 					Only tap this button when you are making payments at the cashier
 				</div>
@@ -70,8 +119,18 @@
 				<div class="section">
 					<div class="section-title">Select Store Location</div>
 					<div class="location-wrapper">
-						<button class="location" data-id="New-World-Park">New World Park</button>
-						<button class="location" data-id="Promenade">Promenade</button>
+						<button class="location track"
+							data-id="New-World-Park"
+							data-tracker="click_loc"
+							data-trackvalue="New-World-Park">
+							New World Park
+						</button>
+						<button class="location track" 
+							data-id="Promenade"
+							data-tracker="click_loc"
+							data-trackvalue="Promenade">
+							Promenade
+						</button>
 					</div>
 				</div>
 				<div id="couponSection" style="display: none;">
@@ -103,7 +162,7 @@
 		</div>
 	</div>
 	<footer>
-	  	<div class="footer-banner">
+	  	<div class="footer-banner" id="footer-banner">
 	  		<div class="overlay">
 				<div style="position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);width: 90%;font-size: 16px;">
 					Only tap this button when you are making payments at the cashier
