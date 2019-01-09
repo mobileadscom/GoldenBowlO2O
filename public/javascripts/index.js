@@ -47,8 +47,13 @@ var app = {
 			tracker.track(`imp_${page}`, '', user.info.id, user.info.type)
 		}
 	},
-	trackEvent(type, value) {
-		tracker.track(type, value, user.info.id, user.info.type)
+	trackEvent(type, value, userInfo) {
+		if (userInfo) {
+			tracker.track(type, value, userInfo.id, userInfo.type)
+		}
+		else {
+			tracker.track(type, value, user.info.id, user.info.type)
+		}
 	},
 	initResult(state, couponLink) {
 		if (state == 'win') {
@@ -106,8 +111,9 @@ var app = {
 				if (user.info.type == 'email') { // login via email
 					user.sendCouponEmail(user.info.id, couponLink)
 				}
+				this.trackEvent('win')
 				this.initResult('win', couponLink)
-				document.getElementById('toResult').disabled = false;
+				document.getElementById('toResult').disabled = false
 			}
 		}).catch((error) => {
 			console.error(error)
@@ -139,6 +145,10 @@ var app = {
 				if (response.message == 'registration success.') {
 					this.formSections.toPage('doneSec')
 					user.sendLoginEmail(email)
+					this.trackEvent('register', '', {
+						id: email,
+						type: 'email'
+					})
 				}
 				else if (response.user) {
 					this.continue()
@@ -192,6 +202,9 @@ var app = {
 							}
 							document.getElementById('eraser').style.pointerEvents = 'none';
 							
+						},
+						startFunction: function() {
+							app.trackEvent('scratch')
 						}
 					})
 				}
@@ -240,6 +253,10 @@ var app = {
 	initUser(options) {
 		if (options) {
 			user.init(options).then((response) => {
+				console.log(response)
+				if (response.message == 'registration success.') {
+					this.trackEvent('register')
+				}
 				this.continue()
 			}).catch((error) => {
 				console.log(error)
@@ -253,14 +270,6 @@ var app = {
 						userId: this.params.userId,
 						source: user.info.source,
 					}
-				}
-
-				if (this.params.displayName) { // temporary line login detection
-					options.userInfo.type = 'line'
-					options.autoRegister = true
-				}
-				else {
-					options.autoRegister = false
 				}
 
 				user.init(options).then((response) => {
@@ -367,7 +376,19 @@ var app = {
 		      
 			}
 			else {
-				this.initUser()
+				if (this.params.displayName && this.params.userId) { // temporary line login detection
+					this.initUser({
+			        	userInfo: {
+			        		userId: this.params.userId,
+			        		source: user.info.source,
+			        		type: 'line'
+			        	},
+			        	autoRegister: true
+					})
+				}
+				else {
+					this.initUser()
+				}
 			}
 		}).catch((err) => {
 			console.error(err)
