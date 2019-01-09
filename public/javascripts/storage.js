@@ -96,6 +96,7 @@ let storage = {
 			state: '-',
 			source: source,
 			gameData: {},
+			trackedPages: []
 		})
 	},
 	clearAllData() {

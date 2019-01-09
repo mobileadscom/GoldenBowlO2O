@@ -164,13 +164,13 @@ var app = {
 						store.init(() => {
 							app.storeCallback()
 						});
-						this.events();
+						
 					}
 				}
 				else {
 					this.pages.toPage('joinPage')
 					document.getElementById('footer-banner').style.display = 'none'
-					this.events();
+
 				}
 			}).catch((error) => {
 				console.error(error)
@@ -180,6 +180,7 @@ var app = {
 			this.pages.toPage('joinPage')
 			document.getElementById('footer-banner').style.display = 'none'
 		}
+		this.events();
 	}
 }
 
