@@ -264,6 +264,7 @@ var app = {
 			})
 		}
 		else {
+			user.getLocalUser(user.info.source)
 			if (this.params.userId) {
 				let options = {
 					userInfo: {
@@ -280,9 +281,9 @@ var app = {
 				})
 			}
 			else {
-				user.getLocalUser(user.info.source) // load localStorage user data
+				// user.getLocalUser(user.info.source) // load localStorage user data
 				if (user.info.id) {
-					// check if db has cleared the user, if cleared, clear local storage also 
+					// check if db has cleared the user, if cleared, clear local storage also
 					user.init({
 						userInfo: {
 							userId: user.info.id,

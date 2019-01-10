@@ -34,8 +34,8 @@ let config = {
 		campaignId: 'df9fa8c87d2ab84e1f1893d7484908a9',
 		adUserId: '3354',
 		rmaId: '239',
-		utm_source: '',
-		generalURL: 'https://track.richmediaads.com/a/analytic.htm?rmaId={{rmaId}}&domainId=0&pageLoadId={{cb}}&userId={{adUserId}}&pubUserId=0&campaignId={{campaignId}}&callback=trackSuccess&type={{type}}&value={{value}}&uniqueId={{userId}}&userType={{userType}}&source={{source}}&tc=o2o'
+		utm_source: '{{source}}',
+		generalURL: 'https://track.richmediaads.com/a/analytic.htm?pageLoadId={{cb}}&userId={{adUserId}}&campaignId={{campaignId}}&type={{type}}&value={{value}}&uniqueId={{userId}}&userType={{userType}}&source={{source}}&tc=o2o'
 	}
 }
 

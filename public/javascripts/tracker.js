@@ -1,7 +1,7 @@
 let tracker = {
 	config: {}, //set config in index.js
 	generateTrackingURL() {
-		this.trackingURL = this.config.tracking.generalURL.replace('{{rmaId}}', this.config.tracking.rmaId).replace('{{campaignId}}', this.config.tracking.campaignId).replace('{{adUserId}}', this.config.tracking.adUserId).replace('{{cb}}', window.pgId || Date.now().toString()).replace('{{source}}', this.config.tracking.utm_source)
+		this.trackingURL = this.config.tracking.generalURL.replace('{{campaignId}}', this.config.tracking.campaignId).replace('{{adUserId}}', this.config.tracking.adUserId).replace('{{cb}}', window.pgId || Date.now().toString()).replace('{{source}}', this.config.tracking.utm_source)
 	},
 	track(type, val, uid, utype) {
 		let value = val || '{{value}}'

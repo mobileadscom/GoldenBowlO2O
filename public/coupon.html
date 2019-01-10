@@ -46,8 +46,8 @@
 			var campaignId = 'df9fa8c87d2ab84e1f1893d7484908a9';
 			var adUserId = '3354';
 			var rmaId = '239';
-			var generalUrl = 'https://track.richmediaads.com/a/analytic.htm?rmaId={{rmaId}}&domainId=0&pageLoadId={{cb}}&userId={{adUserId}}&pubUserId=0&campaignId={{campaignId}}&callback=trackSuccess&type={{type}}&value={{value}}&uniqueId={{userId}}&userType={{userType}}&source={{source}}&tc=o2o';
-			var trackingUrl = generalUrl.replace('{{rmaId}}', rmaId).replace('{{campaignId}}', campaignId).replace('{{adUserId}}', adUserId).replace('{{cb}}', pgId).replace('{{source}}', qparams.utm_source || '{{source}}');
+			var generalUrl = 'https://track.richmediaads.com/a/analytic.htm?pageLoadId={{cb}}&userId={{adUserId}}&campaignId={{campaignId}}&type={{type}}&value={{value}}&uniqueId={{userId}}&userType={{userType}}&source={{source}}&tc=o2o';
+			var trackingUrl = generalUrl.replace('{{campaignId}}', campaignId).replace('{{adUserId}}', adUserId).replace('{{cb}}', pgId).replace('{{source}}', qparams.utm_source || '{{source}}');
 		    var type = 'imp_coupon';
 		    var src = trackingUrl.replace('{{type}}', type);
 		    if (window.location.hostname.indexOf('localhost') > -1) {
