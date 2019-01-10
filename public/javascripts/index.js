@@ -6,6 +6,11 @@ import user from './userCore'
 import tracker from './tracker'
 import axios from 'axios'
 
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
+import firebaseConfig from './firebaseConfig';
+firebase.initializeApp(firebaseConfig);
+
 import '../stylesheets/pageLayout.css'
 import '../stylesheets/theme.css'
 import '../stylesheets/campaignPage.css'
@@ -164,7 +169,9 @@ var app = {
 
 		/* Fb Login */
 		document.getElementById('regFb').addEventListener('click', () => {
-			user.registerFb()
+			window.redirectState.set()
+			var provider = new firebase.auth.FacebookAuthProvider()
+			firebase.auth().signInWithRedirect(provider);
 		})
 
 		/* track result page*/
@@ -351,7 +358,7 @@ var app = {
 		  	user.clearLocalSourceData()
 		}
 
-		user.getRedirectResult().then((res) => {
+		firebase.auth().getRedirectResult().then((res) => {
 			console.log(res)
 			if (res.credential) {
 				user.oauth.token = res.credential.accessToken || ''

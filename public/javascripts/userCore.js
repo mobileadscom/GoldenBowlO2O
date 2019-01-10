@@ -1,9 +1,5 @@
 import storage from './storage'
 import axios from 'axios';
-import * as firebase from 'firebase/app';
-import 'firebase/auth';
-import firebaseConfig from './firebaseConfig';
-firebase.initializeApp(firebaseConfig);
 
 let user = {
 	info: {
@@ -90,11 +86,6 @@ let user = {
 			return true
 		}
 	},
-	registerFb: function() {
-		window.redirectState.set()
-		var provider = new firebase.auth.FacebookAuthProvider()
-		firebase.auth().signInWithRedirect(provider);
-	},
 	register(userInfo) {
 		if (userInfo.userId && userInfo.source && userInfo.type) {
 			return axios.post(`${this.config.userAPIDomain}/coupons/goldenBowl/user_register?id=${userInfo.userId}&source=${userInfo.source}&type=${userInfo.type}`)
@@ -167,15 +158,6 @@ let user = {
 	    }).catch((error) => {
 	      console.log(error);
 	    });
-	},
-	getRedirectResult() {
-		return new Promise(function(resolve, reject) {
-			firebase.auth().getRedirectResult().then(function(result) {
-			  resolve(result);
-			}).catch(function(error) {
-			  reject(error);
-			});	
-		});
 	},
 	init(options) {
 		/* get user data from database, 
