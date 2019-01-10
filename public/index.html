@@ -88,12 +88,12 @@
 		    var src = trackingUrl.replace('{{type}}', type);
 		    var isRedirecting = redirectState.get();
 		    if (window.location.hostname.indexOf('localhost') > -1) {
-			    if (!isRedirecting && !qparams.userId && !hasLocalUser()) {
+			    if (!isRedirecting && !qparams.userId && !localUser) {
 			    	console.log(src);
 			    }
 			}
 			else {
-				if (!isRedirecting && !qparams.userId && !hasLocalUser()) {
+				if (!isRedirecting && !qparams.userId && !localUser) {
 					var pixel = document.createElement('img');
 					pixel.src = src;
 					document.head.appendChild(pixel);
@@ -125,6 +125,7 @@
 		}
 		var qparams = queryParams();
 		window.pgId = Date.now().toString() + getRndInteger(10, 99).toString();
+		var localUser = hasLocalUser();
 		trackImp();
 	</script>
 </head>

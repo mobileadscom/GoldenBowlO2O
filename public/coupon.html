@@ -41,28 +41,83 @@
 		    return Math.floor(Math.random() * (max - min) ) + min;
 		}
 
+		function getLocalUser() {
+			// refer storage.js 
+			var storageName = 'o2o_rma';
+			var storageKey = 'goldenBowl';
+
+			// refer config.js
+			var source = qparams.source || 'dumSource';
+
+			if (window.localStorage.getItem(storageName)) {
+				try {
+					let dataObj = JSON.parse(window.localStorage.getItem(storageName))
+					if (dataObj[storageKey] && dataObj[storageKey][source]) {
+						return dataObj[storageKey][source]
+					}
+					else {
+						return {}
+					}			
+				}
+				catch(err) {
+					return {}
+				}
+			}
+			else {
+				return {}
+			}
+		}
+		
+		var userType = '{{userType}}'
+		function hasVisited() {
+			var localUserData = getLocalUser();
+			if (localUserData.id) {
+				if (localUserData.id == qparams.userId) {
+					userType = localUserData.type;
+				}
+
+				if (localUserData.trackedPages.indexOf('coupon') > -1) {
+					return true;
+				}
+				else {
+					return false;
+				}
+			}
+			else {
+				return false
+			}
+			
+		}
+
     	// refer config.js
+    	var firedImp = false;
 		function trackImp() {
 			var campaignId = 'df9fa8c87d2ab84e1f1893d7484908a9';
 			var adUserId = '3354';
-			var rmaId = '239';
 			var generalUrl = 'https://track.richmediaads.com/a/analytic.htm?pageLoadId={{cb}}&userId={{adUserId}}&campaignId={{campaignId}}&type={{type}}&value={{value}}&uniqueId={{userId}}&userType={{userType}}&source={{source}}&tc=o2o';
-			var trackingUrl = generalUrl.replace('{{campaignId}}', campaignId).replace('{{adUserId}}', adUserId).replace('{{cb}}', pgId).replace('{{source}}', qparams.utm_source || '{{source}}').replace('{{userId}}', qparams.userId || '{{userId}}');
+			var trackingUrl = generalUrl.replace('{{campaignId}}', campaignId).replace('{{adUserId}}', adUserId).replace('{{cb}}', pgId).replace('{{source}}', qparams.utm_source || '{{source}}').replace('{{userId}}', qparams.userId || '{{userId}}').replace('{{userType}}', userType);
 		    var type = 'imp_coupon';
 		    var src = trackingUrl.replace('{{type}}', type);
 		    if (window.location.hostname.indexOf('localhost') > -1) {
-			    console.log(src);
+		    	if (!visited) {
+				    console.log(src);
+				    firedImp = true;
+				}
 			}
 			else {
-				var pixel = document.createElement('img');
-				pixel.src = src;
-				document.head.appendChild(pixel);
+				if (!visited) {
+					var pixel = document.createElement('img');
+					pixel.src = src;
+					document.head.appendChild(pixel);
+					firedImp = true;
+				}
 			}
 		}
 
 		var qparams = queryParams();
 		window.pgId = Date.now().toString() + getRndInteger(10, 99).toString();
-		trackImp()
+		var visited = hasVisited();
+		trackImp();
     </script>
 </head>
 <body>    

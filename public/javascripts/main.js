@@ -1,5 +1,6 @@
 import miniPages from './miniPages'
 import config from './config'
+import user from './userCore'
 import tracker from './tracker'
 import store from './store'
 import axios from 'axios'
@@ -8,17 +9,6 @@ import '../stylesheets/pageLayout.css'
 import '../stylesheets/theme.css'
 import '../stylesheets/couponPage.css'
 import '../stylesheets/sharer.css'
-
-var user = {
-	info: {
-		id: '',
-		state: '-',
-		type: ''
-	},
-	get(userId) {
-	    return axios.get(`${config.userAPIDomain}/coupons/goldenBowl/user_info?id=${userId}`);
-	},
-}
 
 var coupon = {
 	id: '',
@@ -54,7 +44,9 @@ var app = {
 		  return query_string;
 	},
 	trackPage(page) {
-		tracker.track(`imp_${page}`, '', user.info.id, user.info.type)
+		if (user.trackPage(page)) {
+			tracker.track(`imp_${page}`, '', user.info.id, user.info.type)
+		}
 	},
 	trackEvent(type, value, userInfo) {
 		if (userInfo) {
@@ -143,12 +135,19 @@ var app = {
 
 		//get data
 		if (this.params.userId) {
-			user.get(this.params.userId).then((response) => {
+			user.getLocalUser(user.info.source)
+			user.get({
+				userId: this.params.userId,
+				source: user.info.source
+			}).then((response) => {
 				console.log(response)
 				if (response.data.status && response.data.coupon._id) {
-					user.info.id = response.data.user.id
-					user.info.state = response.data.user.state
-					user.info.type = response.data.user.type
+					user.setUserInfo({
+						id: response.data.user.id,
+						state: response.data.user.state,
+						couponCode: response.data.user.couponCode,
+						type: response.data.user.type
+					})
 					coupon.id = response.data.coupon._id
 					coupon.couponCode = response.data.coupon.couponCode
 					coupon.claimed = response.data.coupon.claimed
@@ -173,8 +172,17 @@ var app = {
 
 				}
 			}).catch((error) => {
+				alert('Fail to get user\'s info. Please check internet connection.')
 				console.error(error)
 			})
+
+			if (window.firedImp) {
+				let tp = user.info.trackedPages
+				tp.push('coupon')
+				user.setUserInfo({
+					trackedPages: tp
+				})
+			}
 		}
 		else {
 			this.pages.toPage('joinPage')
@@ -185,6 +193,7 @@ var app = {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+	user.setConfig(config)
 	tracker.setConfig(config)
 	app.init();
 	window.app = app;
