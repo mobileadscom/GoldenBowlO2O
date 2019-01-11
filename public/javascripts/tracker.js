@@ -17,6 +17,9 @@ let tracker = {
 		let userId = uid || '{{userId}}'
 		let userType = utype || '{{userType}}'
 		let src = this.trackingURL.replace('{{type}}', type).replace('{{value}}', value).replace('{{userId}}', userId).replace('{{userType}}', userType)
+		if (type == 'win' || type == 'lose') {
+			src = src.replace('&tc=o2o', '')
+		}
 		if (!this.hasTracked(type)) {
 			if (this.config.isDemo || window.location.hostname.indexOf('localhost') > -1) {
 				console.log(src)
