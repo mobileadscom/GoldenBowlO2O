@@ -182,7 +182,7 @@
   text-decoration: none;
 }
 
-#regPage, #gamePage, #resultPage {
+#regPage, #gamePage, #resultPage, #closePage {
   display: none;
 }
 
