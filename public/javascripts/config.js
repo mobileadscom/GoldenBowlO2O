@@ -2,15 +2,15 @@ let config = {
 	isDemo: false,
 	userAPIDomain: 'https://api.mobileads.com',
 	source: 'dumSource',
-	campaignLink: 'https://demo.o2oplatform.com/goldenBowl/',
-	couponLink: 'https://demo.o2oplatform.com/goldenBowl/coupon.html',
+	campaignLink: 'https://goldenbowl.o2oplatform.com/',
+	couponLink: 'https://goldenbowl.o2oplatform.com/coupon.html',
 	emailSender: 'contact@o2oplatform.com',
 	loginEmail: {
 		subject: 'GoldenBowl O2O Login Link',
 		content: `
 			<head><meta charset="utf-8"></head>
 			Thank you for registering. Please click the link below to complete your registration and win a cash voucher
-			<br><br><a href="https://demo.o2oplatform.com/goldenBowl/?userId={{userId}}" target="_blank">
+			<br><br><a href="{{campaignLink}}?userId={{userId}}" target="_blank">
 			{{campaignLink}}?userId={{userId}}</a>
 		`
 	},
