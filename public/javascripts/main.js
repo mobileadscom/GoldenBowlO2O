@@ -151,19 +151,23 @@ var app = {
 					coupon.id = response.data.coupon._id
 					coupon.couponCode = response.data.coupon.couponCode
 					coupon.claimed = response.data.coupon.claimed
-					if (coupon.couponCode && user.info.state == 'win') {
-						document.getElementById('couponCode').innerHTML = response.data.coupon.couponCode
-					}
+					
 					if (coupon.claimed) {
 						this.pages.toPage('donePage')
 						this.trackPage('coupon_redeemed')
 					}
 					else {
-						this.pages.toPage('instructionPage')
-						store.init(() => {
-							app.storeCallback()
-						});
-						
+						if (coupon.couponCode && user.info.state == 'win') {
+							document.getElementById('couponCode').innerHTML = response.data.coupon.couponCode
+							this.pages.toPage('instructionPage')
+							store.init(() => {
+								app.storeCallback()
+							});
+						}
+						else {
+							this.pages.toPage('joinPage')
+							document.getElementById('footer-banner').style.display = 'none'
+						}
 					}
 				}
 				else {
