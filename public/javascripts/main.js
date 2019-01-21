@@ -15,6 +15,14 @@ var coupon = {
 	couponCode: '',
 	claimed: false,
 	claiming: false,
+	couponEffect: {
+		'GBP-5P': '5% Discount',
+		'GBP-10P': '10% Discount',
+		'GBP-15P': '15% Discount',
+		'GBP-RM5': 'RM5 Discount',
+		'GBP-RM10': 'RM10 Discount',
+		'GBP-RM15': 'RM15 Discount'
+	},
 	claim(store) {
 		return axios.post(`${config.userAPIDomain}/coupons/goldenBowl/coupon_claim?id=${user.info.id}&couponId=${this.id}&claimAt=${store}`)
 	}
@@ -159,6 +167,12 @@ var app = {
 					else {
 						if (coupon.couponCode && user.info.state == 'win') {
 							document.getElementById('couponCode').innerHTML = response.data.coupon.couponCode
+							if (coupon.couponEffect[response.data.coupon.couponCode]) {
+								document.getElementById('couponEffect').innerHTML = coupon.couponEffect[response.data.coupon.couponCode]
+							}
+							else {
+								document.getElementById('couponEffect').style.display = 'none'
+							}
 							this.pages.toPage('instructionPage')
 							store.init(() => {
 								app.storeCallback()
