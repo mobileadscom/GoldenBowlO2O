@@ -217,5 +217,4 @@ document.addEventListener('DOMContentLoaded', function() {
 	window.app = app;
 	window.coupon = coupon
 	window.user = user
-	window.tracker = tracker
 });
