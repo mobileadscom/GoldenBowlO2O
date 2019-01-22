@@ -52,12 +52,14 @@ var app = {
 			tracker.track(`imp_${page}`, '', user.info.id, user.info.type)
 		}
 	},
-	trackEvent(type, value, userInfo) {
-		if (userInfo) {
-			tracker.track(type, value, userInfo.id, userInfo.type)
-		}
-		else {
-			tracker.track(type, value, user.info.id, user.info.type)
+	trackEvent(type, value, userInfo, customParams) {
+		if (user.trackEvent(type)) {
+			if (userInfo) {
+				tracker.track(type, value, userInfo.id, userInfo.type, customParams)
+			}
+			else {
+				tracker.track(type, value, user.info.id, user.info.type, customParams)
+			}
 		}
 	},
 	initResult(state, couponLink) {
@@ -116,7 +118,7 @@ var app = {
 				if (user.info.type == 'email') { // login via email
 					user.sendCouponEmail(user.info.id, couponLink)
 				}
-				this.trackEvent('win')
+				this.trackEvent('win', response.data.couponCode)
 				this.initResult('win', couponLink)
 				document.getElementById('toResult').disabled = false
 			}
@@ -278,6 +280,10 @@ var app = {
 						userId: this.params.userId,
 						source: user.info.source,
 					}
+				}
+
+				if (user.info.id != this.params.userId) {
+					user.clearUserInfo()
 				}
 
 				user.init(options).then((response) => {

@@ -12,7 +12,7 @@ let tracker = {
 	generateTrackingURL() {
 		this.trackingURL = this.config.tracking.generalURL.replace('{{campaignId}}', this.config.tracking.campaignId).replace('{{adUserId}}', this.config.tracking.adUserId).replace('{{cb}}', window.pgId || Date.now().toString()).replace('{{source}}', this.config.tracking.utm_source)
 	},
-	track(type, val, uid, utype) {
+	track(type, val, uid, utype, customParams) {
 		let value = val || '{{value}}'
 		let userId = uid || '{{userId}}'
 		let userType = utype || '{{userType}}'
@@ -20,6 +20,15 @@ let tracker = {
 		if (type == 'win' || type == 'lose') {
 			src = src.replace('&tc=o2o', '')
 		}
+
+		if (customParams) {
+			let paramString = ''
+			for (let c in customParams) {
+				paramString += `&${c}=${customParams[c]}`
+			}
+			src += paramString
+		}
+
 		if (!this.hasTracked(type)) {
 			if (this.config.isDemo || window.location.hostname.indexOf('localhost') > -1) {
 				console.log(src)

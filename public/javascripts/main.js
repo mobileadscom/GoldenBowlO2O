@@ -56,12 +56,14 @@ var app = {
 			tracker.track(`imp_${page}`, '', user.info.id, user.info.type)
 		}
 	},
-	trackEvent(type, value, userInfo) {
-		if (userInfo) {
-			tracker.track(type, value, userInfo.id, userInfo.type)
-		}
-		else {
-			tracker.track(type, value, user.info.id, user.info.type)
+	trackEvent(type, value, userInfo, customParams) {
+		if (user.trackEvent(type)) {
+			if (userInfo) {
+				tracker.track(type, value, userInfo.id, userInfo.type, customParams)
+			}
+			else {
+				tracker.track(type, value, user.info.id, user.info.type, customParams)
+			}
 		}
 	},
 	redeemCoupon: function() {
@@ -75,7 +77,7 @@ var app = {
 				console.log(response)
 				if (response.data.message == 'claimed.') {
 					document.getElementById('redeemLoader').style.display = 'none'
-					this.trackEvent('redeem', store.selected)
+					this.trackEvent('redeem', store.selected, '', {couponCode: coupon.couponCode})
 					this.pages.toPage('donePage')
 					this.trackPage('coupon_redeemed')
 				}

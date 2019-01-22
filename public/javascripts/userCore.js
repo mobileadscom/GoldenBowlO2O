@@ -9,7 +9,8 @@ let user = {
 		source: '',
 		gameData: {},
 		type: '',
-		trackedPages: []
+		trackedPages: [],
+		trackedEvents: []
 	},
 	oauth: {
 		token: '',
@@ -43,7 +44,8 @@ let user = {
 			source: this.info.source,
 			gameData: {},
 			type: '',
-			trackedPages: []
+			trackedPages: [],
+			trackedEvents: []
 		})
 	},
 	getLocalUser(source) {
@@ -82,6 +84,19 @@ let user = {
 			tp.push(page)
 			this.setUserInfo({
 				trackedPages: tp
+			})
+			return true
+		}
+	},
+	trackEvent(event) {
+		let te = this.info.trackedEvents
+		if (te.indexOf(event) > -1) {
+			return false
+		}
+		else {
+			te.push(event)
+			this.setUserInfo({
+				trackedEvents: te
 			})
 			return true
 		}
