@@ -24,7 +24,7 @@ var coupon = {
 		'GBP-RM15': 'RM15 Discount'
 	},
 	claim(store) {
-		return axios.post(`${config.userAPIDomain}/coupons/goldenBowl/coupon_claim?id=${user.info.id}&couponId=${this.id}&claimAt=${store}`)
+		return axios.post(`${config.userAPIDomain}/coupon_claim?id=${user.info.id}&couponId=${this.id}&claimAt=${store}`)
 	}
 }
 
