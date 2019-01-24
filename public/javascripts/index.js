@@ -192,7 +192,7 @@ var app = {
 	},
 	initEraser: function() {
 		return new Promise((resolve, reject) => {
-			axios.get(`https://api.mobileads.com/coupons/goldenBowl/coupon_draw?id=${user.info.id}`).then((response) => {
+			axios.get(`${config.userAPIDomain}/coupon_draw?id=${user.info.id}`).then((response) => {
 				console.log(response)
 				if (response.data._id) {
 					this.couponId = response.data._id
