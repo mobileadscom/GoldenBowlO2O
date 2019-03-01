@@ -239,7 +239,8 @@ var app = {
 				this.pages.toPage('resultPage')
 			}*/
 			else {
-				this.initEraser().then((r) => {
+				this.pages.toPage('closePage')
+				/*this.initEraser().then((r) => {
 					if (!this.campaignEnded) {
 						this.pages.toPage('gamePage')
 						this.trackPage('game')
@@ -251,12 +252,13 @@ var app = {
 				}).catch((e) => {
 					console.log(e)
 					this.pages.toPage('regPage')
-				})
+				})*/
 				
 			}
 		}
 		else {
-			this.pages.toPage('regPage')
+			// this.pages.toPage('regPage')
+			this.pages.toPage('closePage')
 		}
 	},
 	initUser(options) {
